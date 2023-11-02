@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/East_Bay"
+    android:padding="@dimen/_10sdp">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="8pm"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:id="@+id/tv_hour_temp_layout"
+        android:layout_marginBottom="@dimen/_10sdp"/>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:src="@drawable/ic_home"
+        android:id="@+id/image_day_icon_hour_temp_layout"
+        android:layout_marginBottom="@dimen/_10sdp"
+        />
+
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="25"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_18ssp"
+        android:textStyle="bold"
+        android:id="@+id/tv_temp_hour_temp_layout"
+        android:layout_marginBottom="@dimen/_10sdp"/>
+    <TextView
+        android:id="@+id/tv_day_humidity_hour_temp_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="51%"
+        android:textColor="@color/Mystic"
+
+        />
+
+</LinearLayout>
