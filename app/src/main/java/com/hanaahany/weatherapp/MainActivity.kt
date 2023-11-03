@@ -8,6 +8,7 @@ import com.hanaahany.weatherapp.databinding.ActivityMainBinding
 import com.hanaahany.weatherapp.databinding.HourlyTempLayoutBinding
 import com.hanaahany.weatherapp.favourite.view.FavouriteFragment
 import com.hanaahany.weatherapp.home.view.HomeFragment
+import com.hanaahany.weatherapp.setting.view.SettingsFragment
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -15,8 +16,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding=ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        supportFragmentManager.beginTransaction().replace(R.id.homeFragment,HomeFragment())
-            .commit()
+        changeFragment(HomeFragment())
         toggleFragment()
 
 
@@ -31,6 +31,7 @@ class MainActivity : AppCompatActivity() {
             changeFragment(FavouriteFragment())
         }
         binding.tvSettings.setOnClickListener{
+            changeFragment(SettingsFragment())
         }
         binding.tvAlert.setOnClickListener{
         }
