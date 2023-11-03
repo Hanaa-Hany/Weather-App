@@ -14,7 +14,7 @@ class Repository private constructor(var remoteSource: RemoteSource):RepositoryI
             return INSTANCE!!
         }
     }
-    override suspend fun makeNetworkCall(lat: Double, lon: Double): List<WeatherResponse> {
+    override suspend fun makeNetworkCall(lat: Double, lon: Double): Response<WeatherResponse> {
         return remoteSource.makeNetworkCall(lat,lon)
     }
 }

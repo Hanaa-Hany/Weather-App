@@ -15,7 +15,7 @@ object WeatherClient:RemoteSource {
         .build()
 
     val productServices = retrofit.create(WeatherServices::class.java)
-    override suspend fun makeNetworkCall( lat:Double, lon:Double): List<WeatherResponse> {
-        return productServices.currentWeather(lat,lon).body()as List<WeatherResponse>
+    override suspend fun makeNetworkCall( lat:Double, lon:Double): Response<WeatherResponse> {
+        return productServices.currentWeather(lat,lon)
     }
 }

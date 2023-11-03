@@ -8,16 +8,23 @@ import com.hanaahany.weatherapp.model.RepositoryInterface
 import com.hanaahany.weatherapp.model.WeatherResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import retrofit2.Response
 
-class HomeViewModel(private val _irepo: RepositoryInterface):ViewModel() {
+class HomeViewModel(private val _irepo: RepositoryInterface) : ViewModel() {
 
-    private val _weatherList= MutableLiveData<List<WeatherResponse>>()
-    val weatherList: LiveData<List<WeatherResponse>> =_weatherList
-    fun getWeather(lat:Double, lon:Double){
+    private val _respone = MutableLiveData<Response<WeatherResponse>>()
+    var respone: LiveData<Response<WeatherResponse>> = _respone
+
+
+    fun getWeather(lat: Double, lon: Double) {
         viewModelScope.launch(Dispatchers.IO) {
-            val list=_irepo.makeNetworkCall(lat,lon)
-            _weatherList.postValue(list)
+            _irepo.makeNetworkCall(lat, lon)
+            _respone.postValue(
+                _irepo.makeNetworkCall(lat, lon)
+            )
+
         }
+
     }
 
 }

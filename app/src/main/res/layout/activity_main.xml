@@ -1,20 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.motion.widget.MotionLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".MainActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/East_Bay"
+    app:layoutDescription="@xml/activity_main_scene">
 
     <androidx.fragment.app.FragmentContainerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:name="com.hanaahany.weatherapp.home.view.HomeFragment"
         android:id="@+id/homeFragment"/>
+    
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:scaleType="centerInside"
+        android:elevation="@dimen/_4sdp"
+        android:src="@drawable/ic_menu"
+        android:background="@drawable/rounded_hom"
+        android:id="@+id/iv_menu"/>
+
+    <TextView
+        android:id="@+id/tv_home"
+        android:text="@string/home"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableStart="@drawable/ic_home"
+        app:layout_constraintStart_toStartOf="parent"
+        style="@style/motion_option"/>
+    <TextView
+        android:id="@+id/tv_fav"
+        android:text="@string/favourite"
+        style="@style/motion_option"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:drawableStartCompat="@drawable/ic_favorite" />
+    <TextView
+        android:id="@+id/tv_settings"
+        android:text="@string/settings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableStart="@drawable/ic_settings"
+        app:layout_constraintStart_toStartOf="parent"
+        style="@style/motion_option"/>
+    <TextView
+        android:id="@+id/tv_alert"
+        android:text="@string/alert"
+        style="@style/motion_option"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:drawableStartCompat="@drawable/ic_alert" />
+
+    <androidx.constraintlayout.helper.widget.Flow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/f1_option"
+        android:orientation="vertical"
+        android:visibility="gone"
+        app:constraint_referenced_ids="tv_home,tv_fav,tv_alert,tv_settings"/>
 
 
 
 
 
-</LinearLayout>
+
+</androidx.constraintlayout.motion.widget.MotionLayout>

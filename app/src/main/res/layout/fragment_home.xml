@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#625D8B"
+    android:background="@color/gray"
     tools:context=".home.view.HomeFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/East_Bay">
+        android:background="@color/gray">
 
         <TextView
             android:id="@+id/tv_temp_home_fragment"
@@ -18,8 +18,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/_20sdp"
             android:layout_marginTop="24dp"
-            android:text="27"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:textSize="@dimen/_40ssp"
             app:layout_constraintEnd_toStartOf="@+id/guideline2"
             app:layout_constraintHorizontal_bias="1.0"
@@ -32,8 +31,7 @@
             android:id="@+id/tv_weather_description_home_fragment"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Fair"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:textSize="@dimen/_20ssp"
             app:layout_constraintEnd_toEndOf="@+id/tv_temp_home_fragment"
             app:layout_constraintStart_toStartOf="@+id/tv_temp_home_fragment"
@@ -44,8 +42,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_20sdp"
-            android:text="New Cairo"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:textSize="@dimen/_20ssp"
             app:layout_constraintEnd_toStartOf="@+id/guideline2"
             app:layout_constraintStart_toStartOf="@+id/tv_weather_description_home_fragment"
@@ -55,8 +52,7 @@
             android:id="@+id/tv_weather_date_home_fragment"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="1/1/1111"
-            android:textColor="@color/Mystic"
+            android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="@+id/tv_temp_home_fragment"
             app:layout_constraintStart_toStartOf="@+id/tv_temp_home_fragment"
             app:layout_constraintTop_toBottomOf="@id/tv_city_home_fragment" />
@@ -65,29 +61,28 @@
             android:id="@+id/tv_weather_time_home_fragment"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="28:25"
-            android:textColor="@color/Mystic"
+            android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="@+id/tv_temp_home_fragment"
             app:layout_constraintStart_toStartOf="@+id/tv_temp_home_fragment"
             app:layout_constraintTop_toBottomOf="@id/tv_weather_date_home_fragment" />
 
         <ImageView
             android:id="@+id/icon_home_fragment"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_home"
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="@dimen/_100sdp"
             app:layout_constraintBottom_toBottomOf="@+id/tv_weather_time_home_fragment"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_weight="1"
             app:layout_constraintStart_toStartOf="@+id/guideline2"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:scaleType="fitXY"/>
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/card1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/_10sdp"
-            android:background="#50517F"
+            android:background="@color/white"
             app:cardCornerRadius="@dimen/_10sdp"
             app:cardElevation="@dimen/_10sdp"
             app:layout_constraintTop_toBottomOf="@id/tv_weather_time_home_fragment">
@@ -96,8 +91,7 @@
                 android:id="@+id/recycler_hourly_day"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#50517F"
-                tools:listitem="@layout/hourly_temp_layout"
+                android:background="@color/white"
                  />
         </com.google.android.material.card.MaterialCardView>
 
@@ -106,7 +100,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/_10sdp"
-            android:background="#50517F"
+            android:background="@color/black"
             app:cardCornerRadius="@dimen/_10sdp"
             app:cardElevation="@dimen/_10sdp"
             app:layout_constraintTop_toBottomOf="@id/card1">
@@ -115,7 +109,7 @@
                 android:id="@+id/recycler_weak_temp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#50517F"
+                android:background="@color/black"
                 tools:listitem="@layout/week_temp_layout"/>
         </com.google.android.material.card.MaterialCardView>
 
@@ -124,7 +118,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/_10sdp"
-            android:background="@color/East_Bay"
+            android:background="@color/black"
             app:cardCornerRadius="@dimen/_10sdp"
             app:cardElevation="@dimen/_10sdp"
             app:layout_constraintEnd_toStartOf="@+id/guideline2"
@@ -136,22 +130,22 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/East_Bay"
+                android:background="@color/white"
                 android:gravity="center"
                 android:orientation="vertical">
 
                 <ImageView
                     android:id="@+id/image_humidity_home_fragment"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_home" />
+                    android:layout_height="@dimen/_50sdp"
+                    android:src="@drawable/wind" />
 
                 <TextView
                     android:id="@+id/tv_humidity_home_fragment"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/wind"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:textSize="@dimen/_18ssp" />
 
                 <TextView
@@ -159,8 +153,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingBottom="@dimen/_7sdp"
-                    android:text="11km\h"
-                    android:textColor="@color/Mystic" />
+                    android:textColor="#6B6C6F"
+                    android:textStyle="bold" />
 
 
             </LinearLayout>
@@ -182,22 +176,22 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/East_Bay"
+                android:background="@color/white"
                 android:gravity="center"
                 android:orientation="vertical">
 
                 <ImageView
                     android:id="@+id/image_wind_home_fragment"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_home" />
+                    android:layout_height="@dimen/_50sdp"
+                    android:src="@drawable/humidity" />
 
                 <TextView
                     android:id="@+id/tv_wind_home_fragment"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/humidity"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:textSize="@dimen/_18ssp" />
 
                 <TextView
@@ -205,8 +199,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingBottom="@dimen/_7sdp"
-                    android:text="51%"
-                    android:textColor="@color/Mystic" />
+                    android:textStyle="bold"
+                    android:textColor="#6B6C6F" />
 
 
             </LinearLayout>
@@ -229,22 +223,22 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/East_Bay"
+                android:background="@color/white"
                 android:gravity="center"
                 android:orientation="vertical">
 
                 <ImageView
                     android:id="@+id/image_pressure_home_fragment"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_home" />
+                    android:layout_height="@dimen/_50sdp"
+                    android:src="@drawable/air" />
 
                 <TextView
                     android:id="@+id/tv_pressure_home_fragment"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/pressure"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:textSize="@dimen/_18ssp" />
 
                 <TextView
@@ -252,8 +246,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingBottom="@dimen/_7sdp"
-                    android:text="11km\h"
-                    android:textColor="@color/Mystic" />
+                    android:textStyle="bold"
+                    android:textColor="#6B6C6F" />
 
 
             </LinearLayout>
@@ -275,22 +269,23 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/East_Bay"
+                android:background="@color/white"
                 android:gravity="center"
                 android:orientation="vertical">
 
                 <ImageView
                     android:id="@+id/image_clouds_home_fragment"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_home" />
+                    android:layout_height="@dimen/_50sdp"
+                    android:src="@drawable/clouds"
+                    />
 
                 <TextView
                     android:id="@+id/tv_clouds_home_fragment"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/clouds"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:textSize="@dimen/_18ssp" />
 
                 <TextView
@@ -298,14 +293,20 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingBottom="@dimen/_7sdp"
-                    android:text="11km\h"
-                    android:textColor="@color/Mystic" />
+                    android:textColor="#6B6C6F"
+                    />
 
 
             </LinearLayout>
 
 
         </com.google.android.material.card.MaterialCardView>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_20sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/card6"
+            />
 
 
         <androidx.constraintlayout.widget.Guideline

@@ -6,6 +6,7 @@
     android:orientation="horizontal"
     android:background="@color/East_Bay"
     android:padding="@dimen/_10sdp"
+    android:gravity="center"
     >
 
     <TextView
@@ -15,7 +16,6 @@
         android:text="Today"
         android:textColor="@color/white"
         android:textSize="@dimen/_18ssp"
-        android:textStyle="bold"
         android:id="@+id/tv_day_name_week_temp_layout"/>
 
     <TextView
@@ -35,6 +35,7 @@
         android:src="@drawable/ic_home"
         android:id="@+id/image_day_icon_week_temp_layout"
         android:gravity="center"/>
+
 
     <TextView
         android:layout_width="0dp"

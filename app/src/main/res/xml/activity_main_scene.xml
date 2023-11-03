@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+    <ConstraintSet android:id="@+id/start">
+        <Constraint android:id="@+id/homeFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+        <Constraint android:id="@+id/iv_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_12sdp"
+            app:layout_constraintBottom_toBottomOf="@+id/homeFragment"
+            app:layout_constraintStart_toStartOf="@+id/homeFragment">
+            <Transform android:rotation="0"/>
+        </Constraint>
+
+        <Constraint android:id="@+id/f1_option"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+            <PropertySet android:visibility="gone"/>
+        </Constraint>
+
+
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/end">
+        <Constraint android:id="@+id/homeFragment"
+           app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent=".85"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent=".65"/>
+        <Constraint android:id="@+id/iv_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_12sdp"
+            app:layout_constraintBottom_toBottomOf="@+id/homeFragment"
+            app:layout_constraintEnd_toEndOf="@+id/homeFragment">
+            <Transform android:rotation="-180"/>
+        </Constraint>
+
+        <Constraint android:id="@+id/f1_option"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+            <PropertySet android:visibility="visible"/>
+        </Constraint>
+    </ConstraintSet>
+    <Transition
+        app:constraintSetEnd="@id/end"
+        app:constraintSetStart="@+id/start"
+        app:duration="500">
+        <OnClick
+            app:clickAction="toggle"
+            app:targetId="@+id/iv_menu"
+           />
+    </Transition>
+
+</MotionScene>

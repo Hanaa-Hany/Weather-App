@@ -89,14 +89,28 @@ class LocationByGPS constructor(var context: Context) {
             val lastLocation: Location = locationResult.lastLocation
             Log.i(Constants.locationTag, lastLocation.latitude.toString())
             mutableLocation.postValue(Pair(lastLocation.latitude, lastLocation.longitude))
+            stopLocationUpdate()
+            geocoder = Geocoder(context, Locale.getDefault())
+            val addresses: MutableList<Address>? =
+                geocoder.getFromLocation(lastLocation.latitude, lastLocation.longitude, 5)
+            if (addresses?.isNotEmpty() == true) {
+                val address = addresses[0]
+//                    val street = address.thoroughfare
+//                    val city = address
+                var cityName = address.adminArea
+//                if (cityName == null){
+//                    cityName = address.locality
+//                    if (cityName == null){
+//                        cityName = address.subAdminArea
+//                    }
+                Log.i("MainRes", cityName)
 
-                stopLocationUpdate()
 
 
-            }
 
+        }
 
-    }
+    }}
 
     fun stopLocationUpdate() {
         fusedLocationClient.removeLocationUpdates(locationCallBack)
