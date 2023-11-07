@@ -3,6 +3,7 @@ package com.hanaahany.weatherapp.Utils
 import android.content.Context
 import android.content.res.Configuration
 import androidx.lifecycle.viewModelScope
+import com.hanaahany.weatherapp.network.sharedpref.SettingSharedPrefrences
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
@@ -11,6 +12,9 @@ import java.util.*
 object Constants {
     const val locationTag="LocationByGps"
     const val SETTING="Setting"
+    const val LANGUAGE="languageFile"
+    const val UNIT="unitFile"
+
 
     fun getTimeHour(value:Long,lang:String): String {
         val timestamp: Long = value
@@ -47,6 +51,15 @@ object Constants {
         val configuration = Configuration()
         configuration.setLocale(newLocale)
         context.resources.updateConfiguration(configuration, context.resources.displayMetrics)
+    }
+    fun writeDegree(context:Context,value:String):String{
+        if (SettingSharedPrefrences.getInstance(context)
+                .readStringSettings(Constants.UNIT) == "standard"
+        ) return "${value} \u212A"
+        else if (SettingSharedPrefrences.getInstance(context)
+                .readStringSettings(Constants.UNIT) == "metric"
+        ) return "${value} \u2103"
+        else return "${value} \u2109"
     }
 
 }

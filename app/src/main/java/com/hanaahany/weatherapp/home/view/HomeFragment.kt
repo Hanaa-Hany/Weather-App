@@ -1,6 +1,7 @@
 package com.hanaahany.weatherapp.home.view
 
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -23,10 +24,7 @@ import com.hanaahany.weatherapp.model.Repository
 import com.hanaahany.weatherapp.model.WeatherResponse
 import com.hanaahany.weatherapp.network.WeatherClient
 import com.hanaahany.weatherapp.network.sharedpref.SettingSharedPrefrences
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import retrofit2.Response
 
 
 class HomeFragment : Fragment() {
@@ -60,8 +58,9 @@ class HomeFragment : Fragment() {
         location.location.observe(context as LifecycleOwner) {
             Log.i(Constants.locationTag, it.first.toString())
             lifecycleScope.launch {
-                var lang=viewModel.readLanguageFromSetting("lang")
-                viewModel.getWeather(it.first, it.second,"metric",lang)
+                val lang=viewModel.readStringFromSetting(Constants.LANGUAGE)
+                val units=viewModel.readStringFromSetting(Constants.UNIT)
+                viewModel.getWeather(it.first, it.second,units,lang)
                 Log.i(Constants.locationTag, "viewModel.getWeather(it.first,it.second)")
             }
         }
@@ -101,8 +100,11 @@ class HomeFragment : Fragment() {
 
     }
 
+    @SuppressLint("SetTextI18n")
     private fun setData(it:WeatherResponse) {
-        binding.tvTempHomeFragment.text=it.current.temp.toInt().toString()
+        binding.tvTempHomeFragment.text=Constants.writeDegree(requireContext(),it.current.temp.toInt().toString())
+
+
         binding.tvCloudsValueHomeFragment.text=it.current.clouds.toString()
         binding.tvPressureValueHomeFragment.text=it.current.pressure.toString()
         binding.tvWindValueHomeFragment.text=it.current.wind_speed.toString()
@@ -111,7 +113,7 @@ class HomeFragment : Fragment() {
         Log.i(Constants.locationTag,"https://openweathermap.org/img/wn/${it.current.weather.get(0).icon}@2x.png")
         Glide.with(requireContext()).load("https://openweathermap.org/img/wn/${it.current.weather.get(0).icon}@4x.png")
             .into( binding.iconHomeFragment)
-        if (SettingSharedPrefrences.getInstance(requireContext()).readLanguage("lang")=="en"){
+        if (SettingSharedPrefrences.getInstance(requireContext()).readStringSettings(Constants.LANGUAGE)=="en"){
             binding.tvWeatherTimeHomeFragment.text=Constants.getTime(it.current.dt,"en")
             binding.tvWeatherDateHomeFragment.text=Constants.getDate(it.current.dt,"en")
         }else{
