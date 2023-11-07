@@ -161,6 +161,7 @@
 
 
             <RadioGroup
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -232,6 +233,7 @@
 
 
             <RadioGroup
+                android:id="@+id/radio_group_speed"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -308,6 +310,7 @@
 
 
             <RadioGroup
+                android:id="@+id/radio_group_language"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"

@@ -1,6 +1,7 @@
 package com.hanaahany.weatherapp.home.view
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +13,7 @@ import com.hanaahany.weatherapp.Utils.Constants
 import com.hanaahany.weatherapp.databinding.WeekTempLayoutBinding
 import com.hanaahany.weatherapp.model.DailyWeather
 import com.hanaahany.weatherapp.model.WeatherResponse
+import com.hanaahany.weatherapp.network.sharedpref.SettingSharedPrefrences
 
 class DayAdapter(var context: Context,var list: List<DailyWeather>):Adapter<DayAdapter.DayViewHolder>() {
     private lateinit var binding:WeekTempLayoutBinding
@@ -31,7 +33,13 @@ class DayAdapter(var context: Context,var list: List<DailyWeather>):Adapter<DayA
         holder.binding.tvTempNigtWeekTempLayout.text=resp.temp.night.toInt().toString()
         Glide.with(context).load("https://openweathermap.org/img/wn/${resp.weather[0].icon}@2x.png").into(
             holder.binding.imageDayIconWeekTempLayout)
-        holder.binding.tvDayNameWeekTempLayout.text=Constants.getDateDay(resp.dt)
+        if (SettingSharedPrefrences.getInstance(context).readLanguage("lang")=="en"){
+            holder.binding.tvDayNameWeekTempLayout.text=Constants.getDateDay(resp.dt,"en")
+            Log.i(Constants.locationTag,SettingSharedPrefrences.getInstance(context).readLanguage("lang"))
+        }else{
+            holder.binding.tvDayNameWeekTempLayout.text=Constants.getDateDay(resp.dt,"ar")
+
+        }
     }
 
     override fun getItemCount(): Int {

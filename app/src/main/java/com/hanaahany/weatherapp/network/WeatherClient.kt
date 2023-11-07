@@ -1,7 +1,6 @@
 package com.hanaahany.weatherapp.network
 
-import com.hanaahany.weatherapp.model.WeatherResponse
-import retrofit2.Response
+import kotlinx.coroutines.flow.flow
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -14,8 +13,8 @@ object WeatherClient:RemoteSource {
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
-    val productServices = retrofit.create(WeatherServices::class.java)
-    override suspend fun makeNetworkCall( lat:Double, lon:Double): Response<WeatherResponse> {
-        return productServices.currentWeather(lat,lon)
+    val weatherServices = retrofit.create(WeatherServices::class.java)
+    override suspend fun makeNetworkCall( lat:Double, lon:Double,units:String,lang:String)=flow{
+        emit(weatherServices.currentWeather(lat,lon,units,lang).body()!!)
     }
 }

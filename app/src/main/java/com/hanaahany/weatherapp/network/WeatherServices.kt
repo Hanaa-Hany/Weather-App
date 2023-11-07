@@ -11,6 +11,7 @@ interface WeatherServices:RemoteSource {
         @Query("lat") latitude: Double,
         @Query("lon") longitude: Double,
         @Query("units")units:String="metric",
+        @Query("lang")lang:String="en",
         @Query("appid") appid:String ="5f40589c146e66738eacada978281f07"):Response<WeatherResponse>
 
 
