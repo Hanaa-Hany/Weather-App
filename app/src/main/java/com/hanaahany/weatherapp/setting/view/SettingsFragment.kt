@@ -52,9 +52,10 @@ class SettingsFragment : Fragment() {
         binding.radioGroupSpeed.setOnCheckedChangeListener { _, checkId ->
             if (checkId == R.id.radio_meter) {
                 Toast.makeText(requireContext(), "Meter", Toast.LENGTH_SHORT).show()
-
+                viewModel.writeStringToSetting(Constants.WIND_SPEED,"metric")
             } else {
                 Toast.makeText(requireContext(), "Miles", Toast.LENGTH_SHORT).show()
+                viewModel.writeStringToSetting(Constants.WIND_SPEED,"imperial")
 
 
             }

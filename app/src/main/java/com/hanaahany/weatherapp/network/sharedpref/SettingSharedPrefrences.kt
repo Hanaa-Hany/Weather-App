@@ -27,24 +27,14 @@ class SettingSharedPrefrences(context:Context):ISettingSharedPrefrence {
 
     override fun readStringSettings(key: String):String {
         var value:String
-        sharedPreferences.getString(key,"en").let {
-            value=it?:"en"
+        sharedPreferences.getString(key,"nan").let {
+            value=it?:"nan"
         }
         return value
 
     }
 
-    override fun writeUnits(key: String, value: Float) {
-        sharedPreferences.edit().putFloat(key,value).apply()
-    }
 
-    override fun readUnits(key: String): Float {
-        var value:Float
-        sharedPreferences.getFloat(key,0f).let {
-            value=it
-        }
-        return value
-    }
 
 
 }

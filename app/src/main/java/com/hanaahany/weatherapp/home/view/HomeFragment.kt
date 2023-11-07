@@ -61,7 +61,6 @@ class HomeFragment : Fragment() {
                 val lang=viewModel.readStringFromSetting(Constants.LANGUAGE)
                 val units=viewModel.readStringFromSetting(Constants.UNIT)
                 viewModel.getWeather(it.first, it.second,units,lang)
-                Log.i(Constants.locationTag, "viewModel.getWeather(it.first,it.second)")
             }
         }
         lifecycleScope.launch {
@@ -103,11 +102,10 @@ class HomeFragment : Fragment() {
     @SuppressLint("SetTextI18n")
     private fun setData(it:WeatherResponse) {
         binding.tvTempHomeFragment.text=Constants.writeDegree(requireContext(),it.current.temp.toInt().toString())
-
-
         binding.tvCloudsValueHomeFragment.text=it.current.clouds.toString()
         binding.tvPressureValueHomeFragment.text=it.current.pressure.toString()
-        binding.tvWindValueHomeFragment.text=it.current.wind_speed.toString()
+        binding.tvWindValueHomeFragment.text=Constants.windSpeed(requireContext(), it.current.wind_speed.toString())
+
         binding.tvHumidityValueHomeFragment.text=it.current.humidity.toString()
         binding.tvWeatherDescriptionHomeFragment.text=it.current.weather.get(0).description
         Log.i(Constants.locationTag,"https://openweathermap.org/img/wn/${it.current.weather.get(0).icon}@2x.png")

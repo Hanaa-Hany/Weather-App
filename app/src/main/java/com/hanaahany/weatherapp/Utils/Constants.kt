@@ -14,6 +14,8 @@ object Constants {
     const val SETTING="Setting"
     const val LANGUAGE="languageFile"
     const val UNIT="unitFile"
+    const val WIND_SPEED="unitFile"
+
 
 
     fun getTimeHour(value:Long,lang:String): String {
@@ -54,12 +56,18 @@ object Constants {
     }
     fun writeDegree(context:Context,value:String):String{
         if (SettingSharedPrefrences.getInstance(context)
-                .readStringSettings(Constants.UNIT) == "standard"
+                .readStringSettings(UNIT) == "standard"
         ) return "${value} \u212A"
         else if (SettingSharedPrefrences.getInstance(context)
-                .readStringSettings(Constants.UNIT) == "metric"
+                .readStringSettings(UNIT) == "metric"
         ) return "${value} \u2103"
         else return "${value} \u2109"
+    }
+    fun windSpeed(context:Context,value:String):String{
+       if (SettingSharedPrefrences.getInstance(context)
+                .readStringSettings(WIND_SPEED) == "metric"
+        ) return "${value} m/s "
+        else return "${value} miles "
     }
 
 }
