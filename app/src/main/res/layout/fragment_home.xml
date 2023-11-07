@@ -141,7 +141,7 @@
                     android:src="@drawable/wind" />
 
                 <TextView
-                    android:id="@+id/tv_humidity_home_fragment"
+                    android:id="@+id/tv_wind_home_fragment"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/wind"
@@ -149,7 +149,7 @@
                     android:textSize="@dimen/_18ssp" />
 
                 <TextView
-                    android:id="@+id/tv_humidity_value_home_fragment"
+                    android:id="@+id/tv_wind_value_home_fragment"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingBottom="@dimen/_7sdp"
@@ -187,7 +187,8 @@
                     android:src="@drawable/humidity" />
 
                 <TextView
-                    android:id="@+id/tv_wind_home_fragment"
+
+                    android:id="@+id/tv_humidity_home_fragment"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/humidity"
@@ -195,7 +196,8 @@
                     android:textSize="@dimen/_18ssp" />
 
                 <TextView
-                    android:id="@+id/tv_wind_value_home_fragment"
+
+                    android:id="@+id/tv_humidity_value_home_fragment"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingBottom="@dimen/_7sdp"
