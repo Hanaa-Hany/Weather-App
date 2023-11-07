@@ -8,6 +8,7 @@ import com.bumptech.glide.Glide
 import com.hanaahany.weatherapp.Utils.Constants
 import com.hanaahany.weatherapp.databinding.HourlyTempLayoutBinding
 import com.hanaahany.weatherapp.model.HourlyWeather
+import com.hanaahany.weatherapp.network.sharedpref.SettingSharedPrefrences
 
 class HourAdapter(var context: Context, var list: List<HourlyWeather>):
     RecyclerView.Adapter<HourAdapter.HourViewHolder>() {
@@ -28,7 +29,13 @@ class HourAdapter(var context: Context, var list: List<HourlyWeather>):
         val resp = list.get(position)
         holder.binding.tvDayHumidityHourTempLayout.text=resp.humidity.toString()
         holder.binding.tvTempHourTempLayout.text="${resp.temp.toInt().toString()}c"
-        holder.binding.tvHourTempLayout.text=Constants.getTimeHour(resp.dt)
+        if (SettingSharedPrefrences.getInstance(context).readLanguage("lang")=="en"){
+            holder.binding.tvHourTempLayout.text=Constants.getTimeHour(resp.dt,"en")
+        }else{
+            holder.binding.tvHourTempLayout.text=Constants.getTimeHour(resp.dt,"ar")
+
+        }
+
         Glide.with(context).load("https://openweathermap.org/img/wn/${resp.weather[0].icon}@2x.png").into(holder.binding.imageDayIconHourTempLayout)
 
 

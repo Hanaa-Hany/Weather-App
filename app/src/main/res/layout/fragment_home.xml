@@ -21,9 +21,6 @@
             android:textColor="@color/black"
             android:textSize="@dimen/_40ssp"
             app:layout_constraintEnd_toStartOf="@+id/guideline2"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintHorizontal_weight="1"
-            app:layout_constraintStart_toEndOf="@id/icon_home_fragment"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -45,6 +42,7 @@
             android:textColor="@color/black"
             android:textSize="@dimen/_20ssp"
             app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            app:layout_constraintBottom_toTopOf="@id/tv_weather_date_home_fragment"
             app:layout_constraintStart_toStartOf="@+id/tv_weather_description_home_fragment"
             app:layout_constraintTop_toBottomOf="@id/tv_weather_description_home_fragment" />
 
@@ -53,6 +51,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
+            app:layout_constraintBottom_toTopOf="@id/tv_weather_time_home_fragment"
             app:layout_constraintEnd_toEndOf="@+id/tv_temp_home_fragment"
             app:layout_constraintStart_toStartOf="@+id/tv_temp_home_fragment"
             app:layout_constraintTop_toBottomOf="@id/tv_city_home_fragment" />
@@ -62,6 +61,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
+            app:layout_constraintBottom_toTopOf="@id/card1"
             app:layout_constraintEnd_toEndOf="@+id/tv_temp_home_fragment"
             app:layout_constraintStart_toStartOf="@+id/tv_temp_home_fragment"
             app:layout_constraintTop_toBottomOf="@id/tv_weather_date_home_fragment" />

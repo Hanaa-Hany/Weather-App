@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="wind_speed" translatable="false">سرعه الرياح</string>
+    <string name="location" translatable="false">الموقع</string>
+    <string name="language" translatable="false">اللغه</string>
+    <string name="alert" translatable="false">التنبيهات</string>
+    <string name="wind">الرياح</string>
+    <string name="humidity">الرطوبه</string>
+    <string name="pressure">الضغط</string>
+    <string name="clouds">السحب</string>
+    <string name="favourite">المفضله</string>
+    <string name="settings">الاعدادات</string>
+    <string name="units">الوحدات</string>
+</resources>
