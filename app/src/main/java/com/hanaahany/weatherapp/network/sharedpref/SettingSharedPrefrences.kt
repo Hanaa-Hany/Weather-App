@@ -21,17 +21,29 @@ class SettingSharedPrefrences(context:Context):ISettingSharedPrefrence {
             }
         }
     }
-    override fun writeLanguage(key: String, value: String) {
+    override fun writeStringSettings(key: String, value: String) {
         sharedPreferences.edit().putString(key,value).apply()
     }
 
-    override fun readLanguage(key: String):String {
+    override fun readStringSettings(key: String):String {
         var value:String
         sharedPreferences.getString(key,"en").let {
             value=it?:"en"
         }
         return value
 
+    }
+
+    override fun writeUnits(key: String, value: Float) {
+        sharedPreferences.edit().putFloat(key,value).apply()
+    }
+
+    override fun readUnits(key: String): Float {
+        var value:Float
+        sharedPreferences.getFloat(key,0f).let {
+            value=it
+        }
+        return value
     }
 
 

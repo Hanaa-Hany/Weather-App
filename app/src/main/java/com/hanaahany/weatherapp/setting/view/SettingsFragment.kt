@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RadioGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -32,10 +33,6 @@ class SettingsFragment : Fragment() {
     }
 
 
-
-
-
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val factory = HomeViewModelFactory(
@@ -44,9 +41,10 @@ class SettingsFragment : Fragment() {
                 SettingSharedPrefrences.getInstance(requireContext())
             )
         )
-        viewModel=ViewModelProvider(this,factory).get(HomeViewModel::class.java)
+        viewModel = ViewModelProvider(this, factory).get(HomeViewModel::class.java)
         handleLanguage()
         handelSpeed()
+        handleUnits()
 
     }
 
@@ -70,16 +68,33 @@ class SettingsFragment : Fragment() {
             if (checkId == R.id.radio_arabic) {
                 Toast.makeText(requireContext(), "Arabic", Toast.LENGTH_SHORT).show()
                 Constants.changeLanguage("ar", requireContext())
-                viewModel.writeLanguageToSetting("lang","ar")
+                viewModel.writeStringToSetting(Constants.LANGUAGE, "ar")
             } else {
                 Toast.makeText(requireContext(), "English", Toast.LENGTH_SHORT).show()
                 Constants.changeLanguage("en", requireContext())
-                viewModel.writeLanguageToSetting("lang","en")
+                viewModel.writeStringToSetting(Constants.LANGUAGE, "en")
             }
             restartApplication()
 
 
         }
+    }
+
+    private fun handleUnits() {
+        binding.radioGroupUnits.setOnCheckedChangeListener(RadioGroup.OnCheckedChangeListener { _, radioId ->
+            when (radioId) {
+                R.id.radio_kelvin ->
+                    viewModel.writeStringToSetting(Constants.UNIT, "standard")
+                R.id.radio_celisous ->
+                    viewModel.writeStringToSetting(Constants.UNIT, "metric")
+
+                R.id.radio_fehraniet ->
+                    viewModel.writeStringToSetting(Constants.UNIT, "imperial")
+
+            }
+            restartApplication()
+
+        })
     }
 
     private fun restartApplication() {

@@ -1,5 +1,6 @@
 package com.hanaahany.weatherapp.home.view
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -10,7 +11,7 @@ import com.hanaahany.weatherapp.databinding.HourlyTempLayoutBinding
 import com.hanaahany.weatherapp.model.HourlyWeather
 import com.hanaahany.weatherapp.network.sharedpref.SettingSharedPrefrences
 
-class HourAdapter(var context: Context, var list: List<HourlyWeather>):
+class HourAdapter(var context: Context, var list: List<HourlyWeather>) :
     RecyclerView.Adapter<HourAdapter.HourViewHolder>() {
     private lateinit var binding: HourlyTempLayoutBinding
 
@@ -25,18 +26,23 @@ class HourAdapter(var context: Context, var list: List<HourlyWeather>):
         return HourViewHolder(binding)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: HourViewHolder, position: Int) {
         val resp = list.get(position)
-        holder.binding.tvDayHumidityHourTempLayout.text=resp.humidity.toString()
-        holder.binding.tvTempHourTempLayout.text="${resp.temp.toInt().toString()}c"
-        if (SettingSharedPrefrences.getInstance(context).readLanguage("lang")=="en"){
-            holder.binding.tvHourTempLayout.text=Constants.getTimeHour(resp.dt,"en")
-        }else{
-            holder.binding.tvHourTempLayout.text=Constants.getTimeHour(resp.dt,"ar")
+        holder.binding.tvDayHumidityHourTempLayout.text = resp.humidity.toString()
+        holder.binding.tvTempHourTempLayout.text = Constants.writeDegree(context,resp.temp.toInt().toString())
+
+        if (SettingSharedPrefrences.getInstance(context)
+                .readStringSettings(Constants.LANGUAGE) == "en"
+        ) {
+            holder.binding.tvHourTempLayout.text = Constants.getTimeHour(resp.dt, "en")
+        } else {
+            holder.binding.tvHourTempLayout.text = Constants.getTimeHour(resp.dt, "ar")
 
         }
 
-        Glide.with(context).load("https://openweathermap.org/img/wn/${resp.weather[0].icon}@2x.png").into(holder.binding.imageDayIconHourTempLayout)
+        Glide.with(context).load("https://openweathermap.org/img/wn/${resp.weather[0].icon}@2x.png")
+            .into(holder.binding.imageDayIconHourTempLayout)
 
 
     }

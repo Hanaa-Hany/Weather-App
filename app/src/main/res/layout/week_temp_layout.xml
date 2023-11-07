@@ -43,7 +43,7 @@
         android:layout_weight="1"
         android:text="29"
         android:textColor="@color/white"
-        android:textSize="@dimen/_18ssp"
+        android:textSize="@dimen/_12ssp"
         android:textStyle="bold"
         android:gravity="center"
         android:id="@+id/tv_temp_week_temp_layout"/>
@@ -53,7 +53,7 @@
         android:layout_weight="1"
         android:text="29"
         android:textColor="@color/white"
-        android:textSize="@dimen/_18ssp"
+        android:textSize="@dimen/_12ssp"
         android:textStyle="bold"
         android:gravity="center"
         android:id="@+id/tv_temp_nigt_week_temp_layout"/>
