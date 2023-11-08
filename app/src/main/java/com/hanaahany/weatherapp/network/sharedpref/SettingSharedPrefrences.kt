@@ -34,7 +34,17 @@ class SettingSharedPrefrences(context:Context):ISettingSharedPrefrence {
 
     }
 
+    override fun writeFloatSettings(key: String, value: Float) {
+        sharedPreferences.edit().putFloat(key,value).apply()
+    }
 
+    override fun readFloatSettings(key: String): Float {
+        var value:Float
+        sharedPreferences.getFloat(key,0f).let {
+            value=it
+        }
+        return value
+    }
 
 
 }

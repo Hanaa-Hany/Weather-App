@@ -1,8 +1,13 @@
 package com.hanaahany.weatherapp.Utils
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.Configuration
+import android.location.Geocoder
+import android.util.Log
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.viewModelScope
+import com.hanaahany.weatherapp.model.WeatherResponse
 import com.hanaahany.weatherapp.network.sharedpref.SettingSharedPrefrences
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -15,6 +20,16 @@ object Constants {
     const val LANGUAGE="languageFile"
     const val UNIT="unitFile"
     const val WIND_SPEED="unitFile"
+    const val LOCATION="locationFile"
+    const val GPS="gpsFile"
+    const val MAP="mapFile"
+    const val LAT="latitude"
+    const val LAN="longitude"
+
+
+
+
+
 
 
 
@@ -70,4 +85,32 @@ object Constants {
         else return "${value} miles "
     }
 
+    @SuppressLint("SetTextI18n")
+    fun setLocationNameByGeoCoder(weatherResponse: WeatherResponse, context: Context): String {
+        var latit=0.0
+        var langi=0.0
+        LocationByGPS(context).location.observe(context as LifecycleOwner){
+            latit=it.first
+            langi=it.second
+        }
+        try {
+            val x =
+                Geocoder(context).getFromLocation(
+                        latit,langi,1
+
+                )
+            Log.i(locationTag,"ff"+weatherResponse.lat.toString())
+            return if (x != null && x[0].subAdminArea != null) {
+                Log.i(locationTag, x[0].subAdminArea.toString())
+                x[0].subAdminArea
+
+
+            } else {
+                weatherResponse.timezone
+            }
+        } catch (e: Exception) {
+            return weatherResponse.timezone
+        }
+    }
 }
+

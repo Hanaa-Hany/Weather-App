@@ -2,21 +2,30 @@ package com.hanaahany.weatherapp.setting.view
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.Navigation
 import com.hanaahany.weatherapp.R
 import com.hanaahany.weatherapp.Utils.Constants
+import com.hanaahany.weatherapp.Utils.LocationByGPS
 import com.hanaahany.weatherapp.databinding.FragmentSettingsBinding
+import com.hanaahany.weatherapp.dp.LocalSource
 import com.hanaahany.weatherapp.home.viewmodel.HomeViewModel
 import com.hanaahany.weatherapp.home.viewmodel.HomeViewModelFactory
+import com.hanaahany.weatherapp.maps.MapsFragment
 import com.hanaahany.weatherapp.model.Repository
 import com.hanaahany.weatherapp.network.WeatherClient
 import com.hanaahany.weatherapp.network.sharedpref.SettingSharedPrefrences
+import kotlinx.coroutines.launch
 
 
 class SettingsFragment : Fragment() {
@@ -38,14 +47,36 @@ class SettingsFragment : Fragment() {
         val factory = HomeViewModelFactory(
             Repository.getInstance(
                 WeatherClient,
-                SettingSharedPrefrences.getInstance(requireContext())
+                SettingSharedPrefrences.getInstance(requireContext()), LocalSource(requireContext())
             )
         )
         viewModel = ViewModelProvider(this, factory).get(HomeViewModel::class.java)
         handleLanguage()
         handelSpeed()
         handleUnits()
+        handleLocation()
 
+    }
+    private fun handleLocation(){
+        binding.radioGroupLocation.setOnCheckedChangeListener { radioGroup, radioId ->
+            when(radioId){
+                R.id.radio_gps->{ viewModel.writeStringToSetting(Constants.LOCATION,Constants.GPS)
+                    LocationByGPS(requireContext()).location.observe(context as LifecycleOwner) {
+                        Log.i(Constants.locationTag, it.first.toString())
+                        lifecycleScope.launch {
+                            val lang=viewModel.readStringFromSetting(Constants.LANGUAGE)
+                            val units=viewModel.readStringFromSetting(Constants.UNIT)
+                            viewModel.getWeather(it.first, it.second,units,lang)
+                        }
+                    }
+
+                }
+                R.id.radio_map->{viewModel.writeStringToSetting(Constants.LOCATION,Constants.MAP)
+                    requireActivity().supportFragmentManager.beginTransaction().replace(R.id.homeFragment,MapsFragment()).commit()
+                    //Navigation.findNavController(requireView()).navigate(R.id.mapsFragment)
+                }
+            }
+        }
     }
 
     private fun handelSpeed() {

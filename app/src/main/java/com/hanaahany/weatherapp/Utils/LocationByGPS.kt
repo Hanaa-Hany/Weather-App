@@ -16,6 +16,7 @@ import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
 import java.util.*
+import kotlin.properties.Delegates
 
 private const val MAP_PERMISSION_ID = 505
 
@@ -92,6 +93,9 @@ class LocationByGPS constructor(var context: Context) {
             val lastLocation: Location = locationResult.lastLocation
             Log.i(Constants.locationTag, lastLocation.latitude.toString())
             mutableLocation.postValue(Pair(lastLocation.latitude, lastLocation.longitude))
+            lat=lastLocation.latitude
+            lang=lastLocation.longitude
+
             stopLocationUpdate()
             geocoder = Geocoder(context, Locale.getDefault())
             _address.postValue(geocoder.getFromLocation(lastLocation.latitude, lastLocation.longitude, 1)!!)
@@ -103,6 +107,11 @@ class LocationByGPS constructor(var context: Context) {
 
     fun stopLocationUpdate() {
         fusedLocationClient.removeLocationUpdates(locationCallBack)
+    }
+
+    companion object{
+         var lat by Delegates.notNull<Double>()
+        var lang by Delegates.notNull<Double>()
     }
 
 

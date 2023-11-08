@@ -18,6 +18,7 @@ import com.hanaahany.weatherapp.Utils.ApiState
 import com.hanaahany.weatherapp.Utils.Constants
 import com.hanaahany.weatherapp.Utils.LocationByGPS
 import com.hanaahany.weatherapp.databinding.FragmentHomeBinding
+import com.hanaahany.weatherapp.dp.LocalSource
 import com.hanaahany.weatherapp.home.viewmodel.HomeViewModel
 import com.hanaahany.weatherapp.home.viewmodel.HomeViewModelFactory
 import com.hanaahany.weatherapp.model.Repository
@@ -50,7 +51,7 @@ class HomeFragment : Fragment() {
 
 
         val factory = HomeViewModelFactory(Repository.getInstance(WeatherClient,
-            SettingSharedPrefrences.getInstance(requireContext())
+            SettingSharedPrefrences.getInstance(requireContext()), LocalSource(requireContext())
         ))
 
         viewModel = ViewModelProvider(this, factory).get(HomeViewModel::class.java)
@@ -61,25 +62,22 @@ class HomeFragment : Fragment() {
                 val lang=viewModel.readStringFromSetting(Constants.LANGUAGE)
                 val units=viewModel.readStringFromSetting(Constants.UNIT)
                 viewModel.getWeather(it.first, it.second,units,lang)
+
             }
+
+
         }
         lifecycleScope.launch {
             viewModel.respone.collect { result ->
                 when (result) {
                     is ApiState.Success -> {
-                        Log.i(Constants.locationTag,"Success")
-                        Log.i(Constants.locationTag, "${result.date.hourly.get(0).clouds}")
                         setData(result.date)
-                        Log.i(Constants.locationTag,binding.tvWeatherDescriptionHomeFragment.text.toString())
-
                         hourAdapter = HourAdapter(requireContext(), result.date.hourly)
                         binding.recyclerHourlyDay.adapter = hourAdapter
                         dayAdapter = DayAdapter(requireContext(), result.date.daily)
                         binding.recyclerWeakTemp.adapter = dayAdapter
                     }
                     is ApiState.Fail -> {
-                        Log.i(Constants.locationTag,"Fail")
-
                         Toast.makeText(requireContext(), "Server Error", Toast.LENGTH_SHORT).show()
                     }
                     else -> {
@@ -105,7 +103,7 @@ class HomeFragment : Fragment() {
         binding.tvCloudsValueHomeFragment.text=it.current.clouds.toString()
         binding.tvPressureValueHomeFragment.text=it.current.pressure.toString()
         binding.tvWindValueHomeFragment.text=Constants.windSpeed(requireContext(), it.current.wind_speed.toString())
-
+        binding.tvCityHomeFragment.text=Constants.setLocationNameByGeoCoder(it,requireContext())
         binding.tvHumidityValueHomeFragment.text=it.current.humidity.toString()
         binding.tvWeatherDescriptionHomeFragment.text=it.current.weather.get(0).description
         Log.i(Constants.locationTag,"https://openweathermap.org/img/wn/${it.current.weather.get(0).icon}@2x.png")
