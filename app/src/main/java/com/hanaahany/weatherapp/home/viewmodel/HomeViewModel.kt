@@ -60,6 +60,12 @@ class HomeViewModel(private val _irepo: RepositoryInterface) : ViewModel() {
         }
     }
 
+    fun deleteFavLocation(place: Place){
+        viewModelScope.launch {
+            _irepo.deleteLocationFromDB(place)
+        }
+    }
+
 
 
 }

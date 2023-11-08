@@ -18,6 +18,7 @@ import com.hanaahany.weatherapp.dp.LocalSource
 import com.hanaahany.weatherapp.home.viewmodel.HomeViewModel
 import com.hanaahany.weatherapp.home.viewmodel.HomeViewModelFactory
 import com.hanaahany.weatherapp.maps.MapsFragment
+import com.hanaahany.weatherapp.model.Place
 import com.hanaahany.weatherapp.model.Repository
 import com.hanaahany.weatherapp.network.WeatherClient
 import com.hanaahany.weatherapp.network.sharedpref.SettingSharedPrefrences
@@ -51,10 +52,15 @@ class FavouriteFragment : Fragment() {
 
         viewModel = ViewModelProvider(this, factory).get(HomeViewModel::class.java)
         viewModel.getFavLocation()
+
         lifecycleScope.launch {
             viewModel.favLocation.collect{
                 Log.i(Constants.FAV_TAG,it.size.toString())
-                adapter= FavouriteAdapter(requireContext(),it)
+
+                adapter= FavouriteAdapter(requireContext()){
+                    deleteItem(it)
+                }
+                adapter.submitList(it)
                 binding.recyclerFav.adapter=adapter
             }
         }
@@ -64,6 +70,10 @@ class FavouriteFragment : Fragment() {
 
             }
 
+    }
+
+    private fun deleteItem(it: Place) {
+        viewModel.deleteFavLocation(it)
     }
 
     private fun initViews() {
