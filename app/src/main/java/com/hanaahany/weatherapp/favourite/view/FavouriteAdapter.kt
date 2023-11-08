@@ -10,9 +10,10 @@ import com.bumptech.glide.Glide
 import com.hanaahany.weatherapp.Utils.Constants
 import com.hanaahany.weatherapp.databinding.FavLayoutBinding
 import com.hanaahany.weatherapp.databinding.FragmentMapsBinding
+import com.hanaahany.weatherapp.model.Place
 import com.hanaahany.weatherapp.model.WeatherResponse
 
-class FavouriteAdapter(var context: Context,var list:List<WeatherResponse>):Adapter<FavouriteAdapter.FavViewHolder>() {
+class FavouriteAdapter(var context: Context,var list:List<Place>):Adapter<FavouriteAdapter.FavViewHolder>() {
     private lateinit var binding: FavLayoutBinding
 
 
@@ -25,13 +26,14 @@ class FavouriteAdapter(var context: Context,var list:List<WeatherResponse>):Adap
 
     override fun onBindViewHolder(holder: FavViewHolder, position: Int) {
         val listItem=list.get(position)
-        holder.binding.tempFavLayout.text=listItem.current.temp.toString()
-        holder.binding.addressFavLayout.text=listItem.current.temp.toString()
-        Glide.with(context).load("https://openweathermap.org/img/wn/${listItem.current.weather[0].icon}@2x.png")
+        holder.binding.tempFavLayout.text=Constants.writeDegree(context,listItem.temp.toInt().toString())
+        holder.binding.cityFavLayout.text=listItem.city
+        holder.binding.addressFavLayout.text=listItem.cityName
+        Glide.with(context).load("https://openweathermap.org/img/wn/${listItem.icon}@2x.png")
             .into(
                 holder.binding.imageDayIconFavLayout
             )
-        holder.binding.dateFavLayout.text = Constants.getDateDay(listItem.current.dt, "en")
+        holder.binding.dateFavLayout.text = listItem.date
     }
 
     override fun getItemCount(): Int {

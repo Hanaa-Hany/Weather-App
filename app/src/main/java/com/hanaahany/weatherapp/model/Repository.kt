@@ -54,7 +54,7 @@ class Repository private constructor(
         return localSource.getLocationFromDB()
     }
 
-    override suspend fun insertLocationToDB(place: Place) {
+    override suspend fun insertFavLocation(place: Place) {
         localSource.insertLocationToDB(place)
     }
 

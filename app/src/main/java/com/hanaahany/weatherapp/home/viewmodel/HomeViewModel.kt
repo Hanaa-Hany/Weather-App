@@ -1,26 +1,22 @@
 package com.hanaahany.weatherapp.home.viewmodel
 
-import android.content.Context
 import android.util.Log
-import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewModelScope
 import com.hanaahany.weatherapp.Utils.ApiState
 import com.hanaahany.weatherapp.Utils.Constants
-import com.hanaahany.weatherapp.Utils.LocationByGPS
 import com.hanaahany.weatherapp.model.Place
 import com.hanaahany.weatherapp.model.RepositoryInterface
-import com.hanaahany.weatherapp.model.WeatherResponse
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 class HomeViewModel(private val _irepo: RepositoryInterface) : ViewModel() {
 
     private val _respone: MutableStateFlow<ApiState> =MutableStateFlow(ApiState.Loading)
     var respone: StateFlow<ApiState> = _respone
+
+    private val _favLocation: MutableStateFlow<List<Place>> =MutableStateFlow(emptyList())
+    var favLocation: StateFlow<List<Place>> = _favLocation
 
 
     fun getWeather(lat: Double, lon: Double,units:String="metric",lang:String="en") {
@@ -52,9 +48,18 @@ class HomeViewModel(private val _irepo: RepositoryInterface) : ViewModel() {
 
     fun insertFavLocation(place: Place){
         viewModelScope.launch {
-            _irepo.insertLocationToDB(place)
+            _irepo.insertFavLocation(place)
         }
     }
+    fun getFavLocation(){
+        viewModelScope.launch {
+             _irepo.getLocationFromDB().collect {
+                 Log.i(Constants.FAV_TAG,it.size.toString())
+                 _favLocation.value=it
+             }
+        }
+    }
+
 
 
 }

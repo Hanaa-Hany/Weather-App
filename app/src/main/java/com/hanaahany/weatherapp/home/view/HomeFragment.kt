@@ -33,7 +33,8 @@ class HomeFragment : Fragment() {
     lateinit var binding: FragmentHomeBinding
     private lateinit var hourAdapter: HourAdapter
     private lateinit var dayAdapter: DayAdapter
-
+    private var latitude:Double=0.0
+    private var langitude:Double=0.0
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -62,7 +63,8 @@ class HomeFragment : Fragment() {
                 val lang=viewModel.readStringFromSetting(Constants.LANGUAGE)
                 val units=viewModel.readStringFromSetting(Constants.UNIT)
                 viewModel.getWeather(it.first, it.second,units,lang)
-
+                latitude=it.first
+                langitude=it.second
             }
 
 
@@ -71,7 +73,10 @@ class HomeFragment : Fragment() {
             viewModel.respone.collect { result ->
                 when (result) {
                     is ApiState.Success -> {
+                        result.date.lat=latitude
+                        result.date.long=langitude
                         setData(result.date)
+                        Log.i(Constants.locationTag,result.date.lat.toString()+"result")
                         hourAdapter = HourAdapter(requireContext(), result.date.hourly)
                         binding.recyclerHourlyDay.adapter = hourAdapter
                         dayAdapter = DayAdapter(requireContext(), result.date.daily)
@@ -103,7 +108,8 @@ class HomeFragment : Fragment() {
         binding.tvCloudsValueHomeFragment.text=it.current.clouds.toString()
         binding.tvPressureValueHomeFragment.text=it.current.pressure.toString()
         binding.tvWindValueHomeFragment.text=Constants.windSpeed(requireContext(), it.current.wind_speed.toString())
-        binding.tvCityHomeFragment.text=Constants.setLocationNameByGeoCoder(it,requireContext())
+        binding.tvCityHomeFragment.text=Constants.setLocationNameByGeoCoder(requireContext(),it.long,it.lat)
+        Log.i(Constants.locationTag,it.lat.toString()+"setData")
         binding.tvHumidityValueHomeFragment.text=it.current.humidity.toString()
         binding.tvWeatherDescriptionHomeFragment.text=it.current.weather.get(0).description
         Log.i(Constants.locationTag,"https://openweathermap.org/img/wn/${it.current.weather.get(0).icon}@2x.png")

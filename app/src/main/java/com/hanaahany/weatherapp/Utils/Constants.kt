@@ -15,53 +15,52 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 object Constants {
-    const val locationTag="LocationByGps"
-    const val SETTING="Setting"
-    const val LANGUAGE="languageFile"
-    const val UNIT="unitFile"
-    const val WIND_SPEED="unitFile"
-    const val LOCATION="locationFile"
-    const val GPS="gpsFile"
-    const val MAP="mapFile"
-    const val LAT="latitude"
-    const val LAN="longitude"
+    const val locationTag = "LocationByGps"
+    const val SETTING = "Setting"
+    const val LANGUAGE = "languageFile"
+    const val UNIT = "unitFile"
+    const val WIND_SPEED = "unitFile"
+    const val LOCATION = "locationFile"
+    const val GPS = "gpsFile"
+    const val MAP = "mapFile"
+    const val LAT = "latitude"
+    const val LAN = "longitude"
+    const val FAV_TAG = "FavFragment"
 
 
-
-
-
-
-
-
-    fun getTimeHour(value:Long,lang:String): String {
+    fun getTimeHour(value: Long, lang: String): String {
         val timestamp: Long = value
         val date = Date(timestamp * 1000) // Convert seconds to milliseconds
-        val dateFormat = SimpleDateFormat("h a",Locale(lang))
+        val dateFormat = SimpleDateFormat("h a", Locale(lang))
         val formattedDate = dateFormat.format(date)
         return formattedDate
     }
-    fun getTime(value:Long,lang:String): String {
+
+    fun getTime(value: Long, lang: String): String {
         val timestamp: Long = value
         val date = Date(timestamp * 1000) // Convert seconds to milliseconds
-        val dateFormat = SimpleDateFormat("hh:mm a",Locale(lang))
+        val dateFormat = SimpleDateFormat("hh:mm a", Locale(lang))
         val formattedDate = dateFormat.format(date)
         return formattedDate
     }
-    fun getDate(value:Long,lang:String): String {
+
+    fun getDate(value: Long, lang: String): String {
         val timestamp: Long = value
         val date = Date(timestamp * 1000) // Convert seconds to milliseconds
-        val dateFormat = SimpleDateFormat("yyyy-MM-dd",Locale(lang))
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale(lang))
         val formattedDate = dateFormat.format(date)
         return formattedDate
     }
-    fun getDateDay(value:Long,lang:String): String {
+
+    fun getDateDay(value: Long, lang: String): String {
         val timestamp: Long = value
         val date = Date(timestamp * 1000) // Convert seconds to milliseconds
         val dateFormat = SimpleDateFormat("EEEE", Locale(lang))
         val formattedDate = dateFormat.format(date)
         return formattedDate
     }
-    fun changeLanguage(language: String,context: Context) {
+
+    fun changeLanguage(language: String, context: Context) {
 
         val newLocale = Locale(language)
         Locale.setDefault(newLocale)
@@ -69,7 +68,8 @@ object Constants {
         configuration.setLocale(newLocale)
         context.resources.updateConfiguration(configuration, context.resources.displayMetrics)
     }
-    fun writeDegree(context:Context,value:String):String{
+
+    fun writeDegree(context: Context, value: String): String {
         if (SettingSharedPrefrences.getInstance(context)
                 .readStringSettings(UNIT) == "standard"
         ) return "${value} \u212A"
@@ -78,39 +78,42 @@ object Constants {
         ) return "${value} \u2103"
         else return "${value} \u2109"
     }
-    fun windSpeed(context:Context,value:String):String{
-       if (SettingSharedPrefrences.getInstance(context)
+
+    fun windSpeed(context: Context, value: String): String {
+        if (SettingSharedPrefrences.getInstance(context)
                 .readStringSettings(WIND_SPEED) == "metric"
         ) return "${value} m/s "
         else return "${value} miles "
     }
 
     @SuppressLint("SetTextI18n")
-    fun setLocationNameByGeoCoder(weatherResponse: WeatherResponse, context: Context): String {
-        var latit=0.0
-        var langi=0.0
-        LocationByGPS(context).location.observe(context as LifecycleOwner){
-            latit=it.first
-            langi=it.second
-        }
-        try {
-            val x =
-                Geocoder(context).getFromLocation(
-                        latit,langi,1
+    fun setLocationNameByGeoCoder(context: Context, latitude: Double, longitude: Double): String {
 
-                )
-            Log.i(locationTag,"ff"+weatherResponse.lat.toString())
-            return if (x != null && x[0].subAdminArea != null) {
-                Log.i(locationTag, x[0].subAdminArea.toString())
-                x[0].subAdminArea
+        val geocoder = Geocoder(context, Locale.getDefault())
+        val addresses = geocoder.getFromLocation(latitude, longitude, 1)
+        if (addresses != null && addresses[0].locality != null) {
+            Log.i(locationTag,addresses[0].locality+"Fun")
+            return addresses[0].locality
 
-
-            } else {
-                weatherResponse.timezone
-            }
-        } catch (e: Exception) {
-            return weatherResponse.timezone
+        } else {
+            return "Unknown City"
         }
     }
-}
+    @SuppressLint("SetTextI18n")
+    fun setCityNameByGeoCoder(context: Context, latitude: Double, longitude: Double): String {
 
+        val geocoder = Geocoder(context, Locale.getDefault())
+        val addresses = geocoder.getFromLocation(latitude, longitude, 1)
+        if (addresses != null && addresses[0].adminArea != null) {
+            Log.i(locationTag,addresses[0].adminArea+"Fun")
+            return addresses[0].adminArea
+
+        } else {
+            return "Unknown City"
+        }
+    }
+
+
+
+
+}

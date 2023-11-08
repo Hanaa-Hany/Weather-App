@@ -92,14 +92,16 @@ class LocationByGPS constructor(var context: Context) {
 
             val lastLocation: Location = locationResult.lastLocation
             Log.i(Constants.locationTag, lastLocation.latitude.toString())
+
+            stopLocationUpdate()
             mutableLocation.postValue(Pair(lastLocation.latitude, lastLocation.longitude))
             lat=lastLocation.latitude
             lang=lastLocation.longitude
-
-            stopLocationUpdate()
             geocoder = Geocoder(context, Locale.getDefault())
             _address.postValue(geocoder.getFromLocation(lastLocation.latitude, lastLocation.longitude, 1)!!)
-
+            Log.i(Constants.locationTag,lastLocation.latitude.toString()+"file")
+            Log.i(Constants.locationTag,
+                geocoder.getFromLocation(lastLocation.latitude, lastLocation.longitude, 1)!![0].toString())
 
 
 

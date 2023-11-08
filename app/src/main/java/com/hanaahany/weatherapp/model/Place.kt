@@ -6,10 +6,14 @@ import java.io.Serializable
 
 @Entity(tableName = "Place_Table")
 data class Place(
-@PrimaryKey(autoGenerate = true)
+    @PrimaryKey(autoGenerate = true)
     var id: Int = 0,
     var cityName: String,
     var latitude: Double,
-    var longitude: Double
+    var longitude: Double,
+    var city: String,
+    var temp: Double,
+    var date: String,
+    var icon:String
 ) : Serializable
 
