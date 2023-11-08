@@ -85,6 +85,6 @@ dependencies {
     //Maps Google Play Services
     implementation 'com.google.android.gms:play-services-location:18.0.0'
 
-    //Swiper fresh layout
-    implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
+//    //Swiper fresh layout
+//    implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
 }

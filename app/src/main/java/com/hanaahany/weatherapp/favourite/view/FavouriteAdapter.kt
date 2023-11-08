@@ -29,8 +29,9 @@ class FavouriteAdapter(var context: Context,private val onClick:(Place)->Unit):
 
     override fun onBindViewHolder(holder: FavViewHolder, position: Int) {
         val listItem = getItem(position)
-        holder.binding.tempFavLayout.text =
-            Constants.writeDegree(context, listItem.temp.toString())
+        holder.binding.tempFavLayout.text =listItem.temp.toString()
+            //Constants.writeDegree(context, )
+
         holder.binding.cityFavLayout.text = listItem.city
         holder.binding.addressFavLayout.text = listItem.cityName
         Glide.with(context).load("https://openweathermap.org/img/wn/${listItem.icon}@2x.png")
@@ -38,6 +39,8 @@ class FavouriteAdapter(var context: Context,private val onClick:(Place)->Unit):
                 holder.binding.imageDayIconFavLayout
             )
         holder.binding.dateFavLayout.text = listItem.date
+
+
         holder.itemView.setOnClickListener{
             onClick(listItem)
         }

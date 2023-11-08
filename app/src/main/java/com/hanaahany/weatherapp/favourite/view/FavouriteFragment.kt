@@ -1,28 +1,26 @@
 package com.hanaahany.weatherapp.favourite.view
 
-import android.opengl.Visibility
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
 import com.hanaahany.weatherapp.R
 import com.hanaahany.weatherapp.Utils.Constants
-import com.hanaahany.weatherapp.databinding.FavLayoutBinding
 import com.hanaahany.weatherapp.databinding.FragmentFavouriteBinding
 import com.hanaahany.weatherapp.dp.LocalSource
 import com.hanaahany.weatherapp.home.viewmodel.HomeViewModel
 import com.hanaahany.weatherapp.home.viewmodel.HomeViewModelFactory
 import com.hanaahany.weatherapp.maps.MapsFragment
-import com.hanaahany.weatherapp.model.Place
 import com.hanaahany.weatherapp.model.Repository
 import com.hanaahany.weatherapp.network.WeatherClient
 import com.hanaahany.weatherapp.network.sharedpref.SettingSharedPrefrences
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 
@@ -42,7 +40,7 @@ class FavouriteFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initViews()
+
         val factory = HomeViewModelFactory(
             Repository.getInstance(
                 WeatherClient,
@@ -58,7 +56,7 @@ class FavouriteFragment : Fragment() {
                 Log.i(Constants.FAV_TAG,it.size.toString())
 
                 adapter= FavouriteAdapter(requireContext()){
-                    deleteItem(it)
+                    deleteItem()
                 }
                 adapter.submitList(it)
                 binding.recyclerFav.adapter=adapter
@@ -66,19 +64,41 @@ class FavouriteFragment : Fragment() {
         }
         binding.fabFav.setOnClickListener{
             requireFragmentManager().beginTransaction().replace(R.id.homeFragment,MapsFragment()).commit()
+            }
+    }
 
 
+
+    private fun deleteItem() {
+
+        ItemTouchHelper(object : ItemTouchHelper.SimpleCallback( 0,ItemTouchHelper.RIGHT or ItemTouchHelper.LEFT ) {
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
+
+                return false
             }
 
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+
+
+                val position = viewHolder.adapterPosition
+                var place = adapter.currentList[position]
+                viewModel.deleteFavLocation(place)
+                Snackbar.make(binding.recyclerFav, "Deleted " + place.city, Snackbar.LENGTH_LONG)
+                    .setAction(
+                        "Undo",
+                        View.OnClickListener {
+                           viewModel.insertFavLocation(place)
+                        }).show()
+            }
+
+        }).attachToRecyclerView(binding.recyclerFav)
     }
 
-    private fun deleteItem(it: Place) {
-        viewModel.deleteFavLocation(it)
-    }
 
-    private fun initViews() {
-
-    }
 
 
 }
