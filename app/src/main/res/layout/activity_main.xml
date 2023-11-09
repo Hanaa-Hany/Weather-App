@@ -10,10 +10,13 @@
     android:background="@color/East_Bay"
     app:layoutDescription="@xml/activity_main_scene">
 
-    <androidx.fragment.app.FragmentContainerView
+    <fragment
+        android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/homeFragment"/>
+        android:id="@+id/nav_host_fragment"
+        app:navGraph="@navigation/nav_graph"
+        />
     
     <androidx.appcompat.widget.AppCompatImageView
         android:layout_width="wrap_content"

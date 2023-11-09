@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.Navigation
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -24,6 +25,8 @@ import com.hanaahany.weatherapp.dp.LocalSource
 import com.hanaahany.weatherapp.favourite.view.FavouriteFragment
 import com.hanaahany.weatherapp.home.viewmodel.HomeViewModel
 import com.hanaahany.weatherapp.home.viewmodel.HomeViewModelFactory
+import com.hanaahany.weatherapp.model.DailyWeather
+import com.hanaahany.weatherapp.model.HourlyWeather
 import com.hanaahany.weatherapp.model.Place
 import com.hanaahany.weatherapp.model.Repository
 import com.hanaahany.weatherapp.network.WeatherClient
@@ -39,7 +42,14 @@ class MapsFragment : Fragment() {
     private lateinit var viewModel: HomeViewModel
     private var temp: Double = 0.0
     private var date: String = ""
+    private var pressure: Int = 0
+    private var humidity: Int = 0
+    private var clouds: Int = 0
+    private var windSpeed: Double = 0.0
+    private var description: String = ""
     private var icon: String = ""
+    var hourly: List<HourlyWeather> = emptyList()
+    var daily: List<DailyWeather> = emptyList()
     private var callback: OnMapReadyCallback = OnMapReadyCallback { googleMap ->
         mMap = googleMap
 
@@ -88,8 +98,8 @@ class MapsFragment : Fragment() {
         binding.btnSave.setOnClickListener {
             viewModel.writeFloatToSetting(Constants.LAT, latitude.toFloat())
             viewModel.writeFloatToSetting(Constants.LAN, longitude.toFloat())
-            requireFragmentManager().beginTransaction()
-                .replace(R.id.homeFragment, FavouriteFragment()).commit()
+            Navigation.findNavController(requireView()).navigate(R.id.action_mapsFragment_to_favouriteFragment)
+
 
             lifecycleScope.launch {
                 viewModel.respone.collect {
@@ -99,6 +109,13 @@ class MapsFragment : Fragment() {
                             temp = it.date.current.temp
                             date = Constants.getDate(it.date.current.dt, "en")
                             icon=it.date.current.weather.get(0).icon
+                            pressure=it.date.current.pressure
+                            humidity =it.date.current.humidity
+                            clouds=it.date.current.clouds
+                            windSpeed =it.date.current.wind_speed
+                            description=it.date.current.weather.get(0).description
+                            hourly=it.date.hourly
+                            daily=it.date.daily
                             Log.i(Constants.locationTag,temp.toString())
                             Log.i(Constants.locationTag,date)
                             Log.i(Constants.locationTag,icon)
@@ -125,7 +142,14 @@ class MapsFragment : Fragment() {
                     longitude = longitude,
                     temp = temp,
                     date = date,
-                    icon = icon
+                    icon = icon,
+                    pressure = pressure,
+                    humidity =humidity ,
+                    cloud = clouds,
+                    windSpeed =windSpeed ,
+                    description = description,
+                    hourly = hourly,
+                    daily = daily
                 )
             )
 

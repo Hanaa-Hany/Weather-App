@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
@@ -15,6 +16,7 @@ import com.hanaahany.weatherapp.R
 import com.hanaahany.weatherapp.Utils.Constants
 import com.hanaahany.weatherapp.databinding.FragmentFavouriteBinding
 import com.hanaahany.weatherapp.dp.LocalSource
+import com.hanaahany.weatherapp.favourite.view.FavouriteFragmentDirections.ActionFavouriteFragmentToDetailsFragment
 import com.hanaahany.weatherapp.home.viewmodel.HomeViewModel
 import com.hanaahany.weatherapp.home.viewmodel.HomeViewModelFactory
 import com.hanaahany.weatherapp.maps.MapsFragment
@@ -50,20 +52,23 @@ class FavouriteFragment : Fragment() {
 
         viewModel = ViewModelProvider(this, factory).get(HomeViewModel::class.java)
         viewModel.getFavLocation()
-
+        deleteItem()
         lifecycleScope.launch {
             viewModel.favLocation.collect{
                 Log.i(Constants.FAV_TAG,it.size.toString())
 
                 adapter= FavouriteAdapter(requireContext()){
-                    deleteItem()
+                    //Open Location Details
+                    val action:ActionFavouriteFragmentToDetailsFragment=FavouriteFragmentDirections
+                        .actionFavouriteFragmentToDetailsFragment(it)
+                    Navigation.findNavController(requireView()).navigate(action)
                 }
                 adapter.submitList(it)
                 binding.recyclerFav.adapter=adapter
             }
         }
         binding.fabFav.setOnClickListener{
-            requireFragmentManager().beginTransaction().replace(R.id.homeFragment,MapsFragment()).commit()
+            Navigation.findNavController(requireView()).navigate(R.id.action_favouriteFragment_to_mapsFragment)
             }
     }
 

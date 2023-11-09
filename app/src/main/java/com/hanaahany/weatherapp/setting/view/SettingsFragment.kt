@@ -72,8 +72,7 @@ class SettingsFragment : Fragment() {
 
                 }
                 R.id.radio_map->{viewModel.writeStringToSetting(Constants.LOCATION,Constants.MAP)
-                    requireActivity().supportFragmentManager.beginTransaction().replace(R.id.homeFragment,MapsFragment()).commit()
-                    //Navigation.findNavController(requireView()).navigate(R.id.mapsFragment)
+                    Navigation.findNavController(requireView()).navigate(R.id.mapsFragment)
                 }
             }
         }

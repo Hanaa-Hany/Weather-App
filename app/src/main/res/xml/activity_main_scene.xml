@@ -3,15 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     >
     <ConstraintSet android:id="@+id/start">
-        <Constraint android:id="@+id/homeFragment"
+        <Constraint android:id="@+id/nav_host_fragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
         <Constraint android:id="@+id/iv_menu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/_12sdp"
-            app:layout_constraintBottom_toBottomOf="@+id/homeFragment"
-            app:layout_constraintStart_toStartOf="@+id/homeFragment">
+            app:layout_constraintBottom_toBottomOf="@+id/nav_host_fragment"
+            app:layout_constraintStart_toStartOf="@+id/nav_host_fragment">
             <Transform android:rotation="0"/>
         </Constraint>
 
@@ -27,7 +27,7 @@
     </ConstraintSet>
 
     <ConstraintSet android:id="@+id/end">
-        <Constraint android:id="@+id/homeFragment"
+        <Constraint android:id="@+id/nav_host_fragment"
            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHeight_percent=".85"
@@ -37,8 +37,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/_12sdp"
-            app:layout_constraintBottom_toBottomOf="@+id/homeFragment"
-            app:layout_constraintEnd_toEndOf="@+id/homeFragment">
+            app:layout_constraintBottom_toBottomOf="@+id/nav_host_fragment"
+            app:layout_constraintEnd_toEndOf="@+id/nav_host_fragment">
             <Transform android:rotation="-180"/>
         </Constraint>
 

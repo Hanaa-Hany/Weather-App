@@ -14,6 +14,13 @@ data class Place(
     var city: String,
     var temp: Double,
     var date: String,
-    var icon:String
+    var icon:String,
+    var pressure:Int,
+    var humidity:Int,
+    var cloud:Int,
+    var windSpeed: Double,
+    var description: String,
+    var hourly: List<HourlyWeather>,
+    var daily: List<DailyWeather>
 ) : Serializable
 

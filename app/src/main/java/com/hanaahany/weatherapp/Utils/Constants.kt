@@ -7,6 +7,8 @@ import android.location.Geocoder
 import android.util.Log
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.viewModelScope
+import com.airbnb.lottie.LottieAnimationView
+import com.hanaahany.weatherapp.R
 import com.hanaahany.weatherapp.model.WeatherResponse
 import com.hanaahany.weatherapp.network.sharedpref.SettingSharedPrefrences
 import kotlinx.coroutines.Dispatchers
@@ -110,6 +112,13 @@ object Constants {
 
         } else {
             return "Unknown City"
+        }
+    }
+
+    fun setIcon(src:String,lottiView:LottieAnimationView){
+        when(src){
+             "https://openweathermap.org/img/wn/10d@4x.png" ->lottiView.setAnimation(R.raw.rain_day)
+            "https://openweathermap.org/img/wn/01d@4x.png" ->lottiView.setAnimation(R.raw.sunny)
         }
     }
 

@@ -108,7 +108,7 @@ class HomeFragment : Fragment() {
         binding.tvCloudsValueHomeFragment.text=it.current.clouds.toString()
         binding.tvPressureValueHomeFragment.text=it.current.pressure.toString()
         binding.tvWindValueHomeFragment.text=Constants.windSpeed(requireContext(), it.current.wind_speed.toString())
-        binding.tvCityHomeFragment.text=Constants.setLocationNameByGeoCoder(requireContext(),it.long,it.lat)
+        binding.tvCityHomeFragment.text=Constants.setLocationNameByGeoCoder(requireContext(),it.lat,it.long)
         Log.i(Constants.locationTag,it.lat.toString()+"setData")
         binding.tvHumidityValueHomeFragment.text=it.current.humidity.toString()
         binding.tvWeatherDescriptionHomeFragment.text=it.current.weather.get(0).description

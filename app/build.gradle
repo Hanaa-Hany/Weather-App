@@ -3,6 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
     id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
+    id 'androidx.navigation.safeargs'
 
 }
 
@@ -96,6 +97,16 @@ dependencies {
     testImplementation "org.hamcrest:hamcrest-library:2.2"
     androidTestImplementation "org.hamcrest:hamcrest:2.2"
     androidTestImplementation "org.hamcrest:hamcrest-library:2.2"
+
+    // Kotlin Navigation Component
+    implementation "androidx.navigation:navigation-fragment-ktx:2.7.5"
+    implementation "androidx.navigation:navigation-ui-ktx:2.7.5"
+
+    //Lotti
+    def lottieVersion = "3.4.0"
+    implementation "com.airbnb.android:lottie:$lottieVersion"
+
+
 
 //    //Swiper fresh layout
 //    implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
