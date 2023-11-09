@@ -29,7 +29,7 @@ class FavouriteAdapter(var context: Context,private val onClick:(Place)->Unit):
 
     override fun onBindViewHolder(holder: FavViewHolder, position: Int) {
         val listItem = getItem(position)
-        holder.binding.tempFavLayout.text =listItem.temp.toString()
+        holder.binding.tempFavLayout.text =listItem.temp.toInt().toString()
             //Constants.writeDegree(context, )
 
         holder.binding.cityFavLayout.text = listItem.city

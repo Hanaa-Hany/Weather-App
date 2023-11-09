@@ -9,7 +9,7 @@ interface RepositoryInterface {
     fun writeFloatToSetting(key:String, value:Float)
     fun readFloatFromSetting(key:String):Float
 
-    fun getLocationFromDB(): Flow<List<Place>>
+    fun getFavLocation(): Flow<List<Place>>
 
     suspend fun insertFavLocation(place: Place)
 

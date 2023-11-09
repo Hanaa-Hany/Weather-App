@@ -1,22 +1,22 @@
 package com.hanaahany.weatherapp.model
 
-import com.hanaahany.weatherapp.dp.LocalSource
+import com.hanaahany.weatherapp.dp.ILocalSource
 import com.hanaahany.weatherapp.network.RemoteSource
-import com.hanaahany.weatherapp.network.sharedpref.SettingSharedPrefrences
+import com.hanaahany.weatherapp.network.sharedpref.ISettingSharedPrefrence
 import kotlinx.coroutines.flow.Flow
 
 class Repository private constructor(
     var remoteSource: RemoteSource,
-    var settingSharedPrefrences: SettingSharedPrefrences,
-    var localSource: LocalSource
+    var settingSharedPrefrences: ISettingSharedPrefrence,
+    var localSource: ILocalSource
 ) : RepositoryInterface {
 
     companion object {
         private var INSTANCE: Repository? = null
         fun getInstance(
             remoteSource: RemoteSource,
-            settingSharedPrefrences: SettingSharedPrefrences,
-            localSource: LocalSource
+            settingSharedPrefrences: ISettingSharedPrefrence,
+            localSource: ILocalSource
         ): Repository {
             if (INSTANCE == null) {
                 INSTANCE = Repository(remoteSource, settingSharedPrefrences,localSource)
@@ -50,7 +50,7 @@ class Repository private constructor(
         return settingSharedPrefrences.readFloatSettings(key)
     }
 
-    override fun getLocationFromDB(): Flow<List<Place>> {
+    override fun getFavLocation(): Flow<List<Place>> {
         return localSource.getLocationFromDB()
     }
 

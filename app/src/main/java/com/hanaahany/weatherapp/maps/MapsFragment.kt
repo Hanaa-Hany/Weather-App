@@ -56,6 +56,7 @@ class MapsFragment : Fragment() {
             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(it, 12f))
             latitude = it.latitude
             longitude = it.longitude
+            viewModel.getWeather(it.latitude, it.longitude)
 
             Log.i(Constants.locationTag, "hh" + latitude.toString())
 
@@ -83,35 +84,38 @@ class MapsFragment : Fragment() {
         )
 
         viewModel = ViewModelProvider(this, factory).get(HomeViewModel::class.java)
-        viewModel.getWeather(latitude, longitude)
-        lifecycleScope.launch {
-            viewModel.respone.collect {
-                when (it) {
-                    is ApiState.Success -> {
-                        temp = it.date.current.temp
-                        date = Constants.getDate(it.date.current.dt, "en")
-                        icon=it.date.current.weather.get(0).icon
-                    }
-                    is ApiState.Fail -> Toast.makeText(
-                        requireContext(),
-                        "Server Error",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    is ApiState.Loading -> Log.i(Constants.locationTag, "Loading")
 
-                }
-            }
-        }
         binding.btnSave.setOnClickListener {
             viewModel.writeFloatToSetting(Constants.LAT, latitude.toFloat())
             viewModel.writeFloatToSetting(Constants.LAN, longitude.toFloat())
             requireFragmentManager().beginTransaction()
                 .replace(R.id.homeFragment, FavouriteFragment()).commit()
-            viewModel.getWeather(latitude, longitude)
+
+            lifecycleScope.launch {
+                viewModel.respone.collect {
+                    when (it) {
+                        is ApiState.Success -> {
+
+                            temp = it.date.current.temp
+                            date = Constants.getDate(it.date.current.dt, "en")
+                            icon=it.date.current.weather.get(0).icon
+                            Log.i(Constants.locationTag,temp.toString())
+                            Log.i(Constants.locationTag,date)
+                            Log.i(Constants.locationTag,icon)
+                        }
+                        is ApiState.Fail -> Toast.makeText(
+                            requireContext(),
+                            "Server Error",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        is ApiState.Loading -> Log.i(Constants.locationTag, "Loading")
+
+                    }
+                }
+            }
             val cityName =
                 Constants.setLocationNameByGeoCoder(requireContext(), latitude, longitude)
             val city = Constants.setCityNameByGeoCoder(requireContext(), latitude, longitude)
-
             viewModel.insertFavLocation(
                 Place(
 

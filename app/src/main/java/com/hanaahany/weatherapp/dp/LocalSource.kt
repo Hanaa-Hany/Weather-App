@@ -8,6 +8,7 @@ import kotlinx.coroutines.flow.Flow
 class LocalSource(context: Context):ILocalSource {
     private var locationDAO: LocationDAO
 
+
     init {
         val appDataBase: AppDataBase = AppDataBase.getInstance(context)
         locationDAO = appDataBase.getLocationDAO()
