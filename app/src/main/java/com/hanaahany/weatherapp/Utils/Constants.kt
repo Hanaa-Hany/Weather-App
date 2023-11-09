@@ -5,14 +5,9 @@ import android.content.Context
 import android.content.res.Configuration
 import android.location.Geocoder
 import android.util.Log
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.viewModelScope
 import com.airbnb.lottie.LottieAnimationView
 import com.hanaahany.weatherapp.R
-import com.hanaahany.weatherapp.model.WeatherResponse
 import com.hanaahany.weatherapp.network.sharedpref.SettingSharedPrefrences
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -94,20 +89,21 @@ object Constants {
         val geocoder = Geocoder(context, Locale.getDefault())
         val addresses = geocoder.getFromLocation(latitude, longitude, 1)
         if (addresses != null && addresses[0].locality != null) {
-            Log.i(locationTag,addresses[0].locality+"Fun")
+            Log.i(locationTag, addresses[0].locality + "Fun")
             return addresses[0].locality
 
         } else {
             return "Unknown City"
         }
     }
+
     @SuppressLint("SetTextI18n")
     fun setCityNameByGeoCoder(context: Context, latitude: Double, longitude: Double): String {
 
         val geocoder = Geocoder(context, Locale.getDefault())
         val addresses = geocoder.getFromLocation(latitude, longitude, 1)
         if (addresses != null && addresses[0].adminArea != null) {
-            Log.i(locationTag,addresses[0].adminArea+"Fun")
+            Log.i(locationTag, addresses[0].adminArea + "Fun")
             return addresses[0].adminArea
 
         } else {
@@ -115,14 +111,25 @@ object Constants {
         }
     }
 
-    fun setIcon(src:String,lottiView:LottieAnimationView){
-        when(src){
-             "https://openweathermap.org/img/wn/10d@4x.png" ->lottiView.setAnimation(R.raw.rain_day)
-            "https://openweathermap.org/img/wn/01d@4x.png" ->lottiView.setAnimation(R.raw.sunny)
+    fun setIcon(src: String, lottiView: LottieAnimationView) {
+        when (src) {
+            "https://openweathermap.org/img/wn/10d@2x.png" -> lottiView.setAnimation(R.raw.rain_day)
+            "https://openweathermap.org/img/wn/01d@2x.png" -> lottiView.setAnimation(R.raw.sunny)
+            "https://openweathermap.org/img/wn/02d@2x.png" -> lottiView.setAnimation(R.raw.few_clouds)
+            "https://openweathermap.org/img/wn/03d@2x.png" -> lottiView.setAnimation(R.raw.clouds)
+            "https://openweathermap.org/img/wn/04d@2x.png" -> lottiView.setAnimation(R.raw.broken_clouds)
+            "https://openweathermap.org/img/wn/09d@2x.png" -> lottiView.setAnimation(R.raw.rain_day)
+            "https://openweathermap.org/img/wn/11d@2x.png" -> lottiView.setAnimation(R.raw.thunder)
+            "https://openweathermap.org/img/wn/13d@2x.png" -> lottiView.setAnimation(R.raw.snowfall)
+            "https://openweathermap.org/img/wn/50d@2x.png" -> lottiView.setAnimation(R.raw.mist)
+            "https://openweathermap.org/img/wn/01n@2x.png" -> lottiView.setAnimation(R.raw.first_night)
+            "https://openweathermap.org/img/wn/02n@2x.png" -> lottiView.setAnimation(R.raw.snowfall)
+            "https://openweathermap.org/img/wn/03n@2x.png" -> lottiView.setAnimation(R.raw.mist)
+            "https://openweathermap.org/img/wn/04n@2x.png" -> lottiView.setAnimation(R.raw.first_night)
+
+
         }
     }
-
-
 
 
 }

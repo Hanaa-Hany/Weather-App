@@ -66,16 +66,34 @@
             app:layout_constraintStart_toStartOf="@+id/tv_temp_home_fragment"
             app:layout_constraintTop_toBottomOf="@id/tv_weather_date_home_fragment" />
 
-        <ImageView
+        <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/icon_home_fragment"
-            android:layout_width="@dimen/_100sdp"
-            android:layout_height="@dimen/_100sdp"
+            app:lottie_loop="true"
+            android:layout_width="@dimen/_140sdp"
+            android:layout_height="@dimen/_140sdp"
             app:layout_constraintBottom_toBottomOf="@+id/tv_weather_time_home_fragment"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_weight="1"
             app:layout_constraintStart_toStartOf="@+id/guideline2"
             app:layout_constraintTop_toTopOf="parent"
-            android:scaleType="fitXY"/>
+            android:scaleType="fitXY"
+            app:lottie_autoPlay="true"
+            />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/loading_lotti_home_fragment"
+            app:lottie_loop="true"
+            android:layout_width="@dimen/_200sdp"
+            android:layout_height="@dimen/_200sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:scaleType="fitXY"
+            app:lottie_autoPlay="true"
+            app:lottie_rawRes="@raw/snowfall"
+            android:visibility="invisible"
+            />
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/card1"

@@ -91,7 +91,9 @@ class DetailsFragment : Fragment() {
         binding.tvHumidityValueDetailsFragment.text=place.humidity.toString()
 
         binding.tvWeatherDescriptionDetailsFragment.text=place.description
-        Constants.setIcon("https://openweathermap.org/img/wn/${place.icon}@4x.png",binding.iconDetailsFragment)
+        //Constants.setIcon("https://openweathermap.org/img/wn/${place.icon}@4x.png",binding.iconDetailsFragment)
+        Glide.with(requireContext()).load(Constants.setIcon("https://openweathermap.org/img/wn/${place.icon}@2x.png",binding.iconDetailsFragment)).into( binding.iconDetailsFragment)
+
         if (SettingSharedPrefrences.getInstance(requireContext()).readStringSettings(Constants.LANGUAGE)=="en"){
             //binding.tvWeatherTimeDetailsFragment.text= Constants.getTime(it.current.dt,"en")
             binding.tvWeatherDateDetailsFragment.text= place.date

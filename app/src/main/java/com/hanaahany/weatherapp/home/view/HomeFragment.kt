@@ -75,6 +75,7 @@ class HomeFragment : Fragment() {
                     is ApiState.Success -> {
                         result.date.lat=latitude
                         result.date.long=langitude
+                        binding.loadingLottiHomeFragment.visibility=View.INVISIBLE
                         setData(result.date)
                         Log.i(Constants.locationTag,result.date.lat.toString()+"result")
                         hourAdapter = HourAdapter(requireContext(), result.date.hourly)
@@ -87,6 +88,7 @@ class HomeFragment : Fragment() {
                     }
                     else -> {
                         Log.i(Constants.locationTag,"Loading")
+                        binding.loadingLottiHomeFragment.visibility=View.VISIBLE
 
                     }
                 }
@@ -109,12 +111,12 @@ class HomeFragment : Fragment() {
         binding.tvPressureValueHomeFragment.text=it.current.pressure.toString()
         binding.tvWindValueHomeFragment.text=Constants.windSpeed(requireContext(), it.current.wind_speed.toString())
         binding.tvCityHomeFragment.text=Constants.setLocationNameByGeoCoder(requireContext(),it.lat,it.long)
-        Log.i(Constants.locationTag,it.lat.toString()+"setData")
+        //Log.i(Constants.locationTag,it.lat.toString()+"setData")
         binding.tvHumidityValueHomeFragment.text=it.current.humidity.toString()
         binding.tvWeatherDescriptionHomeFragment.text=it.current.weather.get(0).description
-        Log.i(Constants.locationTag,"https://openweathermap.org/img/wn/${it.current.weather.get(0).icon}@2x.png")
-        Glide.with(requireContext()).load("https://openweathermap.org/img/wn/${it.current.weather.get(0).icon}@4x.png")
-            .into( binding.iconHomeFragment)
+        //Log.i(Constants.locationTag,"https://openweathermap.org/img/wn/${it.current.weather.get(0).icon}@2x.png")
+       // Glide.with(requireContext()).load("https://openweathermap.org/img/wn/${it.current.weather.get(0).icon}@4x.png").into( binding.iconHomeFragment)
+        Constants.setIcon("https://openweathermap.org/img/wn/${it.current.weather.get(0).icon}@2x.png",binding.iconHomeFragment)
         if (SettingSharedPrefrences.getInstance(requireContext()).readStringSettings(Constants.LANGUAGE)=="en"){
             binding.tvWeatherTimeHomeFragment.text=Constants.getTime(it.current.dt,"en")
             binding.tvWeatherDateHomeFragment.text=Constants.getDate(it.current.dt,"en")
