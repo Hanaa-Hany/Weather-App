@@ -15,6 +15,14 @@ class LocalSource(context: Context):ILocalSource {
 
     }
 
+    override fun getCachedWeather(): Flow<WeatherResponse> {
+        return locationDAO.getCachedData()
+    }
+
+    override suspend fun insertCachedWeather(weatherResponse: WeatherResponse) {
+        locationDAO.insertCachedData(weatherResponse)
+    }
+
     override fun getLocationFromDB(): Flow<List<Place>> {
         return locationDAO.getLocationFromDB()
     }

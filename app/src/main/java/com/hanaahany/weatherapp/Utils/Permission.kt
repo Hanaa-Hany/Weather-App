@@ -5,49 +5,55 @@ import android.app.Activity
 import android.content.Context
 import android.content.pm.PackageManager
 import android.location.LocationManager
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 
 private const val MAP_PERMISSION_ID = 505
 
-class Permission(var context: Context):IPermission {
+object  Permission{
 
+     fun checkPermission(context: Context): Boolean {
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    override fun requestPermission() {
-        ActivityCompat.requestPermissions(
-            context as Activity, arrayOf(
-                android.Manifest.permission.ACCESS_FINE_LOCATION,
-                android.Manifest.permission.ACCESS_COARSE_LOCATION
-            ), MAP_PERMISSION_ID
-        )
+        var result = false
+        if (ContextCompat.checkSelfPermission(
+                context,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED ||
+            ContextCompat.checkSelfPermission(
+                context,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+            result = true
+        }
+        return result
     }
 
-    override fun checkPermission(): Boolean {
-        return ActivityCompat.checkSelfPermission(
-            context, android.Manifest.permission.ACCESS_COARSE_LOCATION
-        ) == PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(
-            context, android.Manifest.permission.ACCESS_FINE_LOCATION
-        ) == PackageManager.PERMISSION_GRANTED    }
+     fun isLocationIsEnabled(context: Context): Boolean {
 
-    override fun isPermissionEnabled(): Boolean {
-        var locationManager: LocationManager =
+        val locationManager: LocationManager =
             context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
-        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(
-            LocationManager.NETWORK_PROVIDER
-        )    }
+
+        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)||
+                locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
+    }
+
+     fun checkConnection(context: Context): Boolean {
+        val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val network = connectivityManager.activeNetwork
+        val capabilities = connectivityManager.getNetworkCapabilities(network)
+        return capabilities != null && (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) || capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR))
+    }
+
+//     fun notificationPermission(context: Context): Boolean{
+//        var result = false
+//        if (ContextCompat.checkSelfPermission(context, Manifest.permission.POST_NOTIFICATIONS)
+//            == PackageManager.PERMISSION_GRANTED) {
+//            result = true
+//        }
+//        return result
+//    }
 }
+

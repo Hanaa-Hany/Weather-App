@@ -15,4 +15,8 @@ interface LocationDAO {
   suspend fun insertLocationToDB(place:Place)
   @Delete
   suspend fun deleteLocationFromDB(place: Place)
+  @Insert(onConflict=OnConflictStrategy.REPLACE)
+  suspend fun insertCachedData(weatherResponse: WeatherResponse)
+  @Query("SELECT * FROM weather_table")
+  fun getCachedData():Flow<WeatherResponse>
 }

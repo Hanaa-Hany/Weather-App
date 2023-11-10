@@ -7,6 +7,7 @@ import com.hanaahany.weatherapp.Utils.ApiState
 import com.hanaahany.weatherapp.Utils.Constants
 import com.hanaahany.weatherapp.model.Place
 import com.hanaahany.weatherapp.model.RepositoryInterface
+import com.hanaahany.weatherapp.model.WeatherResponse
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
@@ -27,10 +28,22 @@ class HomeViewModel(private val _irepo: RepositoryInterface) : ViewModel() {
             }.collect{
                 _respone.value=ApiState.Success(it)
             }
-
-
         }
+    }
 
+    fun getCachedWeather(){
+        viewModelScope.launch {
+            _irepo.getCachedData().catch {
+                _respone.value=ApiState.Fail(it.message.toString())
+            }.collect{
+                _respone.value=ApiState.Success(it)
+            }
+        }
+    }
+    fun insertCachedWeather(weatherResponse: WeatherResponse){
+        viewModelScope.launch {
+            _irepo.insertCachedWeather(weatherResponse)
+        }
     }
     fun writeStringToSetting(key:String, value:String){
         _irepo.writeStringToSetting(key,value)

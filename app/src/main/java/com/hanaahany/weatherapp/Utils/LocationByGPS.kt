@@ -32,8 +32,8 @@ class LocationByGPS constructor(var context: Context) {
 
     @SuppressLint("MissingPermission")
     fun getLastLocation() {
-        if (checkPermission()) {
-            if (isPermissionEnabled()) {
+        if (Permission.checkPermission(context)) {
+            if (Permission.isLocationIsEnabled(context)) {
                 requestNewLocation()
             } else {
                 val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
@@ -46,21 +46,9 @@ class LocationByGPS constructor(var context: Context) {
 
     }
 
-    fun checkPermission(): Boolean {
-        return ActivityCompat.checkSelfPermission(
-            context, android.Manifest.permission.ACCESS_COARSE_LOCATION
-        ) == PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(
-            context, android.Manifest.permission.ACCESS_FINE_LOCATION
-        ) == PackageManager.PERMISSION_GRANTED
-    }
 
-    fun isPermissionEnabled(): Boolean {
-        var locationManager: LocationManager =
-            context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
-        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(
-            LocationManager.NETWORK_PROVIDER
-        )
-    }
+
+
 
     @SuppressLint("MissingPermission", "SuspiciousIndentation")
     private fun requestNewLocation() {

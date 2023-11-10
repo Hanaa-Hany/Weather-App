@@ -34,6 +34,15 @@ class Repository private constructor(
         return remoteSource.makeNetworkCall(lat, lon, units, lang)
     }
 
+    override suspend fun getCachedData(): Flow<WeatherResponse> {
+        return localSource.getCachedWeather()
+    }
+
+    override suspend fun insertCachedWeather(weatherResponse: WeatherResponse) {
+        localSource.insertCachedWeather(weatherResponse)
+    }
+
+
     override fun writeStringToSetting(key: String, value: String) {
         settingSharedPrefrences.writeStringSettings(key, value)
     }

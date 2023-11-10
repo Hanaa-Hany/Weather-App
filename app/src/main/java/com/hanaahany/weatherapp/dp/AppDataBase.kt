@@ -9,7 +9,7 @@ import com.hanaahany.weatherapp.model.Place
 import com.hanaahany.weatherapp.model.WeatherResponse
 
 
-@Database(entities = arrayOf(Place::class), version = 1)
+@Database(entities = arrayOf(Place::class,WeatherResponse::class), version = 1)
 @TypeConverters(ConverterDB::class)
 abstract class AppDataBase: RoomDatabase() {
     abstract fun getLocationDAO(): LocationDAO

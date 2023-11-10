@@ -17,6 +17,7 @@ import com.bumptech.glide.Glide
 import com.hanaahany.weatherapp.Utils.ApiState
 import com.hanaahany.weatherapp.Utils.Constants
 import com.hanaahany.weatherapp.Utils.LocationByGPS
+import com.hanaahany.weatherapp.Utils.Permission
 import com.hanaahany.weatherapp.databinding.FragmentHomeBinding
 import com.hanaahany.weatherapp.dp.LocalSource
 import com.hanaahany.weatherapp.home.viewmodel.HomeViewModel
@@ -62,7 +63,16 @@ class HomeFragment : Fragment() {
             lifecycleScope.launch {
                 val lang=viewModel.readStringFromSetting(Constants.LANGUAGE)
                 val units=viewModel.readStringFromSetting(Constants.UNIT)
-                viewModel.getWeather(it.first, it.second,units,lang)
+                if (Permission.checkConnection(requireContext())){
+                    val per=Permission.checkPermission(requireContext())
+                    Log.i(Constants.locationTag,per.toString())
+                    viewModel.getWeather(it.first, it.second,units,lang)
+
+                }else{
+                    viewModel.getCachedWeather()
+                    Log.i(Constants.locationTag,"else"+it.first)
+                }
+
                 latitude=it.first
                 langitude=it.second
             }
@@ -73,6 +83,7 @@ class HomeFragment : Fragment() {
             viewModel.respone.collect { result ->
                 when (result) {
                     is ApiState.Success -> {
+                        viewModel.insertCachedWeather(result.date)
                         result.date.lat=latitude
                         result.date.long=langitude
                         binding.loadingLottiHomeFragment.visibility=View.INVISIBLE
