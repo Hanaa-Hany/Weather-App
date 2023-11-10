@@ -113,19 +113,19 @@ object Constants {
 
     fun setIcon(src: String, lottiView: LottieAnimationView) {
         when (src) {
-            "https://openweathermap.org/img/wn/10d@2x.png" -> lottiView.setAnimation(R.raw.rain_day)
-            "https://openweathermap.org/img/wn/01d@2x.png" -> lottiView.setAnimation(R.raw.sunny)
-            "https://openweathermap.org/img/wn/02d@2x.png" -> lottiView.setAnimation(R.raw.few_clouds)
-            "https://openweathermap.org/img/wn/03d@2x.png" -> lottiView.setAnimation(R.raw.clouds)
-            "https://openweathermap.org/img/wn/04d@2x.png" -> lottiView.setAnimation(R.raw.broken_clouds)
-            "https://openweathermap.org/img/wn/09d@2x.png" -> lottiView.setAnimation(R.raw.rain_day)
-            "https://openweathermap.org/img/wn/11d@2x.png" -> lottiView.setAnimation(R.raw.thunder)
-            "https://openweathermap.org/img/wn/13d@2x.png" -> lottiView.setAnimation(R.raw.snowfall)
-            "https://openweathermap.org/img/wn/50d@2x.png" -> lottiView.setAnimation(R.raw.mist)
-            "https://openweathermap.org/img/wn/01n@2x.png" -> lottiView.setAnimation(R.raw.first_night)
-            "https://openweathermap.org/img/wn/02n@2x.png" -> lottiView.setAnimation(R.raw.snowfall)
-            "https://openweathermap.org/img/wn/03n@2x.png" -> lottiView.setAnimation(R.raw.mist)
-            "https://openweathermap.org/img/wn/04n@2x.png" -> lottiView.setAnimation(R.raw.first_night)
+            "10d" -> lottiView.setAnimation(R.raw.rain_day)
+            "01d" -> lottiView.setAnimation(R.raw.sunny)
+            "02d" -> lottiView.setAnimation(R.raw.few_clouds)
+            "03d" -> lottiView.setAnimation(R.raw.clouds)
+            "04d" -> lottiView.setAnimation(R.raw.broken_clouds)
+            "09d" -> lottiView.setAnimation(R.raw.rain_day)
+            "11d" -> lottiView.setAnimation(R.raw.thunder)
+            "13d" -> lottiView.setAnimation(R.raw.snowfall)
+            "50d" -> lottiView.setAnimation(R.raw.mist)
+            "01n" -> lottiView.setAnimation(R.raw.first_night)
+            "02n" -> lottiView.setAnimation(R.raw._02n)
+            "03n" -> lottiView.setAnimation(R.raw._03n)
+            "04n" -> lottiView.setAnimation(R.raw._04n)
 
 
         }

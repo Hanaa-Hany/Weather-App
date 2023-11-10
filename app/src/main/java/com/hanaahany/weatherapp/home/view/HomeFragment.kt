@@ -116,7 +116,7 @@ class HomeFragment : Fragment() {
         binding.tvWeatherDescriptionHomeFragment.text=it.current.weather.get(0).description
         //Log.i(Constants.locationTag,"https://openweathermap.org/img/wn/${it.current.weather.get(0).icon}@2x.png")
        // Glide.with(requireContext()).load("https://openweathermap.org/img/wn/${it.current.weather.get(0).icon}@4x.png").into( binding.iconHomeFragment)
-        Constants.setIcon("https://openweathermap.org/img/wn/${it.current.weather.get(0).icon}@2x.png",binding.iconHomeFragment)
+        Constants.setIcon(it.current.weather.get(0).icon,binding.iconHomeFragment)
         if (SettingSharedPrefrences.getInstance(requireContext()).readStringSettings(Constants.LANGUAGE)=="en"){
             binding.tvWeatherTimeHomeFragment.text=Constants.getTime(it.current.dt,"en")
             binding.tvWeatherDateHomeFragment.text=Constants.getDate(it.current.dt,"en")

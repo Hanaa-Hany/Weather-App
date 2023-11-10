@@ -10,4 +10,6 @@
     <color name="East_Bay">#625D8B</color>
     <color name="Mystic">#DCDFEC</color>
     <color name="gray">#EBE1E1</color>
+    <color name="main">#0ABBD1</color>
+    <color name="secondry">#EFE7BC</color>
 </resources>

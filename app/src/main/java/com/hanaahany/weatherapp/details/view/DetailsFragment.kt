@@ -92,7 +92,7 @@ class DetailsFragment : Fragment() {
 
         binding.tvWeatherDescriptionDetailsFragment.text=place.description
         //Constants.setIcon("https://openweathermap.org/img/wn/${place.icon}@4x.png",binding.iconDetailsFragment)
-        Glide.with(requireContext()).load(Constants.setIcon("https://openweathermap.org/img/wn/${place.icon}@2x.png",binding.iconDetailsFragment)).into( binding.iconDetailsFragment)
+        Constants.setIcon(place.icon,binding.iconDetailsFragment)
 
         if (SettingSharedPrefrences.getInstance(requireContext()).readStringSettings(Constants.LANGUAGE)=="en"){
             //binding.tvWeatherTimeDetailsFragment.text= Constants.getTime(it.current.dt,"en")
