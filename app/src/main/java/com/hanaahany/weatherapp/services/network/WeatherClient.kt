@@ -1,10 +1,10 @@
-package com.hanaahany.weatherapp.network
+package com.hanaahany.weatherapp.services.network
 
 import kotlinx.coroutines.flow.flow
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-object WeatherClient:RemoteSource {
+object WeatherClient: RemoteSource {
 
     private const val BASE_URL = "https://api.openweathermap.org/data/2.5/"
 

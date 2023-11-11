@@ -1,11 +1,11 @@
-package com.hanaahany.weatherapp.network.sharedpref
+package com.hanaahany.weatherapp.services.sharedpref
 
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import com.hanaahany.weatherapp.Utils.Constants
 
-class SettingSharedPrefrences(context:Context):ISettingSharedPrefrence {
+class SettingSharedPrefrences(context:Context): ISettingSharedPrefrence {
 
 
     private val sharedPreferences: SharedPreferences by lazy {

@@ -1,4 +1,4 @@
-package com.hanaahany.weatherapp.network.sharedpref
+package com.hanaahany.weatherapp.services.sharedpref
 
 interface ISettingSharedPrefrence {
 

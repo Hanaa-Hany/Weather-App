@@ -18,6 +18,13 @@ interface RepositoryInterface {
 
     suspend fun deleteLocationFromDB(place: Place)
 
+
+    suspend fun insertAlarm(alarmItem: Alarm)
+
+    suspend fun deleteAlarm(alarmItem: Alarm)
+
+    fun getAllAlarms(): Flow<List<Alarm>>
+
 //    fun writeUnits(key:String,value:Float)
 //    fun readUnits(key:String):Float
 

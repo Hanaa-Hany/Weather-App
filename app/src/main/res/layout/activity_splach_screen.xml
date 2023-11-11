@@ -18,6 +18,7 @@
         android:text="Weather"
         android:textSize="@dimen/_70ssp"
         android:textStyle="bold"
+        android:textColor="@color/primary_continer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

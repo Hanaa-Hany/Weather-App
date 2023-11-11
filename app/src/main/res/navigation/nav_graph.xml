@@ -16,6 +16,22 @@
         <action
             android:id="@+id/action_homeFragment_to_settingsFragment"
             app:destination="@id/settingsFragment" />
+        <argument
+            android:name="latitude"
+            app:argType="string"
+
+            />
+        <argument android:name="langitude"
+            app:argType="string"
+            android:defaultValue=""
+
+             />
+        <argument
+            android:name="source"
+            app:argType="string"
+            />
+
+
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
@@ -51,6 +67,14 @@
             app:exitAnim="@anim/exit_an"
             app:popEnterAnim="@anim/pop_enter_an"
             app:popExitAnim="@anim/pop_exit_an" />
+        <action
+            android:id="@+id/action_mapsFragment_to_homeFragment"
+            app:destination="@id/homeFragment" >
+
+        </action>
+        <argument
+            android:name="sourceFragment"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/favouriteFragment"
@@ -79,5 +103,23 @@
         <argument
             android:name="detailsFav"
             app:argType="com.hanaahany.weatherapp.model.Place" />
+    </fragment>
+    <dialog
+        android:id="@+id/alertDialogFragment"
+        android:name="com.hanaahany.weatherapp.alert.AlertDialogFragment"
+        android:label="fragment_alert_dialog"
+        tools:layout="@layout/fragment_alert_dialog" >
+        <action
+            android:id="@+id/action_alertDialogFragment_to_alertFragment"
+            app:destination="@id/alertFragment" />
+    </dialog>
+    <fragment
+        android:id="@+id/alertFragment"
+        android:name="com.hanaahany.weatherapp.alert.view.AlertFragment"
+        android:label="fragment_alert"
+        tools:layout="@layout/fragment_alert" >
+        <action
+            android:id="@+id/action_alertFragment_to_alertDialogFragment"
+            app:destination="@id/alertDialogFragment" />
     </fragment>
 </navigation>

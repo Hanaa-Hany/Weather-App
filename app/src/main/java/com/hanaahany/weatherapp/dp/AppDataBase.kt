@@ -5,11 +5,12 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
+import com.hanaahany.weatherapp.model.Alarm
 import com.hanaahany.weatherapp.model.Place
 import com.hanaahany.weatherapp.model.WeatherResponse
 
 
-@Database(entities = arrayOf(Place::class,WeatherResponse::class), version = 1)
+@Database(entities = arrayOf(Place::class,WeatherResponse::class,Alarm::class), version = 1)
 @TypeConverters(ConverterDB::class)
 abstract class AppDataBase: RoomDatabase() {
     abstract fun getLocationDAO(): LocationDAO

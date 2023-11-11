@@ -1,11 +1,11 @@
-package com.hanaahany.weatherapp.network
+package com.hanaahany.weatherapp.services.network
 
 import com.hanaahany.weatherapp.model.WeatherResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-interface WeatherServices:RemoteSource {
+interface WeatherServices: RemoteSource {
     @GET("onecall")
     suspend fun currentWeather(
         @Query("lat") latitude: Double,

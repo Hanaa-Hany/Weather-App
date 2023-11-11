@@ -21,16 +21,20 @@ import com.hanaahany.weatherapp.Utils.ApiState
 import com.hanaahany.weatherapp.Utils.Constants
 import com.hanaahany.weatherapp.Utils.LocationByGPS
 import com.hanaahany.weatherapp.databinding.FragmentMapsBinding
+import com.hanaahany.weatherapp.details.view.DetailsFragmentArgs
 import com.hanaahany.weatherapp.dp.LocalSource
 import com.hanaahany.weatherapp.favourite.view.FavouriteFragment
+import com.hanaahany.weatherapp.home.view.HomeFragment
+import com.hanaahany.weatherapp.home.view.HomeFragment.Companion.flag
 import com.hanaahany.weatherapp.home.viewmodel.HomeViewModel
 import com.hanaahany.weatherapp.home.viewmodel.HomeViewModelFactory
 import com.hanaahany.weatherapp.model.DailyWeather
 import com.hanaahany.weatherapp.model.HourlyWeather
 import com.hanaahany.weatherapp.model.Place
 import com.hanaahany.weatherapp.model.Repository
-import com.hanaahany.weatherapp.network.WeatherClient
-import com.hanaahany.weatherapp.network.sharedpref.SettingSharedPrefrences
+import com.hanaahany.weatherapp.services.network.WeatherClient
+import com.hanaahany.weatherapp.services.sharedpref.SettingSharedPrefrences
+import com.hanaahany.weatherapp.setting.view.SettingsFragmentDirections
 import kotlinx.coroutines.launch
 
 class MapsFragment : Fragment() {
@@ -92,15 +96,31 @@ class MapsFragment : Fragment() {
                 SettingSharedPrefrences.getInstance(requireContext()), LocalSource(requireContext())
             )
         )
-
         viewModel = ViewModelProvider(this, factory).get(HomeViewModel::class.java)
+        handleUI()
+        onClicks()
 
+
+
+    }
+
+    private fun handleUI() {
+        //to know I go to from Fav or Settings
+        val source = MapsFragmentArgs.fromBundle(requireArguments()).sourceFragment
+        if(source==Constants.SET_Source){
+            binding.btnGetWeather.visibility=View.VISIBLE
+            binding.btnSave.visibility=View.GONE
+        }else{
+            binding.btnSave.visibility=View.VISIBLE
+            binding.btnGetWeather.visibility=View.GONE
+        }
+    }
+
+    private fun onClicks() {
         binding.btnSave.setOnClickListener {
             viewModel.writeFloatToSetting(Constants.LAT, latitude.toFloat())
             viewModel.writeFloatToSetting(Constants.LAN, longitude.toFloat())
             Navigation.findNavController(requireView()).navigate(R.id.action_mapsFragment_to_favouriteFragment)
-
-
             lifecycleScope.launch {
                 viewModel.respone.collect {
                     when (it) {
@@ -135,7 +155,6 @@ class MapsFragment : Fragment() {
             val city = Constants.setCityNameByGeoCoder(requireContext(), latitude, longitude)
             viewModel.insertFavLocation(
                 Place(
-
                     city = city,
                     cityName = cityName,
                     latitude = latitude,
@@ -152,6 +171,17 @@ class MapsFragment : Fragment() {
                     daily = daily
                 )
             )
+
+        }
+
+        binding.btnGetWeather.setOnClickListener {
+            flag=false
+            val action= MapsFragmentDirections.actionMapsFragmentToHomeFragment(latitude.toString(),longitude.toString())
+            Log.i(Constants.locationTag,"$latitude MapsFragment" )
+
+            Navigation.findNavController(requireView()).navigate(action)
+           //Navigation.findNavController(requireView()).navigate(R.id.action_mapsFragment_to_homeFragment)
+
 
         }
     }

@@ -17,12 +17,13 @@ import com.hanaahany.weatherapp.Utils.Constants
 import com.hanaahany.weatherapp.databinding.FragmentFavouriteBinding
 import com.hanaahany.weatherapp.dp.LocalSource
 import com.hanaahany.weatherapp.favourite.view.FavouriteFragmentDirections.ActionFavouriteFragmentToDetailsFragment
+import com.hanaahany.weatherapp.favourite.view.FavouriteFragmentDirections.ActionFavouriteFragmentToMapsFragment
 import com.hanaahany.weatherapp.home.viewmodel.HomeViewModel
 import com.hanaahany.weatherapp.home.viewmodel.HomeViewModelFactory
 import com.hanaahany.weatherapp.maps.MapsFragment
 import com.hanaahany.weatherapp.model.Repository
-import com.hanaahany.weatherapp.network.WeatherClient
-import com.hanaahany.weatherapp.network.sharedpref.SettingSharedPrefrences
+import com.hanaahany.weatherapp.services.network.WeatherClient
+import com.hanaahany.weatherapp.services.sharedpref.SettingSharedPrefrences
 import kotlinx.coroutines.launch
 
 
@@ -52,23 +53,32 @@ class FavouriteFragment : Fragment() {
 
         viewModel = ViewModelProvider(this, factory).get(HomeViewModel::class.java)
         viewModel.getFavLocation()
+
         deleteItem()
         lifecycleScope.launch {
             viewModel.favLocation.collect{
                 Log.i(Constants.FAV_TAG,it.size.toString())
-
-                adapter= FavouriteAdapter(requireContext()){
-                    //Open Location Details
-                    val action:ActionFavouriteFragmentToDetailsFragment=FavouriteFragmentDirections
-                        .actionFavouriteFragmentToDetailsFragment(it)
-                    Navigation.findNavController(requireView()).navigate(action)
+                if (it.isEmpty()){
+                    binding.lottiFav.visibility=View.VISIBLE
+                }else{
+                    binding.lottiFav.visibility=View.GONE
+                    adapter= FavouriteAdapter(requireContext()){
+                        //Open Location Details
+                        val action:ActionFavouriteFragmentToDetailsFragment=FavouriteFragmentDirections
+                            .actionFavouriteFragmentToDetailsFragment(it)
+                        Navigation.findNavController(requireView()).navigate(action)
+                    }
+                    adapter.submitList(it)
+                    binding.recyclerFav.adapter=adapter
                 }
-                adapter.submitList(it)
-                binding.recyclerFav.adapter=adapter
+
             }
         }
         binding.fabFav.setOnClickListener{
-            Navigation.findNavController(requireView()).navigate(R.id.action_favouriteFragment_to_mapsFragment)
+            val action:ActionFavouriteFragmentToMapsFragment=FavouriteFragmentDirections
+                .actionFavouriteFragmentToMapsFragment(Constants.FAV_Source)
+            Navigation.findNavController(requireView()).navigate(action)
+
             }
     }
 

@@ -2,13 +2,17 @@ package com.hanaahany.weatherapp.Utils
 
 import android.Manifest
 import android.app.Activity
+import android.app.AlarmManager
 import android.content.Context
 import android.content.pm.PackageManager
 import android.location.LocationManager
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.content.getSystemService
 
 private const val MAP_PERMISSION_ID = 505
 
@@ -47,13 +51,16 @@ object  Permission{
         return capabilities != null && (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) || capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR))
     }
 
-//     fun notificationPermission(context: Context): Boolean{
-//        var result = false
-//        if (ContextCompat.checkSelfPermission(context, Manifest.permission.POST_NOTIFICATIONS)
-//            == PackageManager.PERMISSION_GRANTED) {
-//            result = true
-//        }
-//        return result
-//    }
+
+
+
+     fun notificationPermission(context: Context): Boolean{
+        var result = false
+        if (ContextCompat.checkSelfPermission(context, Manifest.permission.POST_NOTIFICATIONS)
+            == PackageManager.PERMISSION_GRANTED) {
+            result = true
+        }
+        return result
+    }
 }
 

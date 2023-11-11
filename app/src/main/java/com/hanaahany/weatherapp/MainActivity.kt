@@ -22,6 +22,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         setUpNavigation()
         toggleFragment()
+        binding.tvHome.setTextColor(getColor(R.color.text_option))
+
 
 
 
@@ -36,14 +38,34 @@ class MainActivity : AppCompatActivity() {
     private fun toggleFragment() {
         binding.tvHome.setOnClickListener{
             navController.navigate(R.id.homeFragment)
+            binding.tvHome.setTextColor(getColor(R.color.text_option))
+            binding.tvFav.setTextColor(getColor(R.color.text_color))
+            binding.tvSettings.setTextColor(getColor(R.color.text_color))
+            binding.tvAlert.setTextColor(getColor(R.color.text_color))
         }
         binding.tvFav.setOnClickListener{
             navController.navigate(R.id.favouriteFragment)
+            binding.tvHome.setTextColor(getColor(R.color.text_color))
+            binding.tvFav.setTextColor(getColor(R.color.text_option))
+            binding.tvSettings.setTextColor(getColor(R.color.text_color))
+            binding.tvAlert.setTextColor(getColor(R.color.text_color))
+
         }
         binding.tvSettings.setOnClickListener{
             navController.navigate(R.id.settingsFragment)
+            binding.tvHome.setTextColor(getColor(R.color.text_color))
+            binding.tvFav.setTextColor(getColor(R.color.text_color))
+            binding.tvSettings.setTextColor(getColor(R.color.text_option))
+            binding.tvAlert.setTextColor(getColor(R.color.text_color))
+
         }
         binding.tvAlert.setOnClickListener{
+            navController.navigate(R.id.alertFragment)
+            binding.tvHome.setTextColor(getColor(R.color.text_color))
+            binding.tvFav.setTextColor(getColor(R.color.text_color))
+            binding.tvSettings.setTextColor(getColor(R.color.text_color))
+            binding.tvAlert.setTextColor(getColor(R.color.text_option))
+
         }
     }
 

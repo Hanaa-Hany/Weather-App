@@ -12,7 +12,8 @@
         android:layout_height="match_parent"
         android:id="@+id/recycler_fav"
         tools:listitem="@layout/fav_layout"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:layout_width="wrap_content"
@@ -22,8 +23,22 @@
         android:layout_margin="@dimen/_20sdp"
         android:id="@+id/fab_fav"
         android:src="@drawable/ic_add"
-        android:background="@color/main"/>
+        android:backgroundTint="@color/pink"/>
 
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lotti_fav"
+        android:layout_width="@dimen/_140sdp"
+        android:layout_height="@dimen/_140sdp"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        android:visibility="gone"
+        app:lottie_rawRes="@raw/fav"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

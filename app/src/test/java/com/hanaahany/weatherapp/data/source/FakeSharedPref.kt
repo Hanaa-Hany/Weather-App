@@ -1,9 +1,9 @@
 package com.hanaahany.weatherapp.data.source
 
-import com.hanaahany.weatherapp.network.sharedpref.ISettingSharedPrefrence
+import com.hanaahany.weatherapp.services.sharedpref.ISettingSharedPrefrence
 
 class FakeSharedPref( private var stringValue: String,
-                      private var floatValue: Float):ISettingSharedPrefrence {
+                      private var floatValue: Float): ISettingSharedPrefrence {
     override fun writeStringSettings(key: String, value: String) {
         stringValue=value
     }

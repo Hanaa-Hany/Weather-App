@@ -7,11 +7,22 @@ import android.location.Geocoder
 import android.util.Log
 import com.airbnb.lottie.LottieAnimationView
 import com.hanaahany.weatherapp.R
-import com.hanaahany.weatherapp.network.sharedpref.SettingSharedPrefrences
+import com.hanaahany.weatherapp.services.sharedpref.SettingSharedPrefrences
 import java.text.SimpleDateFormat
 import java.util.*
 
 object Constants {
+    const val CHANNEL_NAME= "weather"
+    const val CHANNEL_DESCRIPTION = "weather notification"
+    const val CHANNEL_ID = "123"
+    const val NOTIFICATION_ID = 1
+    const val ALARM_ITEM = "alarmItem"
+    const val ALERT_DESCRIPTION = "alertDescription"
+    const val ALERT = "alert"
+    const val NOTIFICATION = "notification"
+    const val DISABLE = "disable"
+
+
     const val locationTag = "LocationByGps"
     const val SETTING = "Setting"
     const val LANGUAGE = "languageFile"
@@ -23,6 +34,11 @@ object Constants {
     const val LAT = "latitude"
     const val LAN = "longitude"
     const val FAV_TAG = "FavFragment"
+    const val FAV_Source = "FavouriteFragment"
+    const val SET_Source = "SettingsFragment"
+    const val SET_LAT = "lat"
+    const val SET_LAN = "lan"
+
 
 
     fun getTimeHour(value: Long, lang: String): String {
@@ -71,9 +87,9 @@ object Constants {
                 .readStringSettings(UNIT) == "standard"
         ) return "${value} \u212A"
         else if (SettingSharedPrefrences.getInstance(context)
-                .readStringSettings(UNIT) == "metric"
-        ) return "${value} \u2103"
-        else return "${value} \u2109"
+                .readStringSettings(UNIT) == "imperial"
+        ) return "${value} ℉ "
+        else return "${value} ℃ "
     }
 
     fun windSpeed(context: Context, value: String): String {
@@ -117,7 +133,7 @@ object Constants {
             "01d" -> lottiView.setAnimation(R.raw.sunny)
             "02d" -> lottiView.setAnimation(R.raw.few_clouds)
             "03d" -> lottiView.setAnimation(R.raw.clouds)
-            "04d" -> lottiView.setAnimation(R.raw.broken_clouds)
+            "04d" -> lottiView.setAnimation(R.raw._04d)
             "09d" -> lottiView.setAnimation(R.raw.rain_day)
             "11d" -> lottiView.setAnimation(R.raw.thunder)
             "13d" -> lottiView.setAnimation(R.raw.snowfall)
@@ -125,10 +141,31 @@ object Constants {
             "01n" -> lottiView.setAnimation(R.raw.first_night)
             "02n" -> lottiView.setAnimation(R.raw._02n)
             "03n" -> lottiView.setAnimation(R.raw._03n)
-            "04n" -> lottiView.setAnimation(R.raw._04n)
+            "04n" -> lottiView.setAnimation(R.raw._04d)
 
 
         }
+    }
+
+    fun formatHourMinuteToString(hour: Int, minute: Int): String {
+        val calendar = Calendar.getInstance()
+        calendar.set(Calendar.HOUR_OF_DAY, hour)
+        calendar.set(Calendar.MINUTE, minute)
+        calendar.set(Calendar.SECOND, 0)
+        calendar.set(Calendar.MILLISECOND, 0)
+        val dateFormat = SimpleDateFormat("hh:mm a", Locale.getDefault())
+        return dateFormat.format(calendar.time)
+    }
+    fun formatLongToAnyString(dateTimeInMillis: Long, pattern: String): String {
+        val resultFormat = SimpleDateFormat(pattern, Locale.getDefault())
+        val date = Date(dateTimeInMillis)
+        return resultFormat.format(date)
+    }
+    fun formatFromStringToLong(dateText: String, timeText: String): Long {
+        val dateFormat = SimpleDateFormat("dd MMM yyyy hh:mm a", Locale.getDefault())
+        val dateAndTime = "$dateText $timeText}"
+        val date = dateFormat.parse(dateAndTime)
+        return date?.time ?: -1
     }
 
 

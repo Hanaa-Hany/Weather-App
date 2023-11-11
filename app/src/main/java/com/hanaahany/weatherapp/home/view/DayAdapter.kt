@@ -10,7 +10,7 @@ import com.bumptech.glide.Glide
 import com.hanaahany.weatherapp.Utils.Constants
 import com.hanaahany.weatherapp.databinding.WeekTempLayoutBinding
 import com.hanaahany.weatherapp.model.DailyWeather
-import com.hanaahany.weatherapp.network.sharedpref.SettingSharedPrefrences
+import com.hanaahany.weatherapp.services.sharedpref.SettingSharedPrefrences
 
 class DayAdapter(var context: Context, var list: List<DailyWeather>) :
     Adapter<DayAdapter.DayViewHolder>() {
@@ -36,15 +36,11 @@ class DayAdapter(var context: Context, var list: List<DailyWeather>) :
                 holder.binding.imageDayIconWeekTempLayout
             )
         if (SettingSharedPrefrences.getInstance(context)
-                .readStringSettings(Constants.LANGUAGE) == "en"
+                .readStringSettings(Constants.LANGUAGE) == "ar"
         ) {
-            holder.binding.tvDayNameWeekTempLayout.text = Constants.getDateDay(resp.dt, "en")
-            Log.i(
-                Constants.locationTag,
-                SettingSharedPrefrences.getInstance(context).readStringSettings("lang")
-            )
-        } else {
             holder.binding.tvDayNameWeekTempLayout.text = Constants.getDateDay(resp.dt, "ar")
+        } else {
+            holder.binding.tvDayNameWeekTempLayout.text = Constants.getDateDay(resp.dt, "en")
 
         }
     }

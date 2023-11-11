@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:background="@color/main"
+    android:background="@color/primary_continer"
     android:padding="@dimen/_10sdp"
     android:gravity="center"
     >
@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="3"
         android:text="Today"
-        android:textColor="@color/white"
+        android:textColor="@color/text_color"
         android:textSize="@dimen/_18ssp"
         android:id="@+id/tv_day_name_week_temp_layout"/>
 
@@ -23,8 +23,7 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:text="51%"
-        android:textColor="@color/Mystic"
+        android:textColor="@color/text_color"
         android:gravity="center"
          />
 
@@ -41,8 +40,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="29"
-        android:textColor="@color/white"
+        android:textColor="@color/text_color"
         android:textSize="@dimen/_12ssp"
         android:textStyle="bold"
         android:gravity="center"
@@ -51,8 +49,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="29"
-        android:textColor="@color/white"
+        android:textColor="@color/text_color"
         android:textSize="@dimen/_12ssp"
         android:textStyle="bold"
         android:gravity="center"

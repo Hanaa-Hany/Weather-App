@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/secondry"
+    android:background="@color/white"
     tools:context=".details.view.DetailsFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/secondry">
+        android:background="@color/white">
 
         <TextView
             android:id="@+id/tv_temp_details_fragment"
@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/_20sdp"
             android:layout_marginTop="24dp"
-            android:textColor="@color/black"
+            android:textColor="@color/text_color"
             android:textSize="@dimen/_40ssp"
             app:layout_constraintEnd_toStartOf="@+id/guideline2"
             app:layout_constraintStart_toStartOf="parent"
@@ -28,7 +28,7 @@
             android:id="@+id/tv_weather_description_details_fragment"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
+            android:textColor="@color/text_color"
             android:textSize="@dimen/_20ssp"
             app:layout_constraintEnd_toEndOf="@+id/tv_temp_details_fragment"
             app:layout_constraintStart_toStartOf="@+id/tv_temp_details_fragment"
@@ -39,7 +39,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_20sdp"
-            android:textColor="@color/black"
+            android:textColor="@color/text_color"
             android:textSize="@dimen/_20ssp"
             app:layout_constraintEnd_toStartOf="@+id/guideline2"
             app:layout_constraintBottom_toTopOf="@id/tv_weather_date_details_fragment"
@@ -50,7 +50,7 @@
             android:id="@+id/tv_weather_date_details_fragment"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
+            android:textColor="@color/text_color"
             app:layout_constraintBottom_toTopOf="@id/tv_weather_time_details_fragment"
             app:layout_constraintEnd_toEndOf="@+id/tv_temp_details_fragment"
             app:layout_constraintStart_toStartOf="@+id/tv_temp_details_fragment"
@@ -60,7 +60,7 @@
             android:id="@+id/tv_weather_time_details_fragment"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
+            android:textColor="@color/text_color"
             app:layout_constraintBottom_toTopOf="@id/card1"
             app:layout_constraintEnd_toEndOf="@+id/tv_temp_details_fragment"
             app:layout_constraintStart_toStartOf="@+id/tv_temp_details_fragment"
@@ -85,7 +85,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/_10sdp"
-            android:background="@color/white"
+            android:background="@color/primary_continer"
             app:cardCornerRadius="@dimen/_10sdp"
             app:cardElevation="@dimen/_10sdp"
             app:layout_constraintTop_toBottomOf="@id/tv_weather_time_details_fragment">
@@ -94,7 +94,7 @@
                 android:id="@+id/recycler_hourly_day"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/white"
+                android:background="@color/primary_continer"
                 />
         </com.google.android.material.card.MaterialCardView>
 
@@ -103,7 +103,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/_10sdp"
-            android:background="@color/black"
+            android:background="@color/text_color"
             app:cardCornerRadius="@dimen/_10sdp"
             app:cardElevation="@dimen/_10sdp"
             app:layout_constraintTop_toBottomOf="@id/card1">
@@ -112,7 +112,7 @@
                 android:id="@+id/recycler_weak_temp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/black"
+                android:background="@color/text_color"
                 tools:listitem="@layout/week_temp_layout"/>
         </com.google.android.material.card.MaterialCardView>
 
@@ -121,7 +121,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/_10sdp"
-            android:background="@color/black"
+            android:background="@color/text_color"
             app:cardCornerRadius="@dimen/_10sdp"
             app:cardElevation="@dimen/_10sdp"
             app:layout_constraintEnd_toStartOf="@+id/guideline2"

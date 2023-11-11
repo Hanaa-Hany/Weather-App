@@ -1,4 +1,4 @@
-package com.hanaahany.weatherapp.network
+package com.hanaahany.weatherapp.services.network
 
 import com.hanaahany.weatherapp.model.WeatherResponse
 import kotlinx.coroutines.flow.Flow

@@ -22,10 +22,11 @@ import com.hanaahany.weatherapp.databinding.FragmentHomeBinding
 import com.hanaahany.weatherapp.dp.LocalSource
 import com.hanaahany.weatherapp.home.viewmodel.HomeViewModel
 import com.hanaahany.weatherapp.home.viewmodel.HomeViewModelFactory
+import com.hanaahany.weatherapp.maps.MapsFragmentArgs
 import com.hanaahany.weatherapp.model.Repository
 import com.hanaahany.weatherapp.model.WeatherResponse
-import com.hanaahany.weatherapp.network.WeatherClient
-import com.hanaahany.weatherapp.network.sharedpref.SettingSharedPrefrences
+import com.hanaahany.weatherapp.services.network.WeatherClient
+import com.hanaahany.weatherapp.services.sharedpref.SettingSharedPrefrences
 import kotlinx.coroutines.launch
 
 
@@ -36,11 +37,13 @@ class HomeFragment : Fragment() {
     private lateinit var dayAdapter: DayAdapter
     private var latitude:Double=0.0
     private var langitude:Double=0.0
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+        flag=true
         binding=FragmentHomeBinding.inflate(inflater,container,false)
         return binding.root
     }
@@ -52,7 +55,8 @@ class HomeFragment : Fragment() {
         location.getLastLocation()
 
 
-        val factory = HomeViewModelFactory(Repository.getInstance(WeatherClient,
+        val factory = HomeViewModelFactory(Repository.getInstance(
+            WeatherClient,
             SettingSharedPrefrences.getInstance(requireContext()), LocalSource(requireContext())
         ))
 
@@ -86,7 +90,10 @@ class HomeFragment : Fragment() {
                         viewModel.insertCachedWeather(result.date)
                         result.date.lat=latitude
                         result.date.long=langitude
-                        binding.loadingLottiHomeFragment.visibility=View.INVISIBLE
+
+                        binding.loadingLottiHomeFragment.visibility=View.GONE
+                        handleView(View.VISIBLE)
+
                         setData(result.date)
                         Log.i(Constants.locationTag,result.date.lat.toString()+"result")
                         hourAdapter = HourAdapter(requireContext(), result.date.hourly)
@@ -100,11 +107,31 @@ class HomeFragment : Fragment() {
                     else -> {
                         Log.i(Constants.locationTag,"Loading")
                         binding.loadingLottiHomeFragment.visibility=View.VISIBLE
+                        handleView(View.INVISIBLE)
 
                     }
                 }
             }
         }
+        getDataFromMap()
+
+    }
+
+    private fun getDataFromMap() {
+        if(flag) {
+
+        }else{
+            val lat = HomeFragmentArgs.fromBundle(requireArguments()).latitude
+            HomeFragmentArgs.fromBundle(requireArguments()).langitude
+            Log.i(Constants.locationTag, "$lat HomeFragment")
+        }
+    }
+
+    private fun handleView(appear: Int) {
+        binding.card3.visibility=appear
+        binding.card4.visibility=appear
+        binding.card5.visibility=appear
+        binding.card6.visibility=appear
     }
 
     private fun initViews() {
@@ -125,20 +152,21 @@ class HomeFragment : Fragment() {
         //Log.i(Constants.locationTag,it.lat.toString()+"setData")
         binding.tvHumidityValueHomeFragment.text=it.current.humidity.toString()
         binding.tvWeatherDescriptionHomeFragment.text=it.current.weather.get(0).description
-        //Log.i(Constants.locationTag,"https://openweathermap.org/img/wn/${it.current.weather.get(0).icon}@2x.png")
-       // Glide.with(requireContext()).load("https://openweathermap.org/img/wn/${it.current.weather.get(0).icon}@4x.png").into( binding.iconHomeFragment)
         Constants.setIcon(it.current.weather.get(0).icon,binding.iconHomeFragment)
-        if (SettingSharedPrefrences.getInstance(requireContext()).readStringSettings(Constants.LANGUAGE)=="en"){
-            binding.tvWeatherTimeHomeFragment.text=Constants.getTime(it.current.dt,"en")
-            binding.tvWeatherDateHomeFragment.text=Constants.getDate(it.current.dt,"en")
-        }else{
+        if (SettingSharedPrefrences.getInstance(requireContext()).readStringSettings(Constants.LANGUAGE)=="ar"){
             binding.tvWeatherTimeHomeFragment.text=Constants.getTime(it.current.dt,"ar")
             binding.tvWeatherDateHomeFragment.text=Constants.getDate(it.current.dt,"ar")
+        }else{
+            binding.tvWeatherTimeHomeFragment.text=Constants.getTime(it.current.dt,"en")
+            binding.tvWeatherDateHomeFragment.text=Constants.getDate(it.current.dt,"en")
 
         }
 
 
     }
 
+    companion object{
+        var flag=true
+    }
 
 }

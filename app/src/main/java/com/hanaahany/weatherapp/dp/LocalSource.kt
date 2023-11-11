@@ -1,6 +1,7 @@
 package com.hanaahany.weatherapp.dp
 
 import android.content.Context
+import com.hanaahany.weatherapp.model.Alarm
 import com.hanaahany.weatherapp.model.Place
 import com.hanaahany.weatherapp.model.WeatherResponse
 import kotlinx.coroutines.flow.Flow
@@ -33,6 +34,18 @@ class LocalSource(context: Context):ILocalSource {
 
     override suspend fun deleteLocationFromDB(place: Place) {
         locationDAO.deleteLocationFromDB(place)
+    }
+
+    override suspend fun insertAlarm(alarmItem: Alarm) {
+        locationDAO.insertAlarm(alarmItem)
+    }
+
+    override suspend fun deleteAlarm(alarmItem: Alarm) {
+        locationDAO.deleteAlarm(alarmItem)
+    }
+
+    override fun getAllAlarms(): Flow<List<Alarm>> {
+        return locationDAO.getAllAlarms()
     }
 
 }

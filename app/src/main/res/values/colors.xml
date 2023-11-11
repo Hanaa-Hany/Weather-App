@@ -12,4 +12,9 @@
     <color name="gray">#EBE1E1</color>
     <color name="main">#0ABBD1</color>
     <color name="secondry">#EFE7BC</color>
+    <color name="primary_continer">#EADDFF</color>
+    <color name="text_color">#1D192B</color>
+    <color name="secondry_continer">#FFD8E4</color>
+    <color name="pink">#F9DEDC</color>
+    <color name="text_option">#6750A4</color>
 </resources>

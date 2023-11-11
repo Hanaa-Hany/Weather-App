@@ -15,7 +15,7 @@
     </style>
     <style name="motion_option">
         <item name="android:textStyle">bold</item>
-        <item name="android:textColor">@color/white</item>
+        <item name="android:textColor">@color/text_color</item>
         <item name="android:textSize">@dimen/_18ssp</item>
         <item name="android:layout_margin">@dimen/_20sdp</item>
 
@@ -29,6 +29,55 @@
         <item name="cardCornerRadius">@dimen/_20sdp</item>
         <item name="android:layout_gravity">center</item>
 
+
+    </style>
+
+    <style name="setting_style">
+
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/_16ssp</item>
+        <item name="android:textColor">@color/black</item>
+
+    </style>
+    <style name="MyCustomAlertDialogStyle" parent="Theme.Material3.Light.Dialog.Alert">
+    </style>
+
+    <style name="ThemeOverlay.App.RadioButton" parent="">
+        <item name="colorOnSurface">@color/main</item>
+        <item name="colorPrimary">@color/East_Bay</item>
+    </style>
+
+    <style name="ThemeOverlay.App.DatePicker" parent="@style/Widget.MaterialComponents.MaterialCalendar">
+        <item name="colorPrimary">@color/main</item>
+        <item name="colorOnPrimary">@color/main</item>
+        <item name="colorOnSurface">@color/main</item>
+        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.App.SmallComponent</item>
+        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.App.MediumComponent</item>
+        <item name="buttonBarPositiveButtonStyle">@style/TextButton</item>
+        <item name="buttonBarNegativeButtonStyle">@style/TextButton</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="TextButton" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
+        <item name="android:textColor">@color/main</item>
+    </style>
+    <style name="ShapeAppearance.App.SmallComponent" parent="ShapeAppearance.Material3.SmallComponent">
+        <item name="cornerFamily">cut</item>
+    </style>
+    <style name="ShapeAppearance.App.MediumComponent" parent="ShapeAppearance.Material3.MediumComponent">
+        <item name="cornerSize">25dp</item>
+    </style>
+
+    <style name="ThemeOverlay.App.timePicker" parent="@style/ThemeOverlay.Material3.MaterialTimePicker">
+        <item name="colorPrimary">@color/East_Bay</item>
+        <item name="colorOnPrimary">@color/East_Bay</item>
+        <item name="colorOnSurface">@color/main</item>
+        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.App.SmallComponent</item>
+        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.App.MediumComponent</item>
+        <item name="buttonBarPositiveButtonStyle">@style/TextButton</item>
+        <item name="buttonBarNegativeButtonStyle">@style/TextButton</item>
     </style>
 
 </resources>

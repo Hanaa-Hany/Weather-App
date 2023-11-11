@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import android.widget.RadioGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -21,10 +20,9 @@ import com.hanaahany.weatherapp.databinding.FragmentSettingsBinding
 import com.hanaahany.weatherapp.dp.LocalSource
 import com.hanaahany.weatherapp.home.viewmodel.HomeViewModel
 import com.hanaahany.weatherapp.home.viewmodel.HomeViewModelFactory
-import com.hanaahany.weatherapp.maps.MapsFragment
 import com.hanaahany.weatherapp.model.Repository
-import com.hanaahany.weatherapp.network.WeatherClient
-import com.hanaahany.weatherapp.network.sharedpref.SettingSharedPrefrences
+import com.hanaahany.weatherapp.services.network.WeatherClient
+import com.hanaahany.weatherapp.services.sharedpref.SettingSharedPrefrences
 import kotlinx.coroutines.launch
 
 
@@ -51,28 +49,73 @@ class SettingsFragment : Fragment() {
             )
         )
         viewModel = ViewModelProvider(this, factory).get(HomeViewModel::class.java)
+
+        handelMarkTemp()
+        handelMarkWind()
+        handelMarkLang()
+        handelMarkLocation()
         handleLanguage()
         handelSpeed()
         handleUnits()
         handleLocation()
 
     }
-    private fun handleLocation(){
+
+    private fun handelMarkLocation() {
+        if (viewModel.readStringFromSetting(Constants.LOCATION) == Constants.MAP) {
+            binding.radioMap.isChecked = true
+        } else {
+            binding.radioGps.isChecked = true
+        }
+    }
+
+    private fun handelMarkLang() {
+            if (viewModel.readStringFromSetting(Constants.LANGUAGE) == "ar") {
+            binding.radioArabic.isChecked = true
+        } else {
+            binding.radioEnglish.isChecked = true
+        }
+    }
+
+    private fun handelMarkWind() {
+        if (viewModel.readStringFromSetting(Constants.WIND_SPEED) == "imperial") {
+            binding.radioMiles.isChecked = true
+        } else {
+            binding.radioMeter.isChecked = true
+        }
+
+    }
+
+    private fun handelMarkTemp() {
+        if (viewModel.readStringFromSetting(Constants.UNIT) == "K") {
+            binding.radioKelvin.isChecked = true
+        } else if (viewModel.readStringFromSetting(Constants.UNIT) == "F") {
+            binding.radioFehraniet.isChecked = true
+        } else {
+            binding.radioCelisous.isChecked = true
+        }
+    }
+
+    private fun handleLocation() {
         binding.radioGroupLocation.setOnCheckedChangeListener { radioGroup, radioId ->
-            when(radioId){
-                R.id.radio_gps->{ viewModel.writeStringToSetting(Constants.LOCATION,Constants.GPS)
+            when (radioId) {
+                R.id.radio_gps -> {
+                    viewModel.writeStringToSetting(Constants.LOCATION, Constants.GPS)
                     LocationByGPS(requireContext()).location.observe(context as LifecycleOwner) {
                         Log.i(Constants.locationTag, it.first.toString())
                         lifecycleScope.launch {
-                            val lang=viewModel.readStringFromSetting(Constants.LANGUAGE)
-                            val units=viewModel.readStringFromSetting(Constants.UNIT)
-                            viewModel.getWeather(it.first, it.second,units,lang)
+                            val lang = viewModel.readStringFromSetting(Constants.LANGUAGE)
+                            val units = viewModel.readStringFromSetting(Constants.UNIT)
+                            viewModel.getWeather(it.first, it.second, units, lang)
                         }
                     }
 
                 }
-                R.id.radio_map->{viewModel.writeStringToSetting(Constants.LOCATION,Constants.MAP)
-                    Navigation.findNavController(requireView()).navigate(R.id.mapsFragment)
+                R.id.radio_map -> {
+                    viewModel.writeStringToSetting(Constants.LOCATION, Constants.MAP)
+                    val action=SettingsFragmentDirections.actionSettingsFragmentToMapsFragment(Constants.SET_Source)
+                    Navigation.findNavController(requireView()).navigate(action)
+
                 }
             }
         }
@@ -82,10 +125,10 @@ class SettingsFragment : Fragment() {
         binding.radioGroupSpeed.setOnCheckedChangeListener { _, checkId ->
             if (checkId == R.id.radio_meter) {
                 Toast.makeText(requireContext(), "Meter", Toast.LENGTH_SHORT).show()
-                viewModel.writeStringToSetting(Constants.WIND_SPEED,"metric")
+                viewModel.writeStringToSetting(Constants.WIND_SPEED, "metric")
             } else {
                 Toast.makeText(requireContext(), "Miles", Toast.LENGTH_SHORT).show()
-                viewModel.writeStringToSetting(Constants.WIND_SPEED,"imperial")
+                viewModel.writeStringToSetting(Constants.WIND_SPEED, "imperial")
 
 
             }
@@ -116,11 +159,14 @@ class SettingsFragment : Fragment() {
             when (radioId) {
                 R.id.radio_kelvin ->
                     viewModel.writeStringToSetting(Constants.UNIT, "standard")
+
                 R.id.radio_celisous ->
                     viewModel.writeStringToSetting(Constants.UNIT, "metric")
 
+
                 R.id.radio_fehraniet ->
                     viewModel.writeStringToSetting(Constants.UNIT, "imperial")
+
 
             }
             restartApplication()

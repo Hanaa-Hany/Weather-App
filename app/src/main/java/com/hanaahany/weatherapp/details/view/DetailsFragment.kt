@@ -25,8 +25,8 @@ import com.hanaahany.weatherapp.home.viewmodel.HomeViewModelFactory
 import com.hanaahany.weatherapp.model.Place
 import com.hanaahany.weatherapp.model.Repository
 import com.hanaahany.weatherapp.model.WeatherResponse
-import com.hanaahany.weatherapp.network.WeatherClient
-import com.hanaahany.weatherapp.network.sharedpref.SettingSharedPrefrences
+import com.hanaahany.weatherapp.services.network.WeatherClient
+import com.hanaahany.weatherapp.services.sharedpref.SettingSharedPrefrences
 import kotlinx.coroutines.launch
 
 

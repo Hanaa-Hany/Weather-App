@@ -1,6 +1,7 @@
 package com.hanaahany.weatherapp.dp
 
 import androidx.room.*
+import com.hanaahany.weatherapp.model.Alarm
 import com.hanaahany.weatherapp.model.Place
 import com.hanaahany.weatherapp.model.WeatherResponse
 import kotlinx.coroutines.flow.Flow
@@ -19,4 +20,12 @@ interface LocationDAO {
   suspend fun insertCachedData(weatherResponse: WeatherResponse)
   @Query("SELECT * FROM weather_table")
   fun getCachedData():Flow<WeatherResponse>
+  @Insert(onConflict=OnConflictStrategy.REPLACE)
+  suspend fun insertAlarm(alarmItem: Alarm)
+  @Delete
+  suspend fun deleteAlarm(alarmItem: Alarm)
+  @Query("SELECT * FROM alarm_table")
+  fun getAllAlarms(): Flow<List<Alarm>>
+
+
 }

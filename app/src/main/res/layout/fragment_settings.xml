@@ -12,6 +12,8 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
     <TextView
+        android:drawableStart="@drawable/ic_sunny"
+        android:drawablePadding="@dimen/_5sdp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/units"
@@ -23,7 +25,8 @@
     <com.google.android.material.card.MaterialCardView
         style="@style/card_style"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/white">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -31,12 +34,9 @@
             android:layout_margin="@dimen/_10sdp">
 
             <TextView
+                style="@style/setting_style"
+                android:text="@string/k"
                 android:id="@+id/tv_kelvin_settings"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="K"
-                android:textSize="@dimen/_20sdp"
-                android:textColor="@color/black"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 android:layout_marginStart="@dimen/_10sdp"/>
@@ -49,15 +49,14 @@
                 android:layout_margin="@dimen/_10sdp"
                 android:id="@+id/view1"/>
             <TextView
+                style="@style/setting_style"
                 android:id="@+id/tv_celisous_settings"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="C"
-                android:textSize="@dimen/_20sdp"
-                android:textColor="@color/black"
+                android:text="@string/c"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/view2"
                 app:layout_constraintTop_toBottomOf="@id/view1"
-                android:layout_marginStart="@dimen/_10sdp"/>
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"/>
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_1sdp"
@@ -68,13 +67,10 @@
                 android:id="@+id/view2"/>
 
             <TextView
+                style="@style/setting_style"
                 android:id="@+id/tv_fehrnait_settings"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:text="F"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_20sdp"
+               android:layout_marginStart="@dimen/_10sdp"
+                android:text="@string/f"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/view2" />
@@ -89,7 +85,8 @@
                 <RadioButton
                     android:id="@+id/radio_kelvin"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    />
                 <RadioButton
                     android:id="@+id/radio_celisous"
                     android:layout_width="wrap_content"
@@ -110,6 +107,8 @@
     </com.google.android.material.card.MaterialCardView>
 
     <TextView
+        android:drawableStart="@drawable/ic_location"
+        android:drawablePadding="@dimen/_5sdp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/location"
@@ -121,7 +120,9 @@
     <com.google.android.material.card.MaterialCardView
         style="@style/card_style"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+
+        >
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -129,12 +130,9 @@
             android:layout_margin="@dimen/_10sdp">
 
             <TextView
+                style="@style/setting_style"
                 android:id="@+id/tv_gps_settings"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="GPS"
-                android:textSize="@dimen/_18sdp"
-                android:textColor="@color/black"
+                android:text="@string/gps"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 android:layout_marginStart="@dimen/_10sdp"/>
@@ -148,13 +146,10 @@
                 android:id="@+id/view4"/>
 
             <TextView
+                style="@style/setting_style"
                 android:id="@+id/tv_Map_settings"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_10sdp"
-                android:text="Map"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_20sdp"
+                android:text="@string/map"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/view4" />
@@ -182,6 +177,8 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
     <TextView
+        android:drawableStart="@drawable/ic_speed"
+        android:drawablePadding="@dimen/_5sdp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/wind_speed"
@@ -193,7 +190,8 @@
     <com.google.android.material.card.MaterialCardView
         style="@style/card_style"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/white">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -201,12 +199,9 @@
             android:layout_margin="@dimen/_10sdp">
 
             <TextView
+                style="@style/setting_style"
                 android:id="@+id/tv_meter_settings"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="meter/sec"
-                android:textSize="@dimen/_18sdp"
-                android:textColor="@color/black"
+                android:text="@string/meter_sec"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 android:layout_marginStart="@dimen/_10sdp"/>
@@ -220,13 +215,10 @@
                 android:id="@+id/view7"/>
 
             <TextView
+                style="@style/setting_style"
                 android:id="@+id/tv_mile_settings"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_10sdp"
-                android:text="miles/hour"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_20sdp"
+                android:text="@string/miles_hour"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/view7" />
@@ -257,6 +249,8 @@
 
 
     <TextView
+        android:drawableStart="@drawable/ic_translate"
+        android:drawablePadding="@dimen/_5sdp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/language"
@@ -278,12 +272,9 @@
             >
 
             <TextView
+                style="@style/setting_style"
                 android:id="@+id/tv_english_settings"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="English"
-                android:textSize="@dimen/_18sdp"
-                android:textColor="@color/black"
+                android:text="@string/english"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 android:layout_marginStart="@dimen/_10sdp"/>
@@ -297,13 +288,10 @@
                 android:id="@+id/view6"/>
 
             <TextView
+                style="@style/setting_style"
                 android:id="@+id/tv_arabic_settings"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_10sdp"
-                android:text="العربيه"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_20sdp"
+                android:text="@string/arabic"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/view6" />

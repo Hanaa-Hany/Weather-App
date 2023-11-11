@@ -24,3 +24,5 @@ data class Place(
     var daily: List<DailyWeather>
 ) : Serializable
 
+
+

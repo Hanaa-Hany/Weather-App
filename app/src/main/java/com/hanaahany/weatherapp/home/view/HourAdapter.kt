@@ -9,7 +9,7 @@ import com.bumptech.glide.Glide
 import com.hanaahany.weatherapp.Utils.Constants
 import com.hanaahany.weatherapp.databinding.HourlyTempLayoutBinding
 import com.hanaahany.weatherapp.model.HourlyWeather
-import com.hanaahany.weatherapp.network.sharedpref.SettingSharedPrefrences
+import com.hanaahany.weatherapp.services.sharedpref.SettingSharedPrefrences
 
 class HourAdapter(var context: Context, var list: List<HourlyWeather>) :
     RecyclerView.Adapter<HourAdapter.HourViewHolder>() {
@@ -33,11 +33,11 @@ class HourAdapter(var context: Context, var list: List<HourlyWeather>) :
         holder.binding.tvTempHourTempLayout.text = Constants.writeDegree(context,resp.temp.toInt().toString())
 
         if (SettingSharedPrefrences.getInstance(context)
-                .readStringSettings(Constants.LANGUAGE) == "en"
+                .readStringSettings(Constants.LANGUAGE) == "ar"
         ) {
-            holder.binding.tvHourTempLayout.text = Constants.getTimeHour(resp.dt, "en")
-        } else {
             holder.binding.tvHourTempLayout.text = Constants.getTimeHour(resp.dt, "ar")
+        } else {
+            holder.binding.tvHourTempLayout.text = Constants.getTimeHour(resp.dt, "en")
 
         }
 

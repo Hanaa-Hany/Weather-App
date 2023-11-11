@@ -1,14 +1,15 @@
 package com.hanaahany.weatherapp.model
 
 import com.hanaahany.weatherapp.dp.ILocalSource
-import com.hanaahany.weatherapp.network.RemoteSource
-import com.hanaahany.weatherapp.network.sharedpref.ISettingSharedPrefrence
+import com.hanaahany.weatherapp.services.network.RemoteSource
+import com.hanaahany.weatherapp.services.sharedpref.ISettingSharedPrefrence
 import kotlinx.coroutines.flow.Flow
 
 class Repository private constructor(
     var remoteSource: RemoteSource,
     var settingSharedPrefrences: ISettingSharedPrefrence,
-    var localSource: ILocalSource
+    var localSource: ILocalSource,
+
 ) : RepositoryInterface {
 
     companion object {
@@ -69,6 +70,18 @@ class Repository private constructor(
 
     override suspend fun deleteLocationFromDB(place: Place) {
         localSource.deleteLocationFromDB(place)
+    }
+
+    override suspend fun insertAlarm(alarmItem: Alarm) {
+        localSource.insertAlarm(alarmItem)
+    }
+
+    override suspend fun deleteAlarm(alarmItem: Alarm) {
+        localSource.deleteAlarm(alarmItem)
+    }
+
+    override fun getAllAlarms(): Flow<List<Alarm>> {
+        return localSource.getAllAlarms()
     }
 
 
