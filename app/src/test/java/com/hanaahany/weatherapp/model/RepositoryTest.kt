@@ -5,6 +5,7 @@ import com.hanaahany.weatherapp.data.source.FakeRemoteSource
 import com.hanaahany.weatherapp.data.source.FakeSharedPref
 import com.hanaahany.weatherapp.services.model.*
 import junit.framework.TestCase.assertEquals
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test
@@ -12,11 +13,21 @@ import org.junit.Test
 class RepositoryTest {
 
     private val firstPlace: Place =
-        Place(0, "NewCairo", 31.2125, 30.2121, "eltgam3", 3.5, "9/11/2023", "")
+        Place(0, "NewCairo", 31.2125, 30.2121,  "eltgam3", 3.5, "9/11/2023", "",0,0,0,0.0,"",
+            emptyList(), emptyList())
     private val secondPlace: Place =
-        Place(1, "cairo", 30.2125, 29.2121, "eltgam3", 3.5, "9/11/2023", "")
+        Place(1, "cairo", 30.2125, 29.2121, "eltgam3", 3.5, "9/11/2023", "",0,0,0,0.0,"",
+            emptyList(), emptyList())
     private val thirdPlace: Place =
-        Place(2, "Daqhlia", 32.2125, 28.2121, "eltgam3", 3.5, "9/11/2023", "")
+        Place(2, "Daqhlia", 32.2125, 28.2121, "eltgam3", 3.5, "9/11/2023", "",0,0,0,0.0,"",
+            emptyList(), emptyList())
+
+    private val firstAlarm:Alarm= Alarm(0L,"",0.0,0.0,"")
+    private val secondAlarm:Alarm=Alarm(0L,"",0.0,0.0,"")
+    private val thirdAlarm:Alarm=Alarm(0L,"",0.0,0.0,"")
+
+    private val keyString="KEY"
+    private val valueString="value"
 
 
     private val weatherResponse: WeatherResponse = WeatherResponse(
@@ -25,6 +36,7 @@ class RepositoryTest {
         0.0,
         "",
         CurrentWeather(0L, 0.0, 0.0, 0, 0, 0, 0.0, emptyList()),
+        emptyList(),
         emptyList(),
         emptyList()
     )
@@ -50,11 +62,6 @@ class RepositoryTest {
 
         )
     }
-
-
-
-
-
     @Test
     fun deletePlaceFromFavTest_Place_DeletedPlace() = runBlocking {
         //when
@@ -69,7 +76,6 @@ class RepositoryTest {
         assertEquals(false, result)
 
     }
-
 
     @Test
     fun insertPlaceToFavTest_ListOfPlaces_PlacesInsertDone() = runBlocking {
@@ -102,9 +108,58 @@ class RepositoryTest {
     }
 
     @Test
-    fun writeStringSettings_String_Write(){
+    fun getAllAlarmsTest_ListOfAlarm()= runBlocking{
+        //When
+        repo.insertAlarm(firstAlarm)
+        repo.insertAlarm(secondAlarm)
+        repo.insertAlarm(thirdAlarm)
+        val result=repo.getAllAlarms()
+
+        //Then
+        result.collect{
+            assertEquals(listOf(firstAlarm,secondAlarm,thirdAlarm),it)
+
+        }
+
+
+
 
     }
+
+    @Test
+    fun deleteAlarmTest_Alarm_Deleted()= runBlocking {
+        //when
+        repo.deleteAlarm(firstAlarm)
+        var result:Boolean? =null
+            repo.getAllAlarms().collect{
+                result=it.contains(firstAlarm)
+            }
+        //then
+        assertEquals(false,result)
+    }
+
+    @Test
+    fun insertAlarmTest_AlarmInserted()= runBlocking {
+        //when
+        repo.insertAlarm(firstAlarm)
+        var result:Boolean?=null
+        repo.getAllAlarms().collect{
+            result=it.contains(firstAlarm)
+        }
+        //then
+        assertEquals(true,result)
+    }
+
+    @Test
+    fun sharedPrefStringToSettingTest_WriteAndReadInDB(){
+        //when
+        repo.writeStringToSetting(keyString,valueString)
+        val result:String =repo.readStringFromSetting(keyString)
+        //then
+        assertEquals(valueString,result)
+    }
+
+
 
 
 }

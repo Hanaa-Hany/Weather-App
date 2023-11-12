@@ -1,5 +1,6 @@
 package com.hanaahany.weatherapp.data.source
 
+import com.hanaahany.weatherapp.services.model.Alarm
 import com.hanaahany.weatherapp.services.model.Place
 import com.hanaahany.weatherapp.services.model.RepositoryInterface
 import com.hanaahany.weatherapp.services.model.WeatherResponse
@@ -7,8 +8,10 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 
 class FakeReository(private val places: MutableList<Place> = mutableListOf(),
-                    private var weather: WeatherResponse,
-                    private var stringReadValue: String
+                    private val weather:WeatherResponse ,
+                    private val alarm: MutableList<Alarm> = mutableListOf(),
+                    private var read: String,
+                    private var readFloat: Float
 ) : RepositoryInterface {
     override suspend fun makeNetworkCall(
         lat: Double,
@@ -18,24 +21,8 @@ class FakeReository(private val places: MutableList<Place> = mutableListOf(),
     ): Flow<WeatherResponse> {
         return flowOf(weather)
     }
-
-    override fun writeStringToSetting(key: String, value: String) {
-        TODO()
-
-    }
-
-    override fun readStringFromSetting(key: String): String {
-        TODO()
-
-    }
-
-    override fun writeFloatToSetting(key: String, value: Float) {
-        TODO()
-
-    }
-
     override fun readFloatFromSetting(key: String): Float {
-        TODO()
+        return readFloat
     }
 
     override fun getFavLocation(): Flow<List<Place>> {
@@ -49,4 +36,42 @@ class FakeReository(private val places: MutableList<Place> = mutableListOf(),
     override suspend fun deleteLocationFromDB(place: Place) {
         places.remove(place)
     }
+
+    override suspend fun insertAlarm(alarmItem: Alarm) {
+        alarm.add(alarmItem)
+    }
+
+    override suspend fun deleteAlarm(alarmItem: Alarm) {
+        alarm.remove(alarmItem)
+    }
+
+    override fun getAllAlarms(): Flow<List<Alarm>> {
+        return flowOf(alarm)
+    }
+
+    override suspend fun getCachedData(): Flow<WeatherResponse> {
+        TODO()
+        //return flowOf(weather.get(0))
+    }
+
+    override suspend fun insertCachedWeather(weatherResponse: WeatherResponse) {
+        //weather.add(weatherResponse)
+    }
+
+    override fun writeStringToSetting(key: String, value: String) {
+        read=value
+
+    }
+
+    override fun readStringFromSetting(key: String): String {
+        return read
+
+    }
+
+    override fun writeFloatToSetting(key: String, value: Float) {
+        readFloat=value
+
+    }
+
+
 }

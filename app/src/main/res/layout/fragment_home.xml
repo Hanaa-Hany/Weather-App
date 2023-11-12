@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/_20sdp"
             android:layout_marginTop="24dp"
-            android:fontFamily="@font/akaya_telivigala"
+            android:fontFamily="@font/aladin"
             android:textColor="@color/primary_continer"
             android:textSize="@dimen/_40ssp"
             app:layout_constraintEnd_toStartOf="@+id/guideline2"
@@ -37,7 +37,7 @@
             app:layout_constraintTop_toBottomOf="@id/tv_temp_home_fragment" />
 
         <TextView
-            android:fontFamily="@font/akaya_telivigala"
+            android:fontFamily="@font/aladin"
             android:textColor="@color/primary_continer"
             android:id="@+id/tv_city_home_fragment"
             android:layout_width="0dp"
@@ -50,7 +50,7 @@
             app:layout_constraintTop_toBottomOf="@id/tv_weather_description_home_fragment" />
 
         <TextView
-            android:fontFamily="@font/akaya_telivigala"
+            android:fontFamily="@font/aladin"
             android:textColor="@color/primary_continer"
             android:id="@+id/tv_weather_date_home_fragment"
             android:layout_width="0dp"
@@ -61,7 +61,7 @@
             app:layout_constraintTop_toBottomOf="@id/tv_city_home_fragment" />
 
         <TextView
-            android:fontFamily="@font/akaya_telivigala"
+            android:fontFamily="@font/aladin"
             android:textColor="@color/primary_continer"
             android:id="@+id/tv_weather_time_home_fragment"
             android:layout_width="0dp"
