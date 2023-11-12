@@ -3,31 +3,23 @@ package com.hanaahany.weatherapp.details.view
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bumptech.glide.Glide
-import com.hanaahany.weatherapp.R
-import com.hanaahany.weatherapp.Utils.ApiState
 import com.hanaahany.weatherapp.Utils.Constants
 import com.hanaahany.weatherapp.databinding.FragmentDetailsBinding
-import com.hanaahany.weatherapp.databinding.FragmentHomeBinding
-import com.hanaahany.weatherapp.dp.LocalSource
 import com.hanaahany.weatherapp.home.view.DayAdapter
 import com.hanaahany.weatherapp.home.view.HourAdapter
 import com.hanaahany.weatherapp.home.viewmodel.HomeViewModel
 import com.hanaahany.weatherapp.home.viewmodel.HomeViewModelFactory
-import com.hanaahany.weatherapp.model.Place
-import com.hanaahany.weatherapp.model.Repository
-import com.hanaahany.weatherapp.model.WeatherResponse
+import com.hanaahany.weatherapp.services.dp.LocalSource
+import com.hanaahany.weatherapp.services.model.Place
+import com.hanaahany.weatherapp.services.model.Repository
 import com.hanaahany.weatherapp.services.network.WeatherClient
 import com.hanaahany.weatherapp.services.sharedpref.SettingSharedPrefrences
-import kotlinx.coroutines.launch
 
 
 class DetailsFragment : Fragment() {

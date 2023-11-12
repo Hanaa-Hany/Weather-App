@@ -1,11 +1,12 @@
-package com.hanaahany.weatherapp.dp
+package com.hanaahany.weatherapp.services.dp
 
 import androidx.room.TypeConverter
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import com.hanaahany.weatherapp.model.CurrentWeather
-import com.hanaahany.weatherapp.model.DailyWeather
-import com.hanaahany.weatherapp.model.HourlyWeather
+import com.hanaahany.weatherapp.services.model.Alert
+import com.hanaahany.weatherapp.services.model.CurrentWeather
+import com.hanaahany.weatherapp.services.model.DailyWeather
+import com.hanaahany.weatherapp.services.model.HourlyWeather
 
 class ConverterDB {
     @TypeConverter
@@ -37,6 +38,16 @@ class ConverterDB {
     @TypeConverter
     fun fromStringToHourly(stringHourly: String): List<HourlyWeather> {
         return Gson().fromJson(stringHourly, object : TypeToken<List<HourlyWeather>>() {}.type)
+    }
+
+    @TypeConverter
+    fun fromAlertToString(alert: List<Alert>): String {
+        return Gson().toJson(alert)
+    }
+
+    @TypeConverter
+    fun fromStringToAlert(stringAlert: String): List<Alert> {
+        return Gson().fromJson(stringAlert, object : TypeToken<List<Alert>>() {}.type)
     }
 
 

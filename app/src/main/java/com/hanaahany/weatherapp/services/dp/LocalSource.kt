@@ -1,12 +1,12 @@
-package com.hanaahany.weatherapp.dp
+package com.hanaahany.weatherapp.services.dp
 
 import android.content.Context
-import com.hanaahany.weatherapp.model.Alarm
-import com.hanaahany.weatherapp.model.Place
-import com.hanaahany.weatherapp.model.WeatherResponse
+import com.hanaahany.weatherapp.services.model.Alarm
+import com.hanaahany.weatherapp.services.model.Place
+import com.hanaahany.weatherapp.services.model.WeatherResponse
 import kotlinx.coroutines.flow.Flow
 
-class LocalSource(context: Context):ILocalSource {
+class LocalSource(context: Context): ILocalSource {
     private var locationDAO: LocationDAO
 
 

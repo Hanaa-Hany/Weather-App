@@ -17,10 +17,10 @@ import com.hanaahany.weatherapp.R
 import com.hanaahany.weatherapp.Utils.Constants
 import com.hanaahany.weatherapp.Utils.LocationByGPS
 import com.hanaahany.weatherapp.databinding.FragmentSettingsBinding
-import com.hanaahany.weatherapp.dp.LocalSource
+import com.hanaahany.weatherapp.services.dp.LocalSource
 import com.hanaahany.weatherapp.home.viewmodel.HomeViewModel
 import com.hanaahany.weatherapp.home.viewmodel.HomeViewModelFactory
-import com.hanaahany.weatherapp.model.Repository
+import com.hanaahany.weatherapp.services.model.Repository
 import com.hanaahany.weatherapp.services.network.WeatherClient
 import com.hanaahany.weatherapp.services.sharedpref.SettingSharedPrefrences
 import kotlinx.coroutines.launch
@@ -113,6 +113,7 @@ class SettingsFragment : Fragment() {
                 }
                 R.id.radio_map -> {
                     viewModel.writeStringToSetting(Constants.LOCATION, Constants.MAP)
+
                     val action=SettingsFragmentDirections.actionSettingsFragmentToMapsFragment(Constants.SET_Source)
                     Navigation.findNavController(requireView()).navigate(action)
 
@@ -132,7 +133,7 @@ class SettingsFragment : Fragment() {
 
 
             }
-            restartApplication()
+            //restartApplication()
         }
     }
 
@@ -169,7 +170,7 @@ class SettingsFragment : Fragment() {
 
 
             }
-            restartApplication()
+            //restartApplication()
 
         })
     }

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="20dp"
+    app:cardElevation="3dp"
+    app:cardUseCompatPadding="true"
+    app:strokeWidth="0dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingVertical="10dp">
+
+        <TextView
+            android:id="@+id/tv_init_setup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Initial Setup"
+            android:textColor="@color/East_Bay"
+            android:textSize="@dimen/_18ssp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:drawableStart="@drawable/ic_settings"
+            android:drawablePadding="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_10sdp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Location"
+            android:textStyle="bold"
+            android:textColor="@color/East_Bay"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:textSize="@dimen/_16ssp"
+            app:layout_constraintBottom_toBottomOf="@+id/radioGroup_Alert_dialog"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_init_setup" />
+
+
+
+
+        <RadioGroup
+            android:id="@+id/radioGroup_Alert_dialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checkedButton="@+id/radio_notification"
+            android:orientation="horizontal"
+            android:paddingHorizontal="40dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_init_setup"
+
+            >
+
+            <RadioButton
+                android:id="@+id/radio_gps"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingEnd="20dp"
+                android:text="@string/gps"
+                android:textColor="@color/East_Bay"
+                tools:ignore="RtlSymmetry" />
+
+            <RadioButton
+                android:id="@+id/radio_map"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/map"
+                android:textColor="@color/East_Bay" />
+        </RadioGroup>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_ok"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_20sdp"
+                app:cornerRadius="@dimen/_10sdp"
+                android:layout_gravity="center"
+                android:text="@string/ok"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/_16ssp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/radioGroup_Alert_dialog"
+
+                />
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</com.google.android.material.card.MaterialCardView>

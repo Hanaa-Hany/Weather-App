@@ -23,7 +23,11 @@ import androidx.annotation.RequiresApi
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.LayoutManager
+import androidx.recyclerview.widget.RecyclerView.VERTICAL
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.noaa.services.notification.NotificationChannelHelper
 import com.google.android.gms.location.LocationServices
 import com.google.android.material.datepicker.CalendarConstraints
@@ -42,9 +46,9 @@ import com.hanaahany.weatherapp.alert.viewmodel.AlertViewModel
 import com.hanaahany.weatherapp.alert.viewmodel.AlertViewModelFactory
 import com.hanaahany.weatherapp.databinding.AlertDialogLayoutBinding
 import com.hanaahany.weatherapp.databinding.FragmentAlertBinding
-import com.hanaahany.weatherapp.dp.LocalSource
-import com.hanaahany.weatherapp.model.Alarm
-import com.hanaahany.weatherapp.model.Repository
+import com.hanaahany.weatherapp.services.dp.LocalSource
+import com.hanaahany.weatherapp.services.model.Alarm
+import com.hanaahany.weatherapp.services.model.Repository
 import com.hanaahany.weatherapp.services.alarm.AlarmSchedular
 import com.hanaahany.weatherapp.services.network.RemoteSource
 import com.hanaahany.weatherapp.services.network.WeatherClient
@@ -83,7 +87,8 @@ class AlertFragment : Fragment() {
         val factory = AlertViewModelFactory(
              Repository.getInstance(
                 WeatherClient,
-                SettingSharedPrefrences.getInstance(requireContext()), LocalSource(requireContext())),
+                SettingSharedPrefrences.getInstance(requireContext()), LocalSource(requireContext())
+             ),
             AlarmSchedular.getInstance(requireContext())
         )
 
@@ -92,6 +97,8 @@ class AlertFragment : Fragment() {
         alertViewModel.getCashedData()
         alertViewModel.getAllAlarms()
 
+
+        binding.rvAlerts.layoutManager=StaggeredGridLayoutManager(2, VERTICAL)
         alertRecyclerAdapter = AlertRecyclerAdapter()
         binding.rvAlerts.adapter = alertRecyclerAdapter
         deleteBySwipe(view)
@@ -106,10 +113,10 @@ class AlertFragment : Fragment() {
             alertViewModel.weatherResponseStateFlow.collectLatest {
                 if(it is ApiState.Success){
                     currentLatitude = it.date.lat
-                    currentLongitude = it.date.long
-                   // currentZoneName = it.weatherResponse.timezone
+                    currentLongitude = it.date.lon
+                    currentZoneName = it.date.timezone
                     try {
-                        currentZoneName = Constants.setLocationNameByGeoCoder( requireContext(),it.date.lat,it.date.long)
+                        currentZoneName = Constants.setLocationNameByGeoCoder( requireContext(),it.date.lat,it.date.lon)
                     }catch (_:Exception){}
                 }
             }
@@ -284,7 +291,6 @@ class AlertFragment : Fragment() {
                 .setCalendarConstraints(constraintsBuilder.build())
                 .setTheme(R.style.ThemeOverlay_App_DatePicker)
                 .setTitleText("Select date")
-
                 .build()
 
         datePicker.show(parentFragmentManager, "date")

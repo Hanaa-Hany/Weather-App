@@ -1,6 +1,6 @@
 package com.hanaahany.weatherapp.data.source
 
-import com.hanaahany.weatherapp.model.WeatherResponse
+import com.hanaahany.weatherapp.services.model.WeatherResponse
 import com.hanaahany.weatherapp.services.network.RemoteSource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf

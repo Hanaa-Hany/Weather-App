@@ -13,12 +13,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:fontFamily="@font/bonbon"
+        android:fontFamily="@font/akronim"
         android:gravity="center"
-        android:text="Weather"
+        android:text="SkyNews"
+        android:textColor="#B2A4C9"
         android:textSize="@dimen/_70ssp"
         android:textStyle="bold"
-        android:textColor="@color/primary_continer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -33,7 +33,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:lottie_autoPlay="true"
-        app:lottie_rawRes="@raw/rain_day"
+        app:lottie_rawRes="@raw/logo"
         android:scaleType="fitXY"
         />
 

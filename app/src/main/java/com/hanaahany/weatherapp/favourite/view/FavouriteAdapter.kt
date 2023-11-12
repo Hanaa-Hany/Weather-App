@@ -12,8 +12,8 @@ import com.bumptech.glide.Glide
 import com.hanaahany.weatherapp.Utils.Constants
 import com.hanaahany.weatherapp.databinding.FavLayoutBinding
 import com.hanaahany.weatherapp.databinding.FragmentMapsBinding
-import com.hanaahany.weatherapp.model.Place
-import com.hanaahany.weatherapp.model.WeatherResponse
+import com.hanaahany.weatherapp.services.model.Place
+import com.hanaahany.weatherapp.services.model.WeatherResponse
 
 class FavouriteAdapter(var context: Context,private val onClick:(Place)->Unit):
     ListAdapter<Place,FavouriteAdapter.FavViewHolder>(FavDiffUtil()) {

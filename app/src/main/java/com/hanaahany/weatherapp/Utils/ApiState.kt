@@ -1,6 +1,6 @@
 package com.hanaahany.weatherapp.Utils
 
-import com.hanaahany.weatherapp.model.WeatherResponse
+import com.hanaahany.weatherapp.services.model.WeatherResponse
 
 sealed class ApiState{
     class Success(val date: WeatherResponse):ApiState()

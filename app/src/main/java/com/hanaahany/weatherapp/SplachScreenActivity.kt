@@ -14,7 +14,7 @@ class SplachScreenActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding=ActivitySplachScreenBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        supportActionBar?.hide()
         // Handler().postDelayed({
         Handler(Looper.getMainLooper()).postDelayed({
             val intent = Intent(this, MainActivity::class.java)

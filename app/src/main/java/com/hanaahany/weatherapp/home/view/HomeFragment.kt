@@ -19,12 +19,12 @@ import com.hanaahany.weatherapp.Utils.Constants
 import com.hanaahany.weatherapp.Utils.LocationByGPS
 import com.hanaahany.weatherapp.Utils.Permission
 import com.hanaahany.weatherapp.databinding.FragmentHomeBinding
-import com.hanaahany.weatherapp.dp.LocalSource
+import com.hanaahany.weatherapp.services.dp.LocalSource
 import com.hanaahany.weatherapp.home.viewmodel.HomeViewModel
 import com.hanaahany.weatherapp.home.viewmodel.HomeViewModelFactory
 import com.hanaahany.weatherapp.maps.MapsFragmentArgs
-import com.hanaahany.weatherapp.model.Repository
-import com.hanaahany.weatherapp.model.WeatherResponse
+import com.hanaahany.weatherapp.services.model.Repository
+import com.hanaahany.weatherapp.services.model.WeatherResponse
 import com.hanaahany.weatherapp.services.network.WeatherClient
 import com.hanaahany.weatherapp.services.sharedpref.SettingSharedPrefrences
 import kotlinx.coroutines.launch
@@ -38,6 +38,7 @@ class HomeFragment : Fragment() {
     private var latitude:Double=0.0
     private var langitude:Double=0.0
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -48,20 +49,32 @@ class HomeFragment : Fragment() {
         return binding.root
     }
 
+    override fun onStart() {
+        super.onStart()
+
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViews()
-        val location = LocationByGPS(requireContext())
-        location.getLastLocation()
 
 
-        val factory = HomeViewModelFactory(Repository.getInstance(
+        val factory = HomeViewModelFactory(
+            Repository.getInstance(
             WeatherClient,
             SettingSharedPrefrences.getInstance(requireContext()), LocalSource(requireContext())
         ))
-
+        val location = LocationByGPS(requireContext())
         viewModel = ViewModelProvider(this, factory).get(HomeViewModel::class.java)
+        if(viewModel.readStringFromSetting(Constants.LOCATION)==Constants.MAP) {
+            val lat = HomeFragmentArgs.fromBundle(requireArguments()).latitude
+            val lan=HomeFragmentArgs.fromBundle(requireArguments()).langitude
+            Log.i(Constants.locationTag, "$lat HomeFragment")
+            viewModel.getWeather(lat.toDouble(),lan.toDouble(),"metric","en")
+        }else{
 
+            location.getLastLocation()
+        }
         location.location.observe(context as LifecycleOwner) {
             Log.i(Constants.locationTag, it.first.toString())
             lifecycleScope.launch {
@@ -87,9 +100,14 @@ class HomeFragment : Fragment() {
             viewModel.respone.collect { result ->
                 when (result) {
                     is ApiState.Success -> {
+                        result.date.lon=langitude
                         viewModel.insertCachedWeather(result.date)
+                        Log.i("Test",result.date.toString())
                         result.date.lat=latitude
-                        result.date.long=langitude
+
+                        Log.i("Test",result.date.lon.toString())
+                        Log.i("Test",result.date.lat.toString())
+
 
                         binding.loadingLottiHomeFragment.visibility=View.GONE
                         handleView(View.VISIBLE)
@@ -113,18 +131,12 @@ class HomeFragment : Fragment() {
                 }
             }
         }
-        getDataFromMap()
+
 
     }
 
     private fun getDataFromMap() {
-        if(flag) {
 
-        }else{
-            val lat = HomeFragmentArgs.fromBundle(requireArguments()).latitude
-            HomeFragmentArgs.fromBundle(requireArguments()).langitude
-            Log.i(Constants.locationTag, "$lat HomeFragment")
-        }
     }
 
     private fun handleView(appear: Int) {
@@ -143,12 +155,12 @@ class HomeFragment : Fragment() {
     }
 
     @SuppressLint("SetTextI18n")
-    private fun setData(it:WeatherResponse) {
+    private fun setData(it: WeatherResponse) {
         binding.tvTempHomeFragment.text=Constants.writeDegree(requireContext(),it.current.temp.toInt().toString())
         binding.tvCloudsValueHomeFragment.text=it.current.clouds.toString()
         binding.tvPressureValueHomeFragment.text=it.current.pressure.toString()
         binding.tvWindValueHomeFragment.text=Constants.windSpeed(requireContext(), it.current.wind_speed.toString())
-        binding.tvCityHomeFragment.text=Constants.setLocationNameByGeoCoder(requireContext(),it.lat,it.long)
+        binding.tvCityHomeFragment.text=Constants.setLocationNameByGeoCoder(requireContext(),it.lat,it.lon)
         //Log.i(Constants.locationTag,it.lat.toString()+"setData")
         binding.tvHumidityValueHomeFragment.text=it.current.humidity.toString()
         binding.tvWeatherDescriptionHomeFragment.text=it.current.weather.get(0).description

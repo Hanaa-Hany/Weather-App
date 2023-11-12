@@ -8,8 +8,8 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.hanaahany.weatherapp.home.view.HomeFragment"
-        android:label="fragment_home"
-        tools:layout="@layout/fragment_home" >
+        android:label="@string/home"
+        tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_homeFragment_to_favouriteFragment"
             app:destination="@id/favouriteFragment" />
@@ -21,23 +21,23 @@
             app:argType="string"
 
             />
-        <argument android:name="langitude"
-            app:argType="string"
+        <argument
+            android:name="langitude"
             android:defaultValue=""
+            app:argType="string"
 
-             />
+            />
         <argument
             android:name="source"
-            app:argType="string"
-            />
+            app:argType="string" />
 
 
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.hanaahany.weatherapp.setting.view.SettingsFragment"
-        android:label="fragment_settings"
-        tools:layout="@layout/fragment_settings" >
+        android:label="Settings"
+        tools:layout="@layout/fragment_settings">
         <action
             android:id="@+id/action_settingsFragment_to_mapsFragment"
             app:destination="@id/mapsFragment" />
@@ -58,8 +58,8 @@
     <fragment
         android:id="@+id/mapsFragment"
         android:name="com.hanaahany.weatherapp.maps.MapsFragment"
-        android:label="fragment_maps"
-        tools:layout="@layout/fragment_maps" >
+        android:label="Map"
+        tools:layout="@layout/fragment_maps">
         <action
             android:id="@+id/action_mapsFragment_to_favouriteFragment"
             app:destination="@id/favouriteFragment"
@@ -69,7 +69,7 @@
             app:popExitAnim="@anim/pop_exit_an" />
         <action
             android:id="@+id/action_mapsFragment_to_homeFragment"
-            app:destination="@id/homeFragment" >
+            app:destination="@id/homeFragment">
 
         </action>
         <argument
@@ -79,8 +79,8 @@
     <fragment
         android:id="@+id/favouriteFragment"
         android:name="com.hanaahany.weatherapp.favourite.view.FavouriteFragment"
-        android:label="fragment_favourite"
-        tools:layout="@layout/fragment_favourite" >
+        android:label="@string/favourite"
+        tools:layout="@layout/fragment_favourite">
         <action
             android:id="@+id/action_favouriteFragment_to_mapsFragment"
             app:destination="@id/mapsFragment" />
@@ -98,15 +98,15 @@
     <fragment
         android:id="@+id/detailsFragment"
         android:name="com.hanaahany.weatherapp.details.view.DetailsFragment"
-        android:label="fragment_details"
-        tools:layout="@layout/fragment_details" >
+        android:label="@string/favourite"
+        tools:layout="@layout/fragment_details">
         <argument
             android:name="detailsFav"
-            app:argType="com.hanaahany.weatherapp.model.Place" />
+            app:argType="com.hanaahany.weatherapp.services.model.Place" />
     </fragment>
     <dialog
         android:id="@+id/alertDialogFragment"
-        android:name="com.hanaahany.weatherapp.alert.AlertDialogFragment"
+        android:name="com.hanaahany.weatherapp.alert.view.AlertFragment"
         android:label="fragment_alert_dialog"
         tools:layout="@layout/fragment_alert_dialog" >
         <action
@@ -116,8 +116,8 @@
     <fragment
         android:id="@+id/alertFragment"
         android:name="com.hanaahany.weatherapp.alert.view.AlertFragment"
-        android:label="fragment_alert"
-        tools:layout="@layout/fragment_alert" >
+        android:label="Alert"
+        tools:layout="@layout/fragment_alert">
         <action
             android:id="@+id/action_alertFragment_to_alertDialogFragment"
             app:destination="@id/alertDialogFragment" />

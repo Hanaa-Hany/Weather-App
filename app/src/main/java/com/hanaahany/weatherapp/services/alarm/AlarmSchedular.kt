@@ -5,7 +5,7 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import com.hanaahany.weatherapp.Utils.Constants
-import com.hanaahany.weatherapp.model.Alarm
+import com.hanaahany.weatherapp.services.model.Alarm
 
 class AlarmSchedular private constructor(context: Context):IAlarmSchedular {
     private val alarmManager: AlarmManager by lazy {

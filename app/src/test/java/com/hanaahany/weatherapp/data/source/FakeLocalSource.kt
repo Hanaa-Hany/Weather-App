@@ -1,7 +1,7 @@
 package com.hanaahany.weatherapp.data.source
 
-import com.hanaahany.weatherapp.dp.ILocalSource
-import com.hanaahany.weatherapp.model.Place
+import com.hanaahany.weatherapp.services.dp.ILocalSource
+import com.hanaahany.weatherapp.services.model.Place
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 

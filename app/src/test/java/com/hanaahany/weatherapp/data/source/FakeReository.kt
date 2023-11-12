@@ -1,15 +1,15 @@
 package com.hanaahany.weatherapp.data.source
 
-import com.hanaahany.weatherapp.model.Place
-import com.hanaahany.weatherapp.model.RepositoryInterface
-import com.hanaahany.weatherapp.model.WeatherResponse
+import com.hanaahany.weatherapp.services.model.Place
+import com.hanaahany.weatherapp.services.model.RepositoryInterface
+import com.hanaahany.weatherapp.services.model.WeatherResponse
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 
-class FakeReository(  private val places: MutableList<Place> = mutableListOf(),
-                      private var weather: WeatherResponse,
-                      private var stringReadValue: String
-) :RepositoryInterface{
+class FakeReository(private val places: MutableList<Place> = mutableListOf(),
+                    private var weather: WeatherResponse,
+                    private var stringReadValue: String
+) : RepositoryInterface {
     override suspend fun makeNetworkCall(
         lat: Double,
         lon: Double,

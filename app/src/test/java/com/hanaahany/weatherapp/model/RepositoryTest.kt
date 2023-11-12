@@ -3,6 +3,7 @@ package com.hanaahany.weatherapp.model
 import com.hanaahany.weatherapp.data.source.FakeLocalSource
 import com.hanaahany.weatherapp.data.source.FakeRemoteSource
 import com.hanaahany.weatherapp.data.source.FakeSharedPref
+import com.hanaahany.weatherapp.services.model.*
 import junit.framework.TestCase.assertEquals
 import kotlinx.coroutines.runBlocking
 import org.junit.Before

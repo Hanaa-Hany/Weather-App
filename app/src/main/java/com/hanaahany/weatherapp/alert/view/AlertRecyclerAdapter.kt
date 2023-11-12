@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.hanaahany.weatherapp.Utils.Constants
 import com.hanaahany.weatherapp.databinding.ItemAlertBinding
-import com.hanaahany.weatherapp.model.Alarm
+import com.hanaahany.weatherapp.services.model.Alarm
 
 class AlertRecyclerAdapter :
     ListAdapter<Alarm, AlertRecyclerAdapter.AlertViewHolder>(RecyclerDiffUtilAlarmItem()) {

@@ -6,8 +6,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.hanaahany.weatherapp.Utils.ApiState
 import com.hanaahany.weatherapp.Utils.Constants
-import com.hanaahany.weatherapp.model.Alarm
-import com.hanaahany.weatherapp.model.RepositoryInterface
+import com.hanaahany.weatherapp.services.model.Alarm
+import com.hanaahany.weatherapp.services.model.RepositoryInterface
 import com.hanaahany.weatherapp.services.alarm.AlarmSchedular
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -52,9 +52,7 @@ class AlertViewModel(private val repo: RepositoryInterface, private val alarmSch
         viewModelScope.launch(Dispatchers.IO) {
             repo.getCachedData()?.let { data ->
                 data.collectLatest {
-                    if (it != null) {
-                        _weatherResponseMutableStateFlow.value = ApiState.Success(it)
-                    }
+                    _weatherResponseMutableStateFlow.value = ApiState.Success(it)
                 }
             }
         }

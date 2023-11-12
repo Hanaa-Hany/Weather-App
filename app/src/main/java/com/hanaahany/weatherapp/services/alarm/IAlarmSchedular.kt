@@ -1,7 +1,7 @@
 package com.hanaahany.weatherapp.services.alarm
 
 import android.content.Context
-import com.hanaahany.weatherapp.model.Alarm
+import com.hanaahany.weatherapp.services.model.Alarm
 
 interface IAlarmSchedular {
 

@@ -1,5 +1,6 @@
-package com.hanaahany.weatherapp.model
+package com.hanaahany.weatherapp.services.model
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
@@ -7,14 +8,24 @@ import androidx.room.PrimaryKey
 data class WeatherResponse(
     @PrimaryKey(autoGenerate = true)
     var id:Int=0,
+    @ColumnInfo("Lat")
     var lat: Double = 0.0,
-    var long: Double = 0.0,
+    @ColumnInfo("long")
+    var lon: Double = 0.0,
+    @ColumnInfo("timezone")
     var timezone: String = "",
+    @ColumnInfo("current")
     var current: CurrentWeather,
+    @ColumnInfo("hourly")
     var hourly: List<HourlyWeather>,
-    var daily: List<DailyWeather>
+    @ColumnInfo("daily")
+    var daily: List<DailyWeather>,
+    @ColumnInfo("alerts")
+    var alerts:List<Alert>
 ){
-    constructor() :this (0,0.0, 0.0, "", CurrentWeather(0,0.0,0.0,0,0,0,0.0, emptyList()), emptyList(), emptyList())
+    constructor() :this (0,0.0, 0.0, "", CurrentWeather(0,0.0,0.0,0,0,0,0.0, emptyList()), emptyList(), emptyList(),
+        emptyList()
+    )
 }
 data class CurrentWeather(
     var dt: Long,
@@ -60,6 +71,6 @@ data class Temp(
 )
 
 data class FeelsLike(var day: Double, var night: Double, var eve: Double, var morn: Double)
-
+data class Alert(var sender_name:String,var event:String,var start:String,var end:Int,var description:String,var tags:List<String>)
 
 

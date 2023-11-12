@@ -1,4 +1,4 @@
-package com.hanaahany.weatherapp.model
+package com.hanaahany.weatherapp.services.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

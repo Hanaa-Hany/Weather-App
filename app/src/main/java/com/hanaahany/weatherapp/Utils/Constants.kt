@@ -133,7 +133,7 @@ object Constants {
             "01d" -> lottiView.setAnimation(R.raw.sunny)
             "02d" -> lottiView.setAnimation(R.raw.few_clouds)
             "03d" -> lottiView.setAnimation(R.raw.clouds)
-            "04d" -> lottiView.setAnimation(R.raw._04d)
+            "04d" -> lottiView.setAnimation(R.raw.clouds_04d)
             "09d" -> lottiView.setAnimation(R.raw.rain_day)
             "11d" -> lottiView.setAnimation(R.raw.thunder)
             "13d" -> lottiView.setAnimation(R.raw.snowfall)
@@ -141,7 +141,7 @@ object Constants {
             "01n" -> lottiView.setAnimation(R.raw.first_night)
             "02n" -> lottiView.setAnimation(R.raw._02n)
             "03n" -> lottiView.setAnimation(R.raw._03n)
-            "04n" -> lottiView.setAnimation(R.raw._04d)
+            "04n" -> lottiView.setAnimation(R.raw.clouds_04d)
 
 
         }

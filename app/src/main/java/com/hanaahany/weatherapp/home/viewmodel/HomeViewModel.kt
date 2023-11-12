@@ -5,9 +5,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.hanaahany.weatherapp.Utils.ApiState
 import com.hanaahany.weatherapp.Utils.Constants
-import com.hanaahany.weatherapp.model.Place
-import com.hanaahany.weatherapp.model.RepositoryInterface
-import com.hanaahany.weatherapp.model.WeatherResponse
+import com.hanaahany.weatherapp.services.model.Place
+import com.hanaahany.weatherapp.services.model.RepositoryInterface
+import com.hanaahany.weatherapp.services.model.WeatherResponse
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 

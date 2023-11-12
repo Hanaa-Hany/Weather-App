@@ -1,6 +1,6 @@
 package com.hanaahany.weatherapp.services.network
 
-import com.hanaahany.weatherapp.model.WeatherResponse
+import com.hanaahany.weatherapp.services.model.WeatherResponse
 import kotlinx.coroutines.flow.Flow
 import retrofit2.Response
 

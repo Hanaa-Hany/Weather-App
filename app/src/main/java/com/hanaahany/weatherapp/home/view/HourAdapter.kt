@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.hanaahany.weatherapp.Utils.Constants
 import com.hanaahany.weatherapp.databinding.HourlyTempLayoutBinding
-import com.hanaahany.weatherapp.model.HourlyWeather
+import com.hanaahany.weatherapp.services.model.HourlyWeather
 import com.hanaahany.weatherapp.services.sharedpref.SettingSharedPrefrences
 
 class HourAdapter(var context: Context, var list: List<HourlyWeather>) :

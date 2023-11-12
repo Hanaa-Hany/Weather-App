@@ -46,10 +46,6 @@ class LocationByGPS constructor(var context: Context) {
 
     }
 
-
-
-
-
     @SuppressLint("MissingPermission", "SuspiciousIndentation")
     private fun requestNewLocation() {
         val locationRequest = com.google.android.gms.location.LocationRequest()

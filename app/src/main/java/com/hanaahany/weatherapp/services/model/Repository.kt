@@ -1,6 +1,6 @@
-package com.hanaahany.weatherapp.model
+package com.hanaahany.weatherapp.services.model
 
-import com.hanaahany.weatherapp.dp.ILocalSource
+import com.hanaahany.weatherapp.services.dp.ILocalSource
 import com.hanaahany.weatherapp.services.network.RemoteSource
 import com.hanaahany.weatherapp.services.sharedpref.ISettingSharedPrefrence
 import kotlinx.coroutines.flow.Flow
@@ -10,7 +10,7 @@ class Repository private constructor(
     var settingSharedPrefrences: ISettingSharedPrefrence,
     var localSource: ILocalSource,
 
-) : RepositoryInterface {
+    ) : RepositoryInterface {
 
     companion object {
         private var INSTANCE: Repository? = null

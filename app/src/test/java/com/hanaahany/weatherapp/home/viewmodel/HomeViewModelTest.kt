@@ -6,6 +6,10 @@ import com.hanaahany.weatherapp.data.source.FakeRemoteSource
 import com.hanaahany.weatherapp.data.source.FakeReository
 import com.hanaahany.weatherapp.data.source.FakeSharedPref
 import com.hanaahany.weatherapp.model.*
+import com.hanaahany.weatherapp.services.model.CurrentWeather
+import com.hanaahany.weatherapp.services.model.Place
+import com.hanaahany.weatherapp.services.model.RepositoryInterface
+import com.hanaahany.weatherapp.services.model.WeatherResponse
 import junit.framework.Assert.assertTrue
 import kotlinx.coroutines.runBlocking
 import org.hamcrest.MatcherAssert.assertThat

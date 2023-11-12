@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView.Adapter
 import com.bumptech.glide.Glide
 import com.hanaahany.weatherapp.Utils.Constants
 import com.hanaahany.weatherapp.databinding.WeekTempLayoutBinding
-import com.hanaahany.weatherapp.model.DailyWeather
+import com.hanaahany.weatherapp.services.model.DailyWeather
 import com.hanaahany.weatherapp.services.sharedpref.SettingSharedPrefrences
 
 class DayAdapter(var context: Context, var list: List<DailyWeather>) :
@@ -28,7 +28,7 @@ class DayAdapter(var context: Context, var list: List<DailyWeather>) :
 
     override fun onBindViewHolder(holder: DayViewHolder, position: Int) {
         val resp = list.get(position)
-        holder.binding.tvDayHumidityWeekTempLayout.text = resp.humidity.toString()
+        holder.binding.tvDayHumidityWeekTempLayout.text = "${resp.humidity}%"
         holder.binding.tvTempWeekTempLayout.text =Constants.writeDegree(context,resp.temp.day.toInt().toString())
         holder.binding.tvTempNigtWeekTempLayout.text = Constants.writeDegree(context,resp.temp.night.toInt().toString())
         Glide.with(context).load("https://openweathermap.org/img/wn/${resp.weather[0].icon}@2x.png")

@@ -40,13 +40,15 @@
             app:layout_constraintTop_toBottomOf="@id/title_alert_dialog"
             app:rippleColor="@color/main"
             app:strokeWidth="0dp"
-            android:focusable="true">
+            android:focusable="true"
+            android:backgroundTint="@color/primary_continer">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingHorizontal="27dp"
-                android:paddingVertical="20dp">
+                android:paddingVertical="20dp"
+                >
 
                 <TextView
                     android:id="@+id/tv_from_time_dialog"
