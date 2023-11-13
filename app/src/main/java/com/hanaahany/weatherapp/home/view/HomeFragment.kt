@@ -70,9 +70,8 @@ class HomeFragment : Fragment() {
                 val lang = viewModel.readStringFromSetting(Constants.LANGUAGE)
                 val units = viewModel.readStringFromSetting(Constants.UNIT)
                 if (Permission.checkConnection(requireContext())) {
-                    val per = Permission.checkPermission(requireContext())
-                    Log.i(Constants.locationTag, per.toString())
                     viewModel.getWeather(it.first, it.second, units, lang)
+
 
                 } else {
                     viewModel.getCachedWeather()
@@ -156,6 +155,7 @@ class HomeFragment : Fragment() {
         binding.tvHumidityValueHomeFragment.text = it.current.humidity.toString()
         binding.tvWeatherDescriptionHomeFragment.text = it.current.weather.get(0).description
         Constants.setIcon(it.current.weather.get(0).icon, binding.iconHomeFragment)
+        Log.i(Constants.locationTag,it.current.weather.get(0).icon)
         if (SettingSharedPrefrences.getInstance(requireContext())
                 .readStringSettings(Constants.LANGUAGE) == "ar"
         ) {

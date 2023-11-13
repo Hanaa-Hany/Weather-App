@@ -144,7 +144,7 @@ class AlertFragment : Fragment() {
         }
 
         binding.btnEnableAlert.setOnClickListener {
-            requestOverlayPermission()
+            this.requestOverlayPermission()
         }
     }
 
@@ -259,6 +259,7 @@ class AlertFragment : Fragment() {
                 val position = viewHolder.adapterPosition
                 val alarmItem = alertRecyclerAdapter.currentList[position]
 
+                //to add sound when deleted alarm
                 val mediaPlayer = MediaPlayer.create(context, R.raw.deleted)
                 mediaPlayer.start()
                 mediaPlayer.setOnCompletionListener { mp ->
@@ -270,8 +271,7 @@ class AlertFragment : Fragment() {
                     setAction("Undo") {
                         alertViewModel.insertAlarm(alarmItem)
                         alertViewModel.createAlarmScheduler(alarmItem, requireContext())
-                    }
-                    show()
+                    }.show()
 
                 }
             }

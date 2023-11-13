@@ -1,5 +1,6 @@
 package com.hanaahany.weatherapp.favourite.view
 
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -101,6 +102,12 @@ class FavouriteFragment : Fragment() {
 
                 val position = viewHolder.adapterPosition
                 var place = adapter.currentList[position]
+                //to add sound when deleted
+                val mediaPlayer = MediaPlayer.create(context, R.raw.deleted)
+                mediaPlayer.start()
+                mediaPlayer.setOnCompletionListener { mp ->
+                    mp.release()
+                }
                 viewModel.deleteFavLocation(place)
                 Snackbar.make(binding.recyclerFav, "Deleted " + place.city, Snackbar.LENGTH_LONG)
                     .setAction(

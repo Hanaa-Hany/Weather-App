@@ -7,6 +7,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.media.MediaPlayer
+import android.os.Build
 import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -14,6 +15,7 @@ import android.view.WindowManager
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.NotificationManagerCompat
 import com.example.noaa.services.notification.NotificationChannelHelper
@@ -29,6 +31,7 @@ import kotlinx.coroutines.*
 class AlarmReceiver : BroadcastReceiver() {
 
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onReceive(context: Context?, intent: Intent?) {
         val item = intent?.getSerializableExtra(Constants.ALARM_ITEM) as Alarm
 
@@ -60,9 +63,6 @@ class AlarmReceiver : BroadcastReceiver() {
                                     messageFromApi,
                                     item.zoneName
                                 )
-                                else -> {
-                                    Toast.makeText(context, "Toast", Toast.LENGTH_SHORT).show()
-                                }
                             }
                         }
                     }
@@ -90,6 +90,7 @@ class AlarmReceiver : BroadcastReceiver() {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun createAlertDialog(context: Context, messageFromApi: String, zoneName: String) {
         val dialogView = LayoutInflater.from(context).inflate(R.layout.alert_dialog_alarm, null)
         val dialogMessage = dialogView.findViewById<TextView>(R.id.alert_description)
@@ -113,7 +114,9 @@ class AlarmReceiver : BroadcastReceiver() {
         }
 
         val window = dialog.window
-        window?.setType(WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            window?.setType(WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY)
+        }
         window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         window?.setGravity(Gravity.TOP)
 
@@ -168,6 +171,7 @@ class AlarmReceiver : BroadcastReceiver() {
                 ).collect {
 
                     mes = it.alerts.get(0).description
+                    Log.i("Alarm",it.lat.toString())
                 }
             }
         } catch (_: Exception) {

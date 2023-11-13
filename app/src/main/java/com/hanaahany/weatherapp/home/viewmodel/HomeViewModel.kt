@@ -8,6 +8,7 @@ import com.hanaahany.weatherapp.Utils.Constants
 import com.hanaahany.weatherapp.services.model.Place
 import com.hanaahany.weatherapp.services.model.RepositoryInterface
 import com.hanaahany.weatherapp.services.model.WeatherResponse
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
@@ -21,7 +22,7 @@ class HomeViewModel(private val _irepo: RepositoryInterface) : ViewModel() {
 
 
     fun getWeather(lat: Double, lon: Double,units:String="metric",lang:String="en") {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
 
             _irepo.makeNetworkCall(lat, lon,units,lang).catch {
                 _respone.value=ApiState.Fail(it.message.toString())
@@ -32,7 +33,7 @@ class HomeViewModel(private val _irepo: RepositoryInterface) : ViewModel() {
     }
 
     fun getCachedWeather(){
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             _irepo.getCachedData().catch {
                 _respone.value=ApiState.Fail(it.message.toString())
             }.collect{

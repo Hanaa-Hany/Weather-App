@@ -126,10 +126,10 @@ class SettingsFragment : Fragment() {
     private fun handelSpeed() {
         binding.radioGroupSpeed.setOnCheckedChangeListener { _, checkId ->
             if (checkId == R.id.radio_meter) {
-                Toast.makeText(requireContext(), "Meter", Toast.LENGTH_SHORT).show()
+                //Toast.makeText(requireContext(), "Meter", Toast.LENGTH_SHORT).show()
                 viewModel.writeStringToSetting(Constants.WIND_SPEED, "metric")
             } else {
-                Toast.makeText(requireContext(), "Miles", Toast.LENGTH_SHORT).show()
+               // Toast.makeText(requireContext(), "Miles", Toast.LENGTH_SHORT).show()
                 viewModel.writeStringToSetting(Constants.WIND_SPEED, "imperial")
 
 
@@ -142,11 +142,11 @@ class SettingsFragment : Fragment() {
         Toast.makeText(requireContext(), "Handle", Toast.LENGTH_SHORT).show()
         binding.radioGroupLanguage.setOnCheckedChangeListener { _, checkId ->
             if (checkId == R.id.radio_arabic) {
-                Toast.makeText(requireContext(), "Arabic", Toast.LENGTH_SHORT).show()
+                //Toast.makeText(requireContext(), "Arabic", Toast.LENGTH_SHORT).show()
                 Constants.changeLanguage("ar", requireContext())
                 viewModel.writeStringToSetting(Constants.LANGUAGE, "ar")
             } else {
-                Toast.makeText(requireContext(), "English", Toast.LENGTH_SHORT).show()
+                //Toast.makeText(requireContext(), "English", Toast.LENGTH_SHORT).show()
                 Constants.changeLanguage("en", requireContext())
                 viewModel.writeStringToSetting(Constants.LANGUAGE, "en")
             }

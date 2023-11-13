@@ -104,7 +104,7 @@ object Constants {
 
         val geocoder = Geocoder(context, Locale.getDefault())
         val addresses = geocoder.getFromLocation(latitude, longitude, 1)
-        if (addresses != null && addresses[0].locality != null) {
+        if (addresses != null && addresses[0].subAdminArea != null) {
             Log.i(locationTag, addresses[0].locality + "Fun")
             return addresses[0].subAdminArea
 
@@ -142,8 +142,8 @@ object Constants {
             "02n" -> lottiView.setAnimation(R.raw._02n)
             "03n" -> lottiView.setAnimation(R.raw._03n)
             "04n" -> lottiView.setAnimation(R.raw.clouds_04d)
-
-
+            "10n" -> lottiView.setAnimation(R.raw._10n)
+            "13n" -> lottiView.setAnimation(R.raw.snow)
         }
     }
 

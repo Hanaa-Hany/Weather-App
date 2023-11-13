@@ -105,5 +105,5 @@ class AlertViewModelTest {
         assertEquals(listOf<Alarm>(firstAlarm,thirdAlarm),result)
     }
 
-  
+
 }

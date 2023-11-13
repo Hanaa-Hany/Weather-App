@@ -25,6 +25,7 @@ class AlarmSchedular private constructor(context: Context):IAlarmSchedular {
         val intent = Intent(context, AlarmReceiver::class.java).apply {
             putExtra(Constants.ALARM_ITEM, item)
         }
+        //edit
         alarmManager.setExactAndAllowWhileIdle(
             AlarmManager.RTC_WAKEUP,
             item.time,
