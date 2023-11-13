@@ -11,11 +11,16 @@
     <string name="favourite">المفضله</string>
     <string name="settings">الاعدادات</string>
     <string name="units">وحده درجه الحراره</string>
-    <string name="home">الصفحه الرئيسيه</string>
+    <string name="home">الرئيسيه</string>
     <string name="save_location">حفظ الموقع</string>
     <string name="k">كلفن</string>
     <string name="c">سيلزيوس</string>
     <string name="f">فهرنهيت</string>
     <string name="meter_sec">متر/ثانيه</string>
     <string name="miles_hour">ميل/ساعه</string>
+    <string name="save_alarm">حفظ المنبه</string>
+    <string name="stop">ايقاف</string>
+    <string name="notification">الاشعارات</string>
+    <string name="alarm">المنبه</string>
+    <string name="get_weather">معلومات الطقس</string>
 </resources>

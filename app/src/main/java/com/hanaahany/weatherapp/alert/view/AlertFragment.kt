@@ -336,16 +336,18 @@ class AlertFragment : Fragment() {
             binding.tvAlertUserNotification.visibility = View.GONE
             binding.btnEnableNotification.visibility = View.GONE
         } else {
-            binding.tvAlertUserNotification.visibility = View.VISIBLE
-            binding.btnEnableNotification.visibility = View.VISIBLE
+            //visible
+            binding.tvAlertUserNotification.visibility = View.GONE
+            binding.btnEnableNotification.visibility = View.GONE
         }
 
         if (Settings.canDrawOverlays(requireContext())) {
             binding.tvAlertUserAlert.visibility = View.GONE
             binding.btnEnableAlert.visibility = View.GONE
         } else {
-            binding.tvAlertUserAlert.visibility = View.VISIBLE
-            binding.btnEnableAlert.visibility = View.VISIBLE
+            //VI
+            binding.tvAlertUserAlert.visibility = View.GONE
+            binding.btnEnableAlert.visibility = View.GONE
         }
     }
 

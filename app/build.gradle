@@ -37,6 +37,7 @@ android {
     buildFeatures{
         viewBinding true
     }
+
 }
 
 dependencies {
@@ -90,6 +91,11 @@ dependencies {
     // InstantTaskExecutorRule
     testImplementation "androidx.arch.core:core-testing:2.1.0"
     androidTestImplementation "androidx.arch.core:core-testing:2.1.0"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4"
+    testImplementation 'app.cash.turbine:turbine:1.0.0'
+    // Dependencies for local unit tests
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+
 
     // hamcrest
     testImplementation "org.hamcrest:hamcrest:2.2"
@@ -105,6 +111,8 @@ dependencies {
     def lottieVersion = "3.4.0"
     implementation "com.airbnb.android:lottie:$lottieVersion"
 
-    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4"
+    //Mockk
+    testImplementation "io.mockk:mockk:1.11.0"
+
 
 }

@@ -17,9 +17,9 @@ import com.hanaahany.weatherapp.R
 import com.hanaahany.weatherapp.Utils.Constants
 import com.hanaahany.weatherapp.Utils.LocationByGPS
 import com.hanaahany.weatherapp.databinding.FragmentSettingsBinding
-import com.hanaahany.weatherapp.services.dp.LocalSource
 import com.hanaahany.weatherapp.home.viewmodel.HomeViewModel
 import com.hanaahany.weatherapp.home.viewmodel.HomeViewModelFactory
+import com.hanaahany.weatherapp.services.dp.LocalSource
 import com.hanaahany.weatherapp.services.model.Repository
 import com.hanaahany.weatherapp.services.network.WeatherClient
 import com.hanaahany.weatherapp.services.sharedpref.SettingSharedPrefrences
@@ -70,7 +70,7 @@ class SettingsFragment : Fragment() {
     }
 
     private fun handelMarkLang() {
-            if (viewModel.readStringFromSetting(Constants.LANGUAGE) == "ar") {
+        if (viewModel.readStringFromSetting(Constants.LANGUAGE) == "ar") {
             binding.radioArabic.isChecked = true
         } else {
             binding.radioEnglish.isChecked = true
@@ -87,12 +87,12 @@ class SettingsFragment : Fragment() {
     }
 
     private fun handelMarkTemp() {
-        if (viewModel.readStringFromSetting(Constants.UNIT) == "K") {
-            binding.radioKelvin.isChecked = true
-        } else if (viewModel.readStringFromSetting(Constants.UNIT) == "F") {
+        if (viewModel.readStringFromSetting(Constants.UNIT) == "metric") {
+            binding.radioCelisous.isChecked = true
+        } else if (viewModel.readStringFromSetting(Constants.UNIT) == "imperial") {
             binding.radioFehraniet.isChecked = true
         } else {
-            binding.radioCelisous.isChecked = true
+            binding.radioKelvin.isChecked = true
         }
     }
 
@@ -114,7 +114,8 @@ class SettingsFragment : Fragment() {
                 R.id.radio_map -> {
                     viewModel.writeStringToSetting(Constants.LOCATION, Constants.MAP)
 
-                    val action=SettingsFragmentDirections.actionSettingsFragmentToMapsFragment(Constants.SET_Source)
+                    val action =
+                        SettingsFragmentDirections.actionSettingsFragmentToMapsFragment(Constants.SET_Source)
                     Navigation.findNavController(requireView()).navigate(action)
 
                 }
@@ -157,19 +158,15 @@ class SettingsFragment : Fragment() {
 
     private fun handleUnits() {
         binding.radioGroupUnits.setOnCheckedChangeListener(RadioGroup.OnCheckedChangeListener { _, radioId ->
-            when (radioId) {
-                R.id.radio_kelvin ->
-                    viewModel.writeStringToSetting(Constants.UNIT, "standard")
 
-                R.id.radio_celisous ->
-                    viewModel.writeStringToSetting(Constants.UNIT, "metric")
-
-
-                R.id.radio_fehraniet ->
-                    viewModel.writeStringToSetting(Constants.UNIT, "imperial")
+            if (radioId == R.id.radio_fehraniet)
+                viewModel.writeStringToSetting(Constants.UNIT, "imperial")
+            else if (radioId == R.id.radio_kelvin)
+                viewModel.writeStringToSetting(Constants.UNIT, "standard")
+            else (radioId == R.id.radio_celisous)
+            viewModel.writeStringToSetting(Constants.UNIT, "metric")
 
 
-            }
             //restartApplication()
 
         })

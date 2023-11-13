@@ -13,6 +13,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.launch
 
 class AlertViewModel(private val repo: RepositoryInterface, private val alarmScheduler: AlarmSchedular) :
@@ -31,6 +32,11 @@ class AlertViewModel(private val repo: RepositoryInterface, private val alarmSch
     fun insertAlarm(alarmItem: Alarm) {
         viewModelScope.launch(Dispatchers.IO) {
             repo.insertAlarm(alarmItem)
+            // Fetch the updated list of alarms after insertion
+            val updatedAlarms = repo.getAllAlarms().firstOrNull() ?: emptyList()
+
+            // Update the state flow with the new list of alarms
+            _alarmsMutableStateFlow.value = updatedAlarms
         }
     }
 

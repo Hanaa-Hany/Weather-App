@@ -84,12 +84,12 @@ object Constants {
 
     fun writeDegree(context: Context, value: String): String {
         if (SettingSharedPrefrences.getInstance(context)
-                .readStringSettings(UNIT) == "standard"
-        ) return "${value} \u212A"
+                .readStringSettings(UNIT) == "metric"
+        )  return "${value} ℃ "
         else if (SettingSharedPrefrences.getInstance(context)
                 .readStringSettings(UNIT) == "imperial"
         ) return "${value} ℉ "
-        else return "${value} ℃ "
+        else return "${value} \u212A"
     }
 
     fun windSpeed(context: Context, value: String): String {
@@ -106,7 +106,7 @@ object Constants {
         val addresses = geocoder.getFromLocation(latitude, longitude, 1)
         if (addresses != null && addresses[0].locality != null) {
             Log.i(locationTag, addresses[0].locality + "Fun")
-            return addresses[0].locality
+            return addresses[0].subAdminArea
 
         } else {
             return "Unknown City"
@@ -135,7 +135,7 @@ object Constants {
             "03d" -> lottiView.setAnimation(R.raw.clouds)
             "04d" -> lottiView.setAnimation(R.raw.clouds_04d)
             "09d" -> lottiView.setAnimation(R.raw.rain_day)
-            "11d" -> lottiView.setAnimation(R.raw.thunder)
+            "11d" -> lottiView.setAnimation(R.raw.thunder_11d)
             "13d" -> lottiView.setAnimation(R.raw.snowfall)
             "50d" -> lottiView.setAnimation(R.raw.mist)
             "01n" -> lottiView.setAnimation(R.raw.first_night)

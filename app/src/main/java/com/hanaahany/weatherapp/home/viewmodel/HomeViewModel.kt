@@ -67,7 +67,7 @@ class HomeViewModel(private val _irepo: RepositoryInterface) : ViewModel() {
     fun getFavLocation(){
         viewModelScope.launch {
              _irepo.getFavLocation().collect {
-                 Log.i(Constants.FAV_TAG,it.size.toString())
+                // Log.i(Constants.FAV_TAG,it.size.toString())
                  _favLocation.value=it
              }
         }
