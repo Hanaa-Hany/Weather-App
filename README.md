@@ -5,7 +5,7 @@ Welcome to the <b>SkyNews</b> App, your personalized weather companion that prov
 ### <b>1. Real-Time Weather Updates:</b><br>
 Receive live weather updates based on your location or any location of your choice.<br>
 Stay informed about current temperature, humidity, wind speed, and more.<br>
-### <b>2. Hourly and Daily Forecasts:<br>
+### <b>2. Hourly and Daily Forecasts:</b><br>
 Plan your activities with confidence using our detailed hourly and daily weather forecasts.<br>
 Get insights into temperature variations, precipitation chances, and wind conditions throughout the day.<br>
 ### <b>3.Favorite Places:</b><br>
